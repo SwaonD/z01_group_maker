@@ -12,8 +12,7 @@ class project_modal(ui.Modal, title='Group Creation'):
 
 	async def on_submit(self, ctx:Interaction):
 		# Check if the project is valid
-		if self.project.value in PROJECT_NAMES:
-			# is_in_list(self.project.value, PROJECT_NAMES) is False:
+		if self.project.value not in PROJECT_NAMES:
 			await ctx.response.send_message("This project doesn't exists. Try again !")
 			return
 
