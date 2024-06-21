@@ -1,13 +1,18 @@
 import discord
 from typing import Optional, Union
 from discord.app_commands import CommandTree
-from src.group_core import ping
+from src.group.group_core import ping, test_group_sql
 from src.settings.variables import GUILD_ID
 
 def register_commands(tree: CommandTree):
 	@tree.command(name="ping", description="ping", guild=discord.Object(id=GUILD_ID))
-	async def ping_command(interaction: discord.Interaction, note: Optional[str]):
-		await ping(interaction, note)
+	async def ping_command(interaction: discord.Interaction):
+		await ping(interaction)
+
+	@tree.command(name="test_group_sql",
+			description="test_group_sql", guild=discord.Object(id=GUILD_ID))
+	async def test_group_sql_command(interaction: discord.Interaction, name:str):
+		await test_group_sql(interaction, name)
 
 # NOTES:
 # @tree.command(name="delete_message", description="delete_message", guild=discord.Object(id=GUILD_ID))
