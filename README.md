@@ -1,3 +1,3 @@
 # Z01 Group Maker
 
-Commit
+Better group creation for projects.
