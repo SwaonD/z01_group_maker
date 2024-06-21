@@ -1,7 +1,7 @@
 import discord
 from typing import Optional, Union
 from discord.app_commands import CommandTree
-from src.group_core import ping, createGroup
+from src.group_core import ping, create_group
 from src.settings.variables import GUILD_ID
 
 def register_commands(tree: CommandTree):
@@ -10,8 +10,8 @@ def register_commands(tree: CommandTree):
 		await ping(interaction, note)
   
 	@tree.command(name="create", description="Create a group", guild=discord.Object(id=GUILD_ID))
-	async def create_command(interaction: discord.Interaction, project_name: str):
-		await createGroup(interaction, project_name)
+	async def create_command(interaction: discord.Interaction):
+		await create_group(interaction)
 
 # NOTES:
 # @tree.command(name="delete_message", description="delete_message", guild=discord.Object(id=GUILD_ID))
