@@ -1,17 +1,25 @@
-import discord
-from typing import Optional, Union
+from discord import Interaction, Object
+# from typing import Optional, Union
 from discord.app_commands import CommandTree
-from src.group_core import ping, create_group
+from src.group.group_core import test_group_sql, create_group
 from src.settings.variables import GUILD_ID
 
 def register_commands(tree: CommandTree):
-	@tree.command(name="ping", description="ping", guild=discord.Object(id=GUILD_ID))
-	async def ping_command(interaction: discord.Interaction, note: Optional[str]):
-		await ping(interaction, note)
-  
-	@tree.command(name="create", description="Create a group", guild=discord.Object(id=GUILD_ID))
-	async def create_command(interaction: discord.Interaction):
-		await create_group(interaction)
+	@tree.command(name="ping", description="ping", guild=Object(id=GUILD_ID))
+	async def ping_command(ctx:Interaction):
+		await ping(ctx)
+
+	@tree.command(name="create", description="Create a group", guild=Object(id=GUILD_ID))
+	async def create_command(ctx:Interaction):
+		await create_group(ctx)
+
+	@tree.command(name="test_group_sql",
+			description="test_group_sql", guild=Object(id=GUILD_ID))
+	async def test_group_sql_command(ctx:Interaction, name:str):
+		await test_group_sql(ctx, name)
+
+async def ping(ctx:Interaction):
+	await ctx.response.send_message("pong")
 
 # NOTES:
 # @tree.command(name="delete_message", description="delete_message", guild=discord.Object(id=GUILD_ID))

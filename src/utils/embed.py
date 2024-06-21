@@ -1,6 +1,7 @@
-import discord
+from discord import Colour, Embed, Interaction
 
-async def edit_embed(message, title, description, color, url, embed_index):
+async def edit_embed(message:str, title:str,
+		description:str, color:str, url:str, embed_index:int):
 	if not embed_index:
 		embed_index = 0
 	embeds = message.embeds
@@ -18,39 +19,41 @@ async def edit_embed(message, title, description, color, url, embed_index):
 		await message.edit(embeds=embeds)
 	else:
 		# new embed into the selected message
-		myEmbed = discord.Embed(title=title, description=description, color=color, url=url)
+		myEmbed = Embed(title=title,
+				description=description, color=color, url=url)
 		embeds.append(myEmbed)
 		await message.edit(embeds=embeds)
 
-async def embed(interaction, title, description, color, url, message_id, embed_index):
+async def embed(ctx:Interaction, title:str, description:str, color:str=None,
+		url:str=None, message_id:str=None, embed_index:int=None):
 	try:
 		if color:
-			color = discord.Colour.from_str(color)
+			color = Colour.from_str(color)
 		if message_id:
 			# edit embed
-			message = await interaction.channel.fetch_message(int(message_id))
+			message = await ctx.channel.fetch_message(int(message_id))
 			await edit_embed(message, title, description, color, url, embed_index)
-			await interaction.response.send_message(content="done", ephemeral=True)
+			await ctx.response.send_message(content="done", ephemeral=True)
 		else:
 			# new embed
-			myEmbed = discord.Embed(title=title, description=description, color=color, url=url)
-			await interaction.response.send_message(embed=myEmbed)
+			myEmbed = Embed(title=title, description=description, color=color, url=url)
+			await ctx.response.send_message(embed=myEmbed)
 	except Exception as e:
 		print(e)
-		await interaction.response.send_message(content=e, ephemeral=True)
+		await ctx.response.send_message(content=e, ephemeral=True)
 
-async def remove_embed(interaction, message_id, embed_index):
+async def remove_embed(ctx:Interaction, message_id:str, embed_index:int):
 	try:
-		message = await interaction.channel.fetch_message(int(message_id))
+		message = await ctx.channel.fetch_message(int(message_id))
 		embeds = message.embeds
 		if embed_index:
 			del embeds[embed_index]
 		else:
 			embeds = []
 		await message.edit(embeds=embeds)
-		await interaction.response.send_message(content="done", ephemeral=True)
+		await ctx.response.send_message(content="done", ephemeral=True)
 	except Exception as e:
 		print(e)
-		await interaction.response.send_message(content=e, ephemeral=True)
+		await ctx.response.send_message(content=e, ephemeral=True)
 
 # add field and remove field
