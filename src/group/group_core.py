@@ -1,7 +1,8 @@
 from discord import ui, Interaction, Embed, Colour, ui, TextStyle
-from src.utils.sql import sql_add_group
-from src.utils.other import is_in_list
+# from src.utils.sql import sql_add_group
+# from src.utils.other import is_in_list
 from src.settings.variables import PROJECT_NAMES
+from src.settings.tables import GROUP_TABLE
 import logging
 
 # Modal to ask for project name
@@ -11,7 +12,8 @@ class project_modal(ui.Modal, title='Group Creation'):
 
 	async def on_submit(self, ctx:Interaction):
 		# Check if the project is valid
-		if is_in_list(self.project.value, PROJECT_NAMES) is False:
+		if self.project.value in PROJECT_NAMES:
+			# is_in_list(self.project.value, PROJECT_NAMES) is False:
 			await ctx.response.send_message("This project doesn't exists. Try again !")
 			return
 
@@ -33,13 +35,12 @@ async def create_group(interaction: Interaction):
 	await interaction.response.send_modal(project_modal())
 
 
-
-# swaon part
+# SWAON TEST PART
 async def test_group_sql(ctx:Interaction, name:str="Undefined"):
 	view = await generate_group_view()
 	message = await ctx.channel.send(content=f"project {name}", view=view)
 	if message is not None:
-		await sql_add_group(message.id, name, ctx.user.id)
+		GROUP_TABLE.insert_data(message.id, name, ctx.user.id)
 	ctx.response.is_done()
 
 async def button_callback(interaction: Interaction):

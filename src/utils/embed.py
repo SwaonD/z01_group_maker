@@ -1,6 +1,6 @@
-from discord import Colour, Embed, Interaction
+from discord import Colour, Embed, Interaction, Message
 
-async def edit_embed(message:str, title:str,
+async def edit_embed(message:Message, title:str,
 		description:str, color:str, url:str, embed_index:int):
 	if not embed_index:
 		embed_index = 0
