@@ -1,6 +1,6 @@
 from discord import Interaction, Embed, Colour, TextChannel, PartialMessage
 from src.settings.tables import GROUPS_TABLE
-from src.settings.variables import GROUP_CHANNEL_ID_S
+from src.settings.variables import GROUP_CHANNEL_ID_L
 
 async def list(ctx: Interaction, project_name: str | None):
 	condition = ""
@@ -15,10 +15,10 @@ async def list(ctx: Interaction, project_name: str | None):
 		user = ctx.client.get_user(tup[1])
 		if user is None:
 			user = await ctx.client.fetch_user(tup[1])
-		group_channel: TextChannel = ctx.client.get_channel(GROUP_CHANNEL_ID_S)
+		group_channel: TextChannel = ctx.client.get_channel(GROUP_CHANNEL_ID_L)
 		if group_channel is None:
 			group_channel: TextChannel = \
-					await ctx.client.fetch_channel(GROUP_CHANNEL_ID_S)
+					await ctx.client.fetch_channel(GROUP_CHANNEL_ID_L)
 		message: PartialMessage = group_channel.get_partial_message(tup[2])
 		content += f"{tup[0]} {user.mention} {message.jump_url}\n"
 	if content == "":
