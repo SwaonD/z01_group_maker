@@ -13,14 +13,14 @@ class BaseTable():
 
 	def get_data(self, condition: str = "", *columns: str) -> list[tuple]:
 		"""
-		ex : table.get_data(f"{table.message_id} = 2", table.id)\n
+		ex : table.get_data(f"{table.message_id} = '{2}'", table.id)\n
 		default * if no columns
 		"""
 		return sql_get_data(self.file, self.name, condition, *columns)
 
 	def delete_data(self, condition: str=""):
 		"""
-		ex : table.delete_data(f"{table.message_id} = 2")
+		ex : table.delete_data(f"{table.message_id} = '{2}'")
 		"""
 		sql_delete_data(self.file, self.name, condition)
 

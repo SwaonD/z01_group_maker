@@ -19,7 +19,6 @@ def sql_get_data(file: str,
 	columns_str = ""
 	request = ""
 	for i, col in enumerate(columns):
-		print(f"col = {col}")
 		columns_str += col
 		if i != len(columns)-1:
 			columns_str += ", "
