@@ -22,4 +22,4 @@ def get_group_members(group_id: int):
 		list: All members for the group
 	"""
 	members = GROUP_MEMBERS_TABLE.get_data(f"{GROUP_MEMBERS_TABLE.group_id} = {group_id}", GROUP_MEMBERS_TABLE.user_id)
-	return members[0]
+	return members
