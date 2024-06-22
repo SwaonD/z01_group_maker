@@ -1,4 +1,7 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 GUILD_ID = 352509375266422797
 GROUP_CHANNEL_ID = os.getenv("Z_01_GROUP_CHANNEL_ID")

@@ -1,12 +1,9 @@
 import os
 from discord import Client, app_commands
-from dotenv import load_dotenv
 from src.settings.variables import *
 from src.init import getIntents
 from src.events import register_events
 from src.commands import register_commands
-
-load_dotenv()
 
 def main():
 	intents = getIntents()
