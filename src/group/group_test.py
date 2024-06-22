@@ -8,6 +8,7 @@ async def test_group_sql(ctx: Interaction, name: str = "Undefined"):
 	if message is not None:
 		id = GROUPS_TABLE.insert_data(message.id, name, ctx.user.id)
 		GROUP_MEMBERS_TABLE.insert_data(id, ctx.user.id)
+		# GROUPS_TABLE.get_data(f"{GROUPS_TABLE.creator_id} = '{2}'")
 	ctx.response.is_done()
 
 async def button_callback(interaction: Interaction):

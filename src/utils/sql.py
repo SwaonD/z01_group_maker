@@ -1,4 +1,5 @@
 import sqlite3
+from src.utils.log import log
 
 def sql_create_table(file: str, name: str, *columns: str):
 	variables = ""
@@ -11,7 +12,7 @@ def sql_create_table(file: str, name: str, *columns: str):
 	with sqlite3.connect(file) as conn:
 		cursor = conn.cursor()
 		cursor.execute(request)
-		print(request)
+		log(request, True)
 		conn.commit()
 
 def sql_get_data(file: str,
@@ -19,7 +20,6 @@ def sql_get_data(file: str,
 	columns_str = ""
 	request = ""
 	for i, col in enumerate(columns):
-		print(f"col = {col}")
 		columns_str += col
 		if i != len(columns)-1:
 			columns_str += ", "
@@ -31,7 +31,7 @@ def sql_get_data(file: str,
 	with sqlite3.connect(file) as conn:
 		cursor = conn.cursor()
 		cursor.execute(request)
-		print(request)
+		log(request, True)
 		rows = cursor.fetchall()
 		conn.commit()
 		return rows

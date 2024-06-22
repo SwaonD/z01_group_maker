@@ -1,0 +1,103 @@
+2024-06-22 | 17:35 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:35 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:35 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:35 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:35 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art-fs' AND creator_id = '1031330570107629650'
+2024-06-22 | 17:35 [SQL] SELECT id FROM groups WHERE message_id = 1254097513061941301
+2024-06-22 | 17:35 [LOG] liamine1 created a group for ascii-art-fs
+2024-06-22 | 17:35 [SQL] SELECT id FROM groups WHERE message_id = 1254097513061941301
+2024-06-22 | 17:35 [SQL] SELECT id FROM groups WHERE message_id = 1254097513061941301
+2024-06-22 | 17:35 [SQL] SELECT user_id FROM group_members WHERE group_id = 2
+2024-06-22 | 17:37 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:37 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:37 [SQL] SELECT id FROM groups WHERE project_name = 'groupie-tracker' AND creator_id = '1031330570107629650'
+2024-06-22 | 17:37 [SQL] SELECT id FROM groups WHERE message_id = 1254097928444973191
+2024-06-22 | 17:37 [LOG] liamine1 created a group for groupie-tracker
+2024-06-22 | 17:37 [SQL] SELECT id FROM groups WHERE message_id = 1254097928444973191
+2024-06-22 | 17:37 [SQL] SELECT id FROM groups WHERE message_id = 1254097928444973191
+2024-06-22 | 17:37 [SQL] SELECT user_id FROM group_members WHERE group_id = 4
+2024-06-22 | 17:38 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:38 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:39 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art-color' AND creator_id = '1031330570107629650'
+2024-06-22 | 17:39 [SQL] SELECT id FROM groups WHERE message_id = 1254098339629236365
+2024-06-22 | 17:39 [LOG] liamine1 created a group for ascii-art-color
+2024-06-22 | 17:39 [SQL] SELECT id FROM groups WHERE message_id = 1254098339629236365
+2024-06-22 | 17:39 [SQL] SELECT id FROM groups WHERE message_id = 1254098339629236365
+2024-06-22 | 17:39 [SQL] SELECT user_id FROM group_members WHERE group_id = 6
+2024-06-22 | 17:39 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:39 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:39 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art-web' AND creator_id = '1031330570107629650'
+2024-06-22 | 17:39 [SQL] SELECT id FROM groups WHERE message_id = 1254098531598471239
+2024-06-22 | 17:39 [LOG] liamine1 created a group for ascii-art-web
+2024-06-22 | 17:39 [SQL] SELECT id FROM groups WHERE message_id = 1254098531598471239
+2024-06-22 | 17:39 [SQL] SELECT id FROM groups WHERE message_id = 1254098531598471239
+2024-06-22 | 17:39 [SQL] SELECT user_id FROM group_members WHERE group_id = 8
+2024-06-22 | 17:41 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:41 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:41 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:41 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:41 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-22 | 17:41 [SQL] SELECT id FROM groups WHERE message_id = 1254098892677447801
+2024-06-22 | 17:41 [LOG] liamine1 created a group for ascii-art
+2024-06-22 | 17:41 [SQL] SELECT id FROM groups WHERE message_id = 1254098892677447801
+2024-06-22 | 17:41 [SQL] SELECT id FROM groups WHERE message_id = 1254098892677447801
+2024-06-22 | 17:41 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-22 | 17:42 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:42 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:42 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:42 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:42 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:42 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:42 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-22 | 17:42 [SQL] SELECT id FROM groups WHERE message_id = 1254099202087321711
+2024-06-22 | 17:42 [LOG] liamine1 created a group for ascii-art
+2024-06-22 | 17:42 [SQL] SELECT id FROM groups WHERE message_id = 1254099202087321711
+2024-06-22 | 17:42 [SQL] SELECT id FROM groups WHERE message_id = 1254099202087321711
+2024-06-22 | 17:42 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-22 | 17:45 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:45 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:45 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art-color' AND creator_id = '1031330570107629650'
+2024-06-22 | 17:45 [SQL] SELECT id FROM groups WHERE message_id = 1254099981523095664
+2024-06-22 | 17:45 [LOG] liamine1 created a group for ascii-art-color
+2024-06-22 | 17:45 [SQL] SELECT id FROM groups WHERE message_id = 1254099981523095664
+2024-06-22 | 17:45 [SQL] SELECT id FROM groups WHERE message_id = 1254099981523095664
+2024-06-22 | 17:45 [SQL] SELECT user_id FROM group_members WHERE group_id = 3
+2024-06-22 | 17:45 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:45 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:46 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art-web' AND creator_id = '1031330570107629650'
+2024-06-22 | 17:46 [SQL] SELECT id FROM groups WHERE message_id = 1254100129225642084
+2024-06-22 | 17:46 [LOG] liamine1 created a group for ascii-art-web
+2024-06-22 | 17:46 [SQL] SELECT id FROM groups WHERE message_id = 1254100129225642084
+2024-06-22 | 17:46 [SQL] SELECT id FROM groups WHERE message_id = 1254100129225642084
+2024-06-22 | 17:46 [SQL] SELECT user_id FROM group_members WHERE group_id = 5
+2024-06-22 | 17:46 [SQL] SELECT id FROM groups WHERE message_id = 1254100129225642084
+2024-06-22 | 17:46 [SQL] SELECT id FROM groups WHERE message_id = 1254100129225642084
+2024-06-22 | 17:46 [SQL] SELECT user_id FROM group_members WHERE group_id = 5
+2024-06-22 | 17:46 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:46 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:46 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art-fs' AND creator_id = '1031330570107629650'
+2024-06-22 | 17:46 [SQL] SELECT id FROM groups WHERE message_id = 1254100278878142465
+2024-06-22 | 17:46 [LOG] liamine1 created a group for ascii-art-fs
+2024-06-22 | 17:46 [SQL] SELECT id FROM groups WHERE message_id = 1254100278878142465
+2024-06-22 | 17:46 [SQL] SELECT id FROM groups WHERE message_id = 1254100278878142465
+2024-06-22 | 17:46 [SQL] SELECT user_id FROM group_members WHERE group_id = 8
+2024-06-22 | 17:48 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:48 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:48 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:48 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:48 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-22 | 17:48 [SQL] SELECT id FROM groups WHERE message_id = 1254100824334925894
+2024-06-22 | 17:48 [LOG] liamine1 created a group for ascii-art
+2024-06-22 | 17:48 [SQL] SELECT id FROM groups WHERE message_id = 1254100824334925894
+2024-06-22 | 17:48 [SQL] SELECT id FROM groups WHERE message_id = 1254100824334925894
+2024-06-22 | 17:48 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-22 | 17:50 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:50 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:50 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 17:50 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-22 | 17:51 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-22 | 17:51 [SQL] SELECT id FROM groups WHERE message_id = 1254101363147931680
+2024-06-22 | 17:51 [LOG] liamine1 created a group for ascii-art
+2024-06-22 | 17:51 [SQL] SELECT id FROM groups WHERE message_id = 1254101363147931680
+2024-06-22 | 17:51 [SQL] SELECT id FROM groups WHERE message_id = 1254101363147931680
+2024-06-22 | 17:51 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
