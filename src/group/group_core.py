@@ -40,6 +40,7 @@ async def test_group_sql(ctx:Interaction, name:str="Undefined"):
 	message = await ctx.channel.send(content=f"project {name}", view=view)
 	if message is not None:
 		GROUP_TABLE.insert_data(message.id, name, ctx.user.id)
+		print(GROUP_TABLE.get_data())
 	ctx.response.is_done()
 
 async def button_callback(interaction: Interaction):
