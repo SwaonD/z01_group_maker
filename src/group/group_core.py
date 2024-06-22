@@ -17,6 +17,7 @@ class MyView(ui.View):
 
 	@ui.button(label="Join", style=ButtonStyle.primary)
 	async def callback1(self, ctx: Interaction, button: Button):
+		# id = get_group_id(self.msg_id)
 		id = get_group_id(ctx.message.id)
 
 		if is_member(id, ctx.user.id):
@@ -67,9 +68,21 @@ async def update_members_count(ctx: Interaction, project: str, author: Union[Use
 
 	embed.add_field(name="Members", value=usernames, inline=False)
 
+	@ui.button(label="Delete", style=ButtonStyle.danger)
+	async def delete_callback(self, ctx: Interaction, button: Button):
+		await delete_group(ctx)
+
+async def update_members_count(ctx: Interaction, embed_id: int, embed):
 	try:
-		channel: TextChannel = await ctx.client.fetch_channel(GROUP_CHANNEL_ID)
-		message = await channel.fetch_message(ctx.message.id)
+		# Fetch the partial message by its ID
+		channel = ctx.message.guild.get_channel(GROUP_CHANNEL_ID)
+		if channel is None:
+			channel = await ctx.message.guild.fetch_channel(GROUP_CHANNEL_ID)
+		message = channel.get_partial_message(embed_id)
+		if message is None:
+			message = await channel.fetch_message(embed_id)
+
+		# Edit the message with the new embed
 		await message.edit(embed=embed)
 	except discord.NotFound:
 		print(f"Message with ID {ctx.message.id} not found.")
@@ -115,3 +128,5 @@ async def create_group(ctx: Interaction, project: str):
 
 	await message.edit(view=v)
 
+async def delete_group(ctx: Interaction):
+	await ctx.response.send_message("delete")
