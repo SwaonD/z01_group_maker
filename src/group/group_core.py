@@ -18,7 +18,8 @@ class MyView(ui.View):
 
 	@ui.button(label="Join", style=ButtonStyle.primary)
 	async def callback1(self, ctx: Interaction, button: Button):
-		id = get_group_id(self.msg_id)
+		# id = get_group_id(self.msg_id)
+		id = get_group_id(ctx.message.id)
 
 		GROUP_MEMBERS_TABLE.insert_data(get_group_id(self.msg_id), ctx.user.id)
 
@@ -40,10 +41,19 @@ class MyView(ui.View):
 	async def callback2(self, button: Button, ctx: Interaction):
 		await ctx.response.send_message("Button 2 clicked!", ephemeral=True)
 
+	@ui.button(label="Delete", style=ButtonStyle.danger)
+	async def delete_callback(self, ctx: Interaction, button: Button):
+		await delete_group(ctx)
+
 async def update_members_count(ctx: Interaction, embed_id: int, embed):
 	try:
 		# Fetch the partial message by its ID
-		message = await ctx.client.get_channel(GROUP_CHANNEL_ID).fetch_message(embed_id)
+		channel = ctx.message.guild.get_channel(GROUP_CHANNEL_ID)
+		if channel is None:
+			channel = await ctx.message.guild.fetch_channel(GROUP_CHANNEL_ID)
+		message = channel.get_partial_message(embed_id)
+		if message is None:
+			message = await channel.fetch_message(embed_id)
 
 		# Edit the message with the new embed
 		await message.edit(embed=embed)
@@ -91,3 +101,5 @@ async def create_group(ctx: Interaction, project: str):
 	v = MyView(project, message.id, ctx.user)
 	await message.edit(view=v)
 
+async def delete_group(ctx: Interaction):
+	await ctx.response.send_message("delete")
