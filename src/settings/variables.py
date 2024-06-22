@@ -1,5 +1,5 @@
 GUILD_ID = 352509375266422797
-DATA_SQL_FILE = "./src/settings/data.db"
+GROUP_SQL_FILE = "./src/settings/group_data.db"
 
 PROJECT_NAMES = [
 	"ascii-art",

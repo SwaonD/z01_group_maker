@@ -1,8 +1,5 @@
-from discord import ui, Interaction, Embed, Colour, ui, TextStyle
-# from src.utils.sql import sql_add_group
-# from src.utils.other import is_in_list
+from discord import ui, Interaction, Embed, Colour, TextStyle
 from src.settings.variables import PROJECT_NAMES
-from src.settings.tables import GROUP_TABLE
 import logging
 
 # Modal to ask for project name
@@ -32,30 +29,3 @@ class project_modal(ui.Modal, title='Group Creation'):
 
 async def create_group(interaction: Interaction):
 	await interaction.response.send_modal(project_modal())
-
-
-# SWAON TEST PART
-async def test_group_sql(ctx:Interaction, name:str="Undefined"):
-	view = await generate_group_view()
-	message = await ctx.channel.send(content=f"project {name}", view=view)
-	if message is not None:
-		GROUP_TABLE.insert_data(message.id, name, ctx.user.id)
-		print(GROUP_TABLE.get_data())
-	ctx.response.is_done()
-
-async def button_callback(interaction: Interaction):
-	await interaction.response.send_message("la mort te regarde")
-
-async def generate_group_view() -> ui.View:
-	join_button = ui.Button(label="Rejoindre")
-	leave_button = ui.Button(label="Quitter")
-	edit_button = ui.Button(label="Editer")
-		# style=discord.ButtonStyle.primary
-	join_button.callback = button_callback
-	leave_button.callback = button_callback
-	edit_button.callback = button_callback
-	new_view = ui.View(timeout=None)
-	new_view.add_item(join_button)
-	new_view.add_item(leave_button)
-	new_view.add_item(edit_button)
-	return new_view
