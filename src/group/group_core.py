@@ -2,7 +2,7 @@ from discord import ui, Interaction, Embed, Colour, ButtonStyle, Button, User, M
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
 from src.settings.variables import GROUP_CHANNEL_ID
 from src.utils.project import is_project, project_exists
-from src.utils.group import get_group_id, get_group_members
+from src.utils.group import get_group_id, get_group_members, is_member
 from src.utils.log import log
 import discord
 from typing import Union
@@ -19,20 +19,31 @@ class MyView(ui.View):
 	@ui.button(label="Join", style=ButtonStyle.primary)
 	async def callback1(self, ctx: Interaction, button: Button):
 		id = get_group_id(self.msg_id)
-
+  
+		if is_member:
+			await ctx.response.send_message(":x: You are already in this group !")
+			return
+  
 		GROUP_MEMBERS_TABLE.insert_data(get_group_id(self.msg_id), ctx.user.id)
-
+  
+		group_members = get_group_members(id)
+  
 		embed_desc = f'''
 		{self.author.mention} created a group for ```{self.project}```
 		'''
-		embed = Embed(
+		embed = Embed( 
 			description=embed_desc,
 			title="Group Creation",
 			colour=Colour.from_str("#FFF"),
 			type="rich"
 		)
-		embed.add_field(name="Members", value=len(get_group_members(id)), inline=False)
-
+		usernames = ""
+  
+		for m in group_members:
+			usernames += ctx.client.get_user(m[0]).mention + "\n"
+      
+		embed.add_field(name="Members", value=usernames, inline=False)
+  
 		await update_members_count(ctx, self.msg_id, embed=embed)
 		await ctx.response.send_message(f"{ctx.user.mention} joined {self.author.mention}'s group", ephemeral=True)
 
@@ -77,7 +88,7 @@ async def create_group(ctx: Interaction, project: str):
 		type="rich"
 	)
 
-	embed.add_field(name="Members", value="1", inline=False)
+	embed.add_field(name="Members", value=ctx.user.mention, inline=False)
 	log(f'{ctx.user} created a group for {project}', False)
 
 	# Send the embed and get the message object

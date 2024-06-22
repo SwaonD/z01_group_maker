@@ -23,3 +23,10 @@ def get_group_members(group_id: int):
 	"""
 	members = GROUP_MEMBERS_TABLE.get_data(f"{GROUP_MEMBERS_TABLE.group_id} = {group_id}", GROUP_MEMBERS_TABLE.user_id)
 	return members
+
+def is_member(group_id: int, user_id: int):
+    members = get_group_members(group_id=group_id)
+    for m in members:
+        if m[0] == user_id:
+            return True
+    return False
