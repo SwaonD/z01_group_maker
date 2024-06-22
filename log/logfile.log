@@ -238,3 +238,5 @@
 2024-06-22 | 23:11 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
 2024-06-22 | 23:11 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
 2024-06-22 | 23:11 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-22 | 23:50 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-22 | 23:50 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
