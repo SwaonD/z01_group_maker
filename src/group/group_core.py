@@ -1,6 +1,6 @@
 from discord import ui, Interaction, Embed, Colour, ButtonStyle, Button, User, Member
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.settings.variables import GROUP_CHANNEL_ID_L
+from src.settings.variables import GROUP_CHANNEL_ID
 from src.utils.project import is_project, project_exists
 from src.utils.group import get_group_id, get_group_members
 from src.utils.log import log
@@ -9,19 +9,19 @@ from typing import Union
 
 class MyView(ui.View):
 	def __init__(self, project_name, msg_id, author: Union[User, Member], *args, **kwargs):
-		super().__init__(*args, **kwargs) 
+		super().__init__(*args, **kwargs)
 		self.project = project_name
 		self.msg_id = msg_id
 		self.author = author
 	async def show(self):
 		print(self)
-		
+
 	@ui.button(label="Join", style=ButtonStyle.primary)
 	async def callback1(self, ctx: Interaction, button: Button):
 		id = get_group_id(self.msg_id)
-  
+
 		GROUP_MEMBERS_TABLE.insert_data(get_group_id(self.msg_id), ctx.user.id)
-  
+
 		embed_desc = f'''
 		{self.author.mention} created a group for ```{self.project}```
 		'''
@@ -32,7 +32,7 @@ class MyView(ui.View):
 			type="rich"
 		)
 		embed.add_field(name="Members", value=len(get_group_members(id)), inline=False)
-  
+
 		await update_members_count(ctx, self.msg_id, embed=embed)
 		await ctx.response.send_message(f"{ctx.user.mention} joined {self.author.mention}'s group", ephemeral=True)
 
@@ -43,7 +43,7 @@ class MyView(ui.View):
 async def update_members_count(ctx: Interaction, embed_id: int, embed):
 	try:
 		# Fetch the partial message by its ID
-		message = await ctx.client.get_channel(GROUP_CHANNEL_ID_L).fetch_message(embed_id)
+		message = await ctx.client.get_channel(GROUP_CHANNEL_ID).fetch_message(embed_id)
 
 		# Edit the message with the new embed
 		await message.edit(embed=embed)
@@ -54,7 +54,7 @@ async def update_members_count(ctx: Interaction, embed_id: int, embed):
 		print("Bot does not have permissions to edit messages.")
 	except discord.HTTPException as e:
 		print(f"HTTP error occurred: {e}")
-	
+
 
 async def create_group(ctx: Interaction, project: str):
 	# Checks
@@ -71,7 +71,7 @@ async def create_group(ctx: Interaction, project: str):
 	{ctx.user.mention} created a group for ```{project}```
 	'''
 	embed = Embed(
-		description=embed_desc,	
+		description=embed_desc,
 		title="Group Creation",
 		colour=Colour.from_str("#FFF"),
 		type="rich"
@@ -79,15 +79,15 @@ async def create_group(ctx: Interaction, project: str):
 
 	embed.add_field(name="Members", value="1", inline=False)
 	log(f'{ctx.user} created a group for {project}', False)
-	
+
 	# Send the embed and get the message object
 	message = await ctx.response.send_message(embed=embed)
 	message = await ctx.original_response()
- 
+
  	# Add Group to GROUPDB and Author to the members database
 	GROUPS_TABLE.insert_data(message.id, project, ctx.user.id)
 	GROUP_MEMBERS_TABLE.insert_data(get_group_id(message.id), ctx.user.id)
- 
+
 	v = MyView(project, message.id, ctx.user)
 	await message.edit(view=v)
- 
+

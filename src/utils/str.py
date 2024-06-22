@@ -18,5 +18,4 @@ def get_aligned_text(categories: list[list[str]], sep: str, nb: int) -> str:
 				result += sep * (max_length[i]-len(elem)+nb)
 			else:
 				result += "\n"
-	print(result)
 	return result
