@@ -1,6 +1,5 @@
-import discord
-
 import os
+from discord import Client, app_commands
 from dotenv import load_dotenv
 from src.settings.variables import *
 from src.init import getIntents
@@ -11,8 +10,8 @@ load_dotenv()
 
 def main():
 	intents = getIntents()
-	client = discord.Client(intents=intents)
-	tree = discord.app_commands.CommandTree(client)
+	client = Client(intents=intents)
+	tree = app_commands.CommandTree(client)
 	register_commands(tree)
 	register_events(client, tree)
 	bot_token = os.getenv("Z_01_GROUP_MAKER_DISCORD_BOT_TOKEN")

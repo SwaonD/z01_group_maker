@@ -11,7 +11,7 @@ class BaseTable():
 	def insert_data(self, data: dict) -> int:
 		return sql_insert_data(self.file, self.name, data)
 
-	def get_data(self, condition:str="", *columns: str) -> list[tuple]:
+	def get_data(self, condition: str = "", *columns: str) -> list[tuple]:
 		"""
 		ex : table.get_data(f"{table.message_id} = 2", table.id)\n
 		default * if no columns

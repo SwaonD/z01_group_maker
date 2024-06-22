@@ -1,5 +1,4 @@
 from discord import Intents
-from src.settings.tables import GroupsTable
 
 def getIntents():
 	# Cache

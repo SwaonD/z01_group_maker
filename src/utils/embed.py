@@ -1,6 +1,6 @@
 from discord import Colour, Embed, Interaction, Message
 
-async def edit_embed(message:Message, title:str,
+async def edit_embed(message: Message, title: str,
 		description:str, color:str, url:str, embed_index:int):
 	if not embed_index:
 		embed_index = 0
@@ -24,8 +24,8 @@ async def edit_embed(message:Message, title:str,
 		embeds.append(myEmbed)
 		await message.edit(embeds=embeds)
 
-async def embed(ctx:Interaction, title:str, description:str, color:str=None,
-		url:str=None, message_id:str=None, embed_index:int=None):
+async def embed(ctx: Interaction, title: str, description: str, color: str = None,
+		url: str = None, message_id: str = None, embed_index: int = None):
 	try:
 		if color:
 			color = Colour.from_str(color)
@@ -42,7 +42,7 @@ async def embed(ctx:Interaction, title:str, description:str, color:str=None,
 		print(e)
 		await ctx.response.send_message(content=e, ephemeral=True)
 
-async def remove_embed(ctx:Interaction, message_id:str, embed_index:int):
+async def remove_embed(ctx: Interaction, message_id: str, embed_index: int):
 	try:
 		message = await ctx.channel.fetch_message(int(message_id))
 		embeds = message.embeds

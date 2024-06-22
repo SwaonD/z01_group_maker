@@ -3,11 +3,11 @@ from src.settings.variables import PROJECT_NAMES
 import logging
 
 # Modal to ask for project name
-class project_modal(ui.Modal, title='Group Creation'):
+class project_modal(ui.Modal, title = 'Group Creation'):
 	project = ui.TextInput(label="What project do you wanna work on ?",
 			style=TextStyle.short, placeholder="ascii-art, groupie-tracker...", required=True)
 
-	async def on_submit(self, ctx:Interaction):
+	async def on_submit(self, ctx: Interaction):
 		# Check if the project is valid
 		if self.project.value not in PROJECT_NAMES:
 			await ctx.response.send_message("This project doesn't exists. Try again !")

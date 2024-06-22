@@ -11,12 +11,12 @@ def register_commands(tree: CommandTree):
 		await ping(ctx)
 
 	@tree.command(name="create", description="Create a group", guild=Object(id=GUILD_ID))
-	async def create_command(ctx:Interaction):
+	async def create_command(ctx: Interaction):
 		await create_group(ctx)
 
 	@tree.command(name="test_group_sql",
 			description="test_group_sql", guild=Object(id=GUILD_ID))
-	async def test_group_sql_command(ctx:Interaction, name:str):
+	async def test_group_sql_command(ctx: Interaction, name: str):
 		await test_group_sql(ctx, name)
 
 async def ping(ctx:Interaction):

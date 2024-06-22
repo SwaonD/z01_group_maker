@@ -2,7 +2,7 @@ from discord import ui, Interaction
 from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
 
 # SWAON TEST PART
-async def test_group_sql(ctx:Interaction, name:str="Undefined"):
+async def test_group_sql(ctx: Interaction, name: str = "Undefined"):
 	view = await generate_group_view()
 	message = await ctx.channel.send(content=f"project {name}", view=view)
 	if message is not None:

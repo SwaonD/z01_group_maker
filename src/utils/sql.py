@@ -1,6 +1,6 @@
 import sqlite3
 
-def sql_create_table(file:str, name:str, *columns:str):
+def sql_create_table(file: str, name: str, *columns: str):
 	variables = ""
 	request = ""
 	for i, elem in enumerate(columns):
@@ -14,8 +14,8 @@ def sql_create_table(file:str, name:str, *columns:str):
 		print(request)
 		conn.commit()
 
-def sql_get_data(file:str,
-		table_name:str, condition:str="", *columns:str) -> list[tuple]:
+def sql_get_data(file: str,
+		table_name: str, condition: str="", *columns: str) -> list[tuple]:
 	columns_str = ""
 	request = ""
 	for i, col in enumerate(columns):
@@ -36,7 +36,7 @@ def sql_get_data(file:str,
 		conn.commit()
 		return rows
 
-def sql_insert_data(file:str, table_name:str, data:dict[str:str]) -> int:
+def sql_insert_data(file: str, table_name: str, data: dict[str:str]) -> int:
 	"""
 	returns INTEGER PRIMARY KEY if it exists
 	"""
@@ -57,7 +57,7 @@ def sql_insert_data(file:str, table_name:str, data:dict[str:str]) -> int:
 		conn.commit()
 		return cursor.lastrowid
 
-def sql_delete_data(file:str, table_name:str, condition:str=""):
+def sql_delete_data(file: str, table_name: str, condition: str=""):
 	request = f"DELETE FROM {table_name}"
 	if condition != "":
 		request += f" WHERE {condition}"

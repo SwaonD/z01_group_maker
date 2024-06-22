@@ -1,6 +1,6 @@
-from discord import Client
+from discord import Client, app_commands
 
-def register_events(client: Client, tree):
+def register_events(client: Client, tree: app_commands.CommandTree):
 	@client.event
 	async def on_ready():
 		for guild in client.guilds:
