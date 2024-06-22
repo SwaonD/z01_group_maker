@@ -26,6 +26,8 @@ def project_exists(project: str, author: str) -> bool:
 		bool: returns True is the project was already found
 	"""
 	group_id = GROUPS_TABLE.get_data(f"{GROUPS_TABLE.project_name} = '{project}' AND {GROUPS_TABLE.creator_id} = '{author}'", GROUPS_TABLE.id)
-	if group_id != None:
+	print(group_id)
+	print(len(group_id))	
+	if len(group_id) != 0:
 		return True
 	return False
