@@ -62,10 +62,10 @@ class GroupMembersTable(BaseTable):
 	def insert_data(self, group_id: int, user_id: int):
 		data = {
 			self.group_id: group_id,
-			self.user_id: user_id
+   			self.user_id: user_id
 		}
 		super().insert_data(data)
-
+  
 
 GROUPS_TABLE = GroupsTable()
 GROUP_MEMBERS_TABLE = GroupMembersTable()

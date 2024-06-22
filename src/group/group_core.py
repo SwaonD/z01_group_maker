@@ -1,4 +1,4 @@
-from discord import ui, Interaction, Embed, Colour, ButtonStyle, Button, User, Member
+from discord import ui, Interaction, Embed, Colour, ButtonStyle, Button, User, Member, TextChannel
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
 from src.settings.variables import GROUP_CHANNEL_ID
 from src.utils.project import is_project, project_exists
@@ -8,59 +8,71 @@ import discord
 from typing import Union
 
 class MyView(ui.View):
-	def __init__(self, project_name, msg_id, author: Union[User, Member], *args, **kwargs):
+	def __init__(self, project_name, author: Union[User, Member], *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.project = project_name
-		self.msg_id = msg_id
 		self.author = author
 	async def show(self):
 		print(self)
 
 	@ui.button(label="Join", style=ButtonStyle.primary)
 	async def callback1(self, ctx: Interaction, button: Button):
-		id = get_group_id(self.msg_id)
+		id = get_group_id(ctx.message.id)
   
-		if is_member:
-			await ctx.response.send_message(":x: You are already in this group !")
+		if is_member(id, ctx.user.id):
+			await ctx.response.send_message(":x: You are already in this group !", ephemeral=True)
 			return
   
-		GROUP_MEMBERS_TABLE.insert_data(get_group_id(self.msg_id), ctx.user.id)
+		GROUP_MEMBERS_TABLE.insert_data(id, ctx.user.id)
   
-		group_members = get_group_members(id)
-  
-		embed_desc = f'''
-		{self.author.mention} created a group for ```{self.project}```
-		'''
-		embed = Embed( 
-			description=embed_desc,
-			title="Group Creation",
-			colour=Colour.from_str("#FFF"),
-			type="rich"
-		)
-		usernames = ""
-  
-		for m in group_members:
-			usernames += ctx.client.get_user(m[0]).mention + "\n"
-      
-		embed.add_field(name="Members", value=usernames, inline=False)
-  
-		await update_members_count(ctx, self.msg_id, embed=embed)
-		await ctx.response.send_message(f"{ctx.user.mention} joined {self.author.mention}'s group", ephemeral=True)
+		await update_members_count(ctx, self.project, self.author)
+		await ctx.response.send_message(f"{ctx.user.mention} joined {self.author.mention}'s group for {self.project}", ephemeral=True)
 
 	@ui.button(label="Leave", style=ButtonStyle.secondary)
-	async def callback2(self, button: Button, ctx: Interaction):
-		await ctx.response.send_message("Button 2 clicked!", ephemeral=True)
+	async def callback2(self, ctx: Interaction, button: Button):
+		id = get_group_id(ctx.message.id)
+  
+		if is_member(id, ctx.user.id) is False:
+			await ctx.response.send_message(":x: You are not in this group !", ephemeral=True)
+			return
 
-async def update_members_count(ctx: Interaction, embed_id: int, embed):
+		GROUP_MEMBERS_TABLE.delete_data(f"{GROUP_MEMBERS_TABLE.id} = {id} AND {GROUP_MEMBERS_TABLE.user_id} = {ctx.user.id}")
+		
+		await update_members_count(ctx, self.project, self.author)
+		await ctx.response.send_message(f"{ctx.user.mention} left {self.author.mention}'s group for {self.project}", ephemeral=True)
+
+async def update_members_count(ctx: Interaction, project: str, author: Union[User, Member]):
+	group_members = get_group_members(ctx.message.id)
+ 
+	if len(group_members) == 0:
+		GROUPS_TABLE.delete_data(f"{GROUPS_TABLE.id} = {get_group_id(ctx.message.id)}")
+		channel: TextChannel = await ctx.client.fetch_channel(GROUP_CHANNEL_ID)
+		message = await channel.fetch_message(ctx.message.id)
+		await message.delete()
+		return
+
+	embed_desc: str = f'''
+	{author.mention} created a group for ```{project}```
+	'''
+	embed: Embed = Embed( 
+		description=embed_desc,
+		title="Group Creation",
+		colour=Colour.from_str("#FFF"),
+		type="rich"
+	)
+ 
+	usernames: str = ""
+	for m in group_members:
+		usernames += ctx.client.get_user(m[0]).mention + "\n"
+     
+	embed.add_field(name="Members", value=usernames, inline=False)
+  
 	try:
-		# Fetch the partial message by its ID
-		message = await ctx.client.get_channel(GROUP_CHANNEL_ID).fetch_message(embed_id)
-
-		# Edit the message with the new embed
+		channel: TextChannel = await ctx.client.fetch_channel(GROUP_CHANNEL_ID)
+		message = await channel.fetch_message(ctx.message.id)
 		await message.edit(embed=embed)
-
 	except discord.NotFound:
-		print(f"Message with ID {embed_id} not found.")
+		print(f"Message with ID {ctx.message.id} not found.")
 	except discord.Forbidden:
 		print("Bot does not have permissions to edit messages.")
 	except discord.HTTPException as e:
@@ -90,15 +102,16 @@ async def create_group(ctx: Interaction, project: str):
 
 	embed.add_field(name="Members", value=ctx.user.mention, inline=False)
 	log(f'{ctx.user} created a group for {project}', False)
+ 
+	v = MyView(project, ctx.user)
 
 	# Send the embed and get the message object
-	message = await ctx.response.send_message(embed=embed)
+	message = await ctx.response.send_message(embed=embed, view=v)
 	message = await ctx.original_response()
 
  	# Add Group to GROUPDB and Author to the members database
 	GROUPS_TABLE.insert_data(message.id, project, ctx.user.id)
 	GROUP_MEMBERS_TABLE.insert_data(get_group_id(message.id), ctx.user.id)
 
-	v = MyView(project, message.id, ctx.user)
 	await message.edit(view=v)
 
