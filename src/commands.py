@@ -13,8 +13,8 @@ def register_commands(tree: CommandTree):
 
 	@tree.command(name="create",
 			description="Create a group", guild=Object(id=GUILD_ID))
-	async def create_command(ctx: Interaction):
-		await create_group(ctx)
+	async def create_command(ctx: Interaction, project: str):
+		await create_group(ctx, project)
 
 	@tree.command(name="test_group_sql",
 			description="test_group_sql", guild=Object(id=GUILD_ID))
