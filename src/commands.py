@@ -3,7 +3,7 @@ from typing import Optional, Union
 from discord.app_commands import CommandTree
 from src.group.group_core import create_group
 from src.group.group_test import test_group_sql
-from src.group.group_utils import list
+from src.group.group_get_commands import list
 from src.settings.variables import GUILD_ID
 
 def register_commands(tree: CommandTree):
