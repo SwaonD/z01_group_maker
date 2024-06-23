@@ -1,43 +1,565 @@
+2024-06-23 | 14:57 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-23 | 14:57 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 14:57 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '291563156159856641'
+2024-06-23 | 14:58 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-23 | 14:58 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 14:58 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '291563156159856641'
+2024-06-23 | 14:58 [SQL] INSERT INTO groups (message_id, project_name, creator_id) VALUES ('1254420263232344109', 'ascii-art', '291563156159856641')
+2024-06-23 | 14:58 [SQL] SELECT id FROM groups WHERE message_id = 1254420263232344109
+2024-06-23 | 14:58 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 14:58 [SQL] SELECT id, message_id, project_name, creator_id FROM groups WHERE message_id = 1254420263232344109
+2024-06-23 | 14:58 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 14:58 [SQL] SELECT id, message_id, project_name, creator_id FROM groups WHERE message_id = 1254420263232344109
+2024-06-23 | 14:58 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 14:58 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 291563156159856641
+2024-06-23 | 14:58 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 14:58 [SQL] SELECT id FROM groups WHERE message_id = 1254420263232344109
+2024-06-23 | 14:58 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 14:58 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '291563156159856641'
+2024-06-23 | 14:58 [SQL] INSERT INTO groups (message_id, project_name, creator_id) VALUES ('1254420309751103602', 'ascii-art', '291563156159856641')
+2024-06-23 | 14:58 [SQL] SELECT id FROM groups WHERE message_id = 1254420309751103602
+2024-06-23 | 14:58 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 14:58 [SQL] SELECT id, message_id, project_name, creator_id FROM groups WHERE message_id = 1254420309751103602
+2024-06-23 | 14:58 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 14:58 [SQL] SELECT id, message_id, project_name, creator_id FROM groups WHERE message_id = 1254420309751103602
+2024-06-23 | 14:58 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 14:58 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 291563156159856641
+2024-06-23 | 14:58 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 14:58 [SQL] SELECT id FROM groups WHERE message_id = 1254420309751103602
+2024-06-23 | 14:58 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 14:58 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '291563156159856641'
+2024-06-23 | 14:58 [SQL] INSERT INTO groups (message_id, project_name, creator_id) VALUES ('1254420390856360017', 'ascii-art', '291563156159856641')
+2024-06-23 | 14:58 [SQL] SELECT id FROM groups WHERE message_id = 1254420390856360017
+2024-06-23 | 14:58 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 14:58 [SQL] SELECT id, message_id, project_name, creator_id FROM groups WHERE message_id = 1254420390856360017
+2024-06-23 | 14:58 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 14:58 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 291563156159856641
+2024-06-23 | 14:58 [SQL] SELECT id FROM groups WHERE message_id = 1254420390856360017
+2024-06-23 | 14:58 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 14:59 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '291563156159856641'
+2024-06-23 | 14:59 [SQL] INSERT INTO groups (message_id, project_name, creator_id) VALUES ('1254420448314265662', 'ascii-art', '291563156159856641')
+2024-06-23 | 14:59 [SQL] SELECT id FROM groups WHERE message_id = 1254420448314265662
+2024-06-23 | 14:59 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 15:29 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-23 | 15:29 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 15:35 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-23 | 15:35 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 15:35 [SQL] SELECT group_id FROM group_members WHERE user_id = 291563156159856641
+2024-06-23 | 15:35 [SQL] SELECT * FROM groups WHERE project_name = 1
+2024-06-23 | 15:38 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-23 | 15:38 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 15:38 [SQL] SELECT group_id FROM group_members WHERE user_id = 291563156159856641
+2024-06-23 | 15:38 [SQL] SELECT * FROM groups WHERE project_name = 1
+2024-06-23 | 15:39 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-23 | 15:39 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 15:39 [SQL] SELECT group_id FROM group_members WHERE user_id = 291563156159856641
+2024-06-23 | 15:39 [SQL] SELECT * FROM groups WHERE project_name = 1
+2024-06-23 | 15:39 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-23 | 15:39 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 15:39 [SQL] SELECT group_id FROM group_members WHERE user_id = 291563156159856641
+2024-06-23 | 15:39 [SQL] SELECT * FROM groups WHERE project_name = 1
+2024-06-23 | 15:39 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '291563156159856641'
+2024-06-23 | 15:40 [SQL] SELECT group_id FROM group_members WHERE user_id = 291563156159856641
+2024-06-23 | 15:40 [SQL] SELECT * FROM groups WHERE project_name = 1
+2024-06-23 | 15:45 [SQL] SELECT group_id FROM group_members WHERE user_id = 291563156159856641
+2024-06-23 | 15:45 [SQL] SELECT * FROM groups WHERE project_name = 1
+2024-06-23 | 15:46 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER)
+2024-06-23 | 15:46 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 15:46 [SQL] SELECT group_id FROM group_members WHERE user_id = 291563156159856641
+2024-06-23 | 15:46 [SQL] SELECT * FROM groups WHERE id = 1
+2024-06-23 | 16:6 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:6 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:6 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '291563156159856641'
+2024-06-23 | 16:6 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:6 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:6 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:6 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:6 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '291563156159856641'
+2024-06-23 | 16:6 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254437524852707409', 'ascii-art', '291563156159856641', '0')
+2024-06-23 | 16:6 [SQL] SELECT id FROM groups WHERE message_id = 1254437524852707409
+2024-06-23 | 16:6 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 16:6 [SQL] SELECT id, message_id, project_name, creator_id FROM groups WHERE message_id = 1254437524852707409
+2024-06-23 | 16:6 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:7 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:7 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:7 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:7 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:8 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '291563156159856641'
+2024-06-23 | 16:8 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254437826372833281', 'ascii-art', '291563156159856641', '0')
+2024-06-23 | 16:8 [SQL] SELECT id FROM groups WHERE message_id = 1254437826372833281
+2024-06-23 | 16:8 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 16:8 [SQL] SELECT id, message_id, project_name, creator_id FROM groups WHERE message_id = 1254437826372833281
+2024-06-23 | 16:9 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:9 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:9 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:9 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:9 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '291563156159856641'
+2024-06-23 | 16:9 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254438274609451011', 'ascii-art', '291563156159856641', '0')
+2024-06-23 | 16:9 [SQL] SELECT id FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:9 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 16:9 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:9 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:9 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:9 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:9 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:9 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:9 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] UPDATE groups SET confirmed = 1 WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] UPDATE groups SET confirmed = 0 WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 291563156159856641
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] SELECT group_id FROM group_members WHERE user_id = 291563156159856641
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 16:10 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:10 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254438274609451011
+2024-06-23 | 16:11 [SQL] SELECT group_id FROM group_members WHERE user_id = 291563156159856641
+2024-06-23 | 16:11 [SQL] SELECT * FROM groups WHERE id = 1
+2024-06-23 | 16:22 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:22 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:22 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:22 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254441411948970117', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:22 [SQL] SELECT id FROM groups WHERE message_id = 1254441411948970117
+2024-06-23 | 16:22 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:22 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254441411948970117
+2024-06-23 | 16:22 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:22 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 16:22 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:22 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254441411948970117
+2024-06-23 | 16:23 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:23 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:23 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:23 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254441614944899205', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:23 [SQL] SELECT id FROM groups WHERE message_id = 1254441614944899205
+2024-06-23 | 16:23 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:23 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254441614944899205
+2024-06-23 | 16:23 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:23 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 16:23 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:23 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254441614944899205
+2024-06-23 | 16:23 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254441614944899205
+2024-06-23 | 16:23 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:23 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:23 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254441614944899205
+2024-06-23 | 16:23 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
 2024-06-23 | 16:24 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
 2024-06-23 | 16:24 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
-2024-06-23 | 17:20 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
-2024-06-23 | 17:20 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
-2024-06-23 | 17:21 [SQL] SELECT project_name, creator_id, message_id FROM groups
-2024-06-23 | 17:21 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art-web' AND creator_id = '291563156159856641'
-2024-06-23 | 17:21 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254456237999788074', 'ascii-art-web', '291563156159856641', '0')
-2024-06-23 | 17:21 [SQL] SELECT id FROM groups WHERE message_id = 1254456237999788074
-2024-06-23 | 17:21 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('2', '291563156159856641')
-2024-06-23 | 17:21 [SQL] SELECT project_name, creator_id, message_id FROM groups
-2024-06-23 | 17:21 [SQL] SELECT group_id FROM group_members WHERE user_id = 1031330570107629650
+2024-06-23 | 16:24 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:24 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254441891076767776', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:24 [SQL] SELECT id FROM groups WHERE message_id = 1254441891076767776
+2024-06-23 | 16:24 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:24 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254441891076767776
+2024-06-23 | 16:24 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:24 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 16:24 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:24 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254441891076767776
+2024-06-23 | 16:24 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254441891076767776
+2024-06-23 | 16:24 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:24 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:24 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254441891076767776
+2024-06-23 | 16:24 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:24 [SQL] UPDATE groups SET creator_id = 291563156159856641 WHERE id = 1
+2024-06-23 | 16:24 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:24 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:24 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:24 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254442080437276824', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:24 [SQL] SELECT id FROM groups WHERE message_id = 1254442080437276824
+2024-06-23 | 16:24 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:25 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254442080437276824
+2024-06-23 | 16:25 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:25 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 16:25 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:25 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254442080437276824
+2024-06-23 | 16:25 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254442080437276824
+2024-06-23 | 16:25 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:25 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:25 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254442080437276824
+2024-06-23 | 16:25 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:25 [SQL] UPDATE groups SET creator_id = 291563156159856641 WHERE id = 1
+2024-06-23 | 16:25 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:25 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254442080437276824
+2024-06-23 | 16:27 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:27 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:27 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:27 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254442665630629950', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:27 [SQL] SELECT id FROM groups WHERE message_id = 1254442665630629950
+2024-06-23 | 16:27 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:27 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254442665630629950
+2024-06-23 | 16:27 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:27 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 16:27 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254442665630629950
+2024-06-23 | 16:27 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:27 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254442665630629950
+2024-06-23 | 16:27 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:27 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:27 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254442665630629950
+2024-06-23 | 16:27 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:27 [SQL] UPDATE groups SET creator_id = 291563156159856641 WHERE id = 1
+2024-06-23 | 16:27 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254442665630629950
+2024-06-23 | 16:27 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:27 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254442665630629950
+2024-06-23 | 16:27 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:27 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254442665630629950
+2024-06-23 | 16:27 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:27 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254442665630629950
+2024-06-23 | 16:43 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:43 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:43 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:43 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254446700542693421', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:43 [SQL] SELECT id FROM groups WHERE message_id = 1254446700542693421
+2024-06-23 | 16:43 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:43 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art-web' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:43 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254446719370793024', 'ascii-art-web', '1031330570107629650', '0')
+2024-06-23 | 16:43 [SQL] SELECT id FROM groups WHERE message_id = 1254446719370793024
+2024-06-23 | 16:43 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('2', '1031330570107629650')
+2024-06-23 | 16:43 [SQL] SELECT group_id FROM group_members WHERE user_id = 1031330570107629650
+2024-06-23 | 16:43 [SQL] SELECT * FROM groups WHERE id = 1
+2024-06-23 | 16:43 [SQL] SELECT * FROM groups WHERE id = 2
+2024-06-23 | 16:43 [SQL] SELECT project_name, creator_id, message_id FROM groups
+2024-06-23 | 16:43 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254446700542693421
+2024-06-23 | 16:43 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:43 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254446700542693421
+2024-06-23 | 16:43 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:43 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:43 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254446700542693421
+2024-06-23 | 16:43 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:44 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:44 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:44 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:44 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254446946643480597', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:44 [SQL] SELECT id FROM groups WHERE message_id = 1254446946643480597
+2024-06-23 | 16:44 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:44 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254446946643480597
+2024-06-23 | 16:44 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:44 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:44 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254446946643480597
+2024-06-23 | 16:44 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:44 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254446946643480597
+2024-06-23 | 16:44 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:47 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:47 [SQL] SELECT project_name, creator_id, message_id FROM groups
+2024-06-23 | 16:49 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:49 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:49 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:49 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254448304234827817', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:49 [SQL] SELECT id FROM groups WHERE message_id = 1254448304234827817
+2024-06-23 | 16:49 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:49 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254448304234827817
+2024-06-23 | 16:49 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:49 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:49 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254448304234827817
+2024-06-23 | 16:49 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:49 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:50 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:50 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:50 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:50 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254448544446677087', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:50 [SQL] SELECT id FROM groups WHERE message_id = 1254448544446677087
+2024-06-23 | 16:50 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:50 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254448544446677087
+2024-06-23 | 16:50 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:50 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:50 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254448544446677087
+2024-06-23 | 16:50 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:50 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 16:51 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:51 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:52 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:52 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254448897888227338', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:52 [SQL] SELECT id FROM groups WHERE message_id = 1254448897888227338
+2024-06-23 | 16:52 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:52 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254448897888227338
+2024-06-23 | 16:52 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:52 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:52 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254448897888227338
+2024-06-23 | 16:52 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:52 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 16:52 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254448897888227338
+2024-06-23 | 16:52 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:52 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:52 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:52 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254448978087641090', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:52 [SQL] SELECT id FROM groups WHERE message_id = 1254448978087641090
+2024-06-23 | 16:52 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:52 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254448978087641090
+2024-06-23 | 16:52 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:52 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:52 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254448978087641090
+2024-06-23 | 16:52 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:52 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 16:53 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:53 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:53 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:53 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254449283663532159', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:53 [SQL] SELECT id FROM groups WHERE message_id = 1254449283663532159
+2024-06-23 | 16:53 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:53 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254449283663532159
+2024-06-23 | 16:53 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:53 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254449283663532159
+2024-06-23 | 16:53 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:53 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254449283663532159
+2024-06-23 | 16:53 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:53 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:53 [SQL] SELECT id FROM groups WHERE message_id = 1254449283663532159
+2024-06-23 | 16:53 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 16:53 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:53 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254449358989037568', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:53 [SQL] SELECT id FROM groups WHERE message_id = 1254449358989037568
+2024-06-23 | 16:53 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:53 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254449358989037568
+2024-06-23 | 16:53 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:53 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:53 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254449358989037568
+2024-06-23 | 16:53 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:53 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 16:54 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:54 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254449394997133333', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:54 [SQL] SELECT id FROM groups WHERE message_id = 1254449394997133333
+2024-06-23 | 16:54 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:54 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254449394997133333
+2024-06-23 | 16:54 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:54 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:54 [SQL] SELECT id FROM groups WHERE message_id = 1254449394997133333
+2024-06-23 | 16:54 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 16:55 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:55 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:55 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:55 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254449834715381824', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:55 [SQL] SELECT id FROM groups WHERE message_id = 1254449834715381824
+2024-06-23 | 16:55 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:55 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254449834715381824
+2024-06-23 | 16:55 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:56 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:56 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:56 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:56 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254450027980656711', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:56 [SQL] SELECT id FROM groups WHERE message_id = 1254450027980656711
+2024-06-23 | 16:56 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:56 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254450027980656711
+2024-06-23 | 16:56 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:56 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:56 [SQL] SELECT id FROM groups WHERE message_id = 1254450027980656711
+2024-06-23 | 16:56 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 16:57 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:57 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 16:57 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 16:57 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254450282071457862', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 16:57 [SQL] SELECT id FROM groups WHERE message_id = 1254450282071457862
+2024-06-23 | 16:57 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 16:57 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254450282071457862
+2024-06-23 | 16:57 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:57 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254450282071457862
+2024-06-23 | 16:57 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 16:57 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 16:57 [SQL] SELECT id FROM groups WHERE message_id = 1254450282071457862
+2024-06-23 | 16:57 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 16:58 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 16:58 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:6 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:6 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:6 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:6 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254452542545592380', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:6 [SQL] SELECT id FROM groups WHERE message_id = 1254452542545592380
+2024-06-23 | 17:6 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:6 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254452542545592380
+2024-06-23 | 17:7 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:7 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:7 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:7 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254452789145374752', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:7 [SQL] SELECT id FROM groups WHERE message_id = 1254452789145374752
+2024-06-23 | 17:7 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:7 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254452789145374752
+2024-06-23 | 17:7 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:7 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:7 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:7 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254452861161570334', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:7 [SQL] SELECT id FROM groups WHERE message_id = 1254452861161570334
+2024-06-23 | 17:7 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:7 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254452861161570334
+2024-06-23 | 17:15 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:15 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:15 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:15 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:15 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:15 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:21 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:21 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:21 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:21 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:22 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:22 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:22 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:22 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
 2024-06-23 | 17:24 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
 2024-06-23 | 17:24 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
-2024-06-23 | 17:25 [SQL] SELECT group_id FROM group_members WHERE user_id = 1031330570107629650
-2024-06-23 | 17:25 [SQL] SELECT project_name, creator_id, message_id FROM groups WHERE id IN (1,)
-2024-06-23 | 17:26 [SQL] SELECT project_name, creator_id, message_id FROM groups
+2024-06-23 | 17:24 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:24 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:25 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:25 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
 2024-06-23 | 17:27 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
 2024-06-23 | 17:27 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
-2024-06-23 | 17:27 [SQL] SELECT group_id FROM group_members WHERE user_id = 1031330570107629650
-2024-06-23 | 17:27 [SQL] SELECT project_name, creator_id, message_id FROM groups WHERE id IN (1,)
-2024-06-23 | 17:31 [SQL] SELECT group_id FROM group_members WHERE user_id = 291563156159856641
-2024-06-23 | 17:31 [SQL] SELECT project_name, creator_id, message_id FROM groups WHERE id IN (1, 2)
-2024-06-23 | 17:34 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
-2024-06-23 | 17:34 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
-2024-06-23 | 17:35 [SQL] SELECT group_id FROM group_members WHERE user_id = 1031330570107629650
-2024-06-23 | 17:35 [SQL] SELECT project_name, creator_id, message_id FROM groups WHERE id IN ('(', '1', ')')
-2024-06-23 | 17:35 [SQL] SELECT project_name, creator_id, message_id FROM groups WHERE project_name = 'ascii-art-web'
-2024-06-23 | 17:35 [SQL] SELECT project_name, creator_id, message_id FROM groups WHERE project_name = 'ascii-a'
-2024-06-23 | 17:35 [SQL] SELECT group_id FROM group_members WHERE user_id = 1031330570107629650
-2024-06-23 | 17:35 [SQL] SELECT project_name, creator_id, message_id FROM groups WHERE id IN ('(', '1', ')') AND project_name = 'ascii-art-web'
-2024-06-23 | 17:35 [SQL] SELECT group_id FROM group_members WHERE user_id = 1031330570107629650
-2024-06-23 | 17:35 [SQL] SELECT project_name, creator_id, message_id FROM groups WHERE id IN ('(', '1', ')') AND project_name = 'ascii-art'
-2024-06-23 | 17:36 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
-2024-06-23 | 17:36 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:27 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:27 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:28 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:28 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:28 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:28 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:29 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:29 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:29 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:29 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:30 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:30 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:30 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:30 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254458507692867625', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:30 [SQL] SELECT id FROM groups WHERE message_id = 1254458507692867625
+2024-06-23 | 17:30 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:30 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254458507692867625
+2024-06-23 | 17:30 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 17:30 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 17:30 [SQL] SELECT id FROM groups WHERE message_id = 1254458514060083342
+2024-06-23 | 17:31 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:31 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:31 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:31 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254458725788553316', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:31 [SQL] SELECT id FROM groups WHERE message_id = 1254458725788553316
+2024-06-23 | 17:31 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:31 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254458725788553316
+2024-06-23 | 17:31 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 17:31 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 17:31 [SQL] SELECT id FROM groups WHERE message_id = 1254458725788553316
+2024-06-23 | 17:31 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 17:31 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:31 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254458780209512478', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:31 [SQL] SELECT id FROM groups WHERE message_id = 1254458780209512478
+2024-06-23 | 17:31 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:31 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254458780209512478
+2024-06-23 | 17:31 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 17:31 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 17:31 [SQL] SELECT id FROM groups WHERE message_id = 1254458780209512478
+2024-06-23 | 17:31 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 17:35 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:35 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:36 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:36 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254459979759358073', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:36 [SQL] SELECT id FROM groups WHERE message_id = 1254459979759358073
+2024-06-23 | 17:36 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:36 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254459979759358073
+2024-06-23 | 17:36 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 17:36 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 17:36 [SQL] SELECT id FROM groups WHERE message_id = 1254459979759358073
+2024-06-23 | 17:36 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 17:38 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:38 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:39 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:39 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254460786642911242', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:39 [SQL] SELECT id FROM groups WHERE message_id = 1254460786642911242
+2024-06-23 | 17:39 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:39 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254460786642911242
+2024-06-23 | 17:39 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 17:39 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 17:39 [SQL] SELECT id FROM groups WHERE message_id = 1254460786642911242
+2024-06-23 | 17:39 [SQL] DELETE FROM groups WHERE id = 1
 2024-06-23 | 17:40 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
 2024-06-23 | 17:40 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
-2024-06-23 | 17:40 [SQL] SELECT project_name, creator_id, message_id FROM groups
+2024-06-23 | 17:40 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:40 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254461072379740270', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:40 [SQL] SELECT id FROM groups WHERE message_id = 1254461072379740270
+2024-06-23 | 17:40 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:40 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254461072379740270
+2024-06-23 | 17:40 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 17:40 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 17:40 [SQL] SELECT id FROM groups WHERE message_id = 1254461072379740270
+2024-06-23 | 17:40 [SQL] DELETE FROM groups WHERE id = 1
 2024-06-23 | 17:40 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
 2024-06-23 | 17:40 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
-2024-06-23 | 17:40 [SQL] SELECT project_name, creator_id, message_id FROM groups
-2024-06-23 | 17:45 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
-2024-06-23 | 17:45 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
-2024-06-23 | 17:45 [SQL] SELECT project_name, creator_id, message_id FROM groups
+2024-06-23 | 17:40 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:40 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254461206216048770', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:40 [SQL] SELECT id FROM groups WHERE message_id = 1254461206216048770
+2024-06-23 | 17:40 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:41 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254461206216048770
+2024-06-23 | 17:41 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 17:41 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 17:41 [SQL] SELECT id FROM groups WHERE message_id = 1254461206216048770
+2024-06-23 | 17:41 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 17:41 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:41 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:41 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:41 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254461307269283932', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:41 [SQL] SELECT id FROM groups WHERE message_id = 1254461307269283932
+2024-06-23 | 17:41 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:41 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254461307269283932
+2024-06-23 | 17:41 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 17:41 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 17:41 [SQL] SELECT id FROM groups WHERE message_id = 1254461307269283932
+2024-06-23 | 17:41 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 17:42 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:42 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:42 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:42 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254461530305597574', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:42 [SQL] SELECT id FROM groups WHERE message_id = 1254461530305597574
+2024-06-23 | 17:42 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:42 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254461530305597574
+2024-06-23 | 17:42 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 17:42 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 17:42 [SQL] SELECT id FROM groups WHERE message_id = 1254461530305597574
+2024-06-23 | 17:42 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 17:42 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:42 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:42 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:42 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254461670890147964', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:42 [SQL] SELECT id FROM groups WHERE message_id = 1254461670890147964
+2024-06-23 | 17:42 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:42 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254461670890147964
+2024-06-23 | 17:42 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 17:42 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 17:42 [SQL] SELECT id FROM groups WHERE message_id = 1254461670890147964
+2024-06-23 | 17:42 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-23 | 17:46 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-23 | 17:46 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-23 | 17:46 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-23 | 17:46 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254462682128715816', 'ascii-art', '1031330570107629650', '0')
+2024-06-23 | 17:46 [SQL] SELECT id FROM groups WHERE message_id = 1254462682128715816
+2024-06-23 | 17:46 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-23 | 17:46 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254462682128715816
+2024-06-23 | 17:46 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254462682128715816
+2024-06-23 | 17:46 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 17:46 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '291563156159856641')
+2024-06-23 | 17:46 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254462682128715816
+2024-06-23 | 17:46 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 17:47 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-23 | 17:47 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
+2024-06-23 | 17:47 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 291563156159856641
+2024-06-23 | 17:47 [SQL] SELECT id FROM groups WHERE message_id = 1254462682128715816
+2024-06-23 | 17:47 [SQL] DELETE FROM groups WHERE id = 1

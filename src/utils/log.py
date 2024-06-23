@@ -36,3 +36,4 @@ def log(msg: str, sql: bool | None):
 			f"PermissionError: Permission denied when trying to access '{path}'.")
 	except Exception as e:
 		print(f"An error occurred: {str(e)}")
+	# print log in loop
