@@ -12,8 +12,8 @@ def sql_create_table(file: str, name: str, *columns: str):
 	request = f"CREATE TABLE IF NOT EXISTS {name} ({variables})"
 	with sqlite3.connect(file) as conn:
 		cursor = conn.cursor()
-		cursor.execute(request)
 		log(request, True)
+		cursor.execute(request)
 		conn.commit()
 
 
@@ -32,8 +32,8 @@ def sql_get_data(file: str,
 		request += f" WHERE {condition}"
 	with sqlite3.connect(file) as conn:
 		cursor = conn.cursor()
-		cursor.execute(request)
 		log(request, True)
+		cursor.execute(request)
 		rows = cursor.fetchall()
 		conn.commit()
 		return rows
@@ -55,8 +55,8 @@ def sql_insert_data(file: str, table_name: str, data: dict[str:str]) -> int:
 	request = f"INSERT INTO {table_name} ({keys_str}) VALUES ({values_str})"
 	with sqlite3.connect(file) as conn:
 		cursor = conn.cursor()
-		cursor.execute(request)
 		log(request, True)
+		cursor.execute(request)
 		conn.commit()
 		return cursor.lastrowid
 
@@ -67,8 +67,8 @@ def sql_delete_data(file: str, table_name: str, condition: str = ""):
 		request += f" WHERE {condition}"
 	with sqlite3.connect(file) as conn:
 		cursor = conn.cursor()
-		cursor.execute(request)
 		log(request, True)
+		cursor.execute(request)
 		conn.commit()
 
 
@@ -82,6 +82,6 @@ def sql_update_data(file: str, table_name: str, data: dict[str:str], condition: 
 	request = f"UPDATE {table_name} SET {d} WHERE {condition}"
 	with sqlite3.connect(file) as conn:
 		cursor = conn.cursor()
-		cursor.execute(request)
 		log(request, True)
+		cursor.execute(request)
 		conn.commit()
