@@ -280,3 +280,27 @@
 2024-06-23 | 23:57 [SQL] DELETE FROM group_members WHERE id = 1 AND user_id = 1031330570107629650
 2024-06-23 | 23:57 [SQL] SELECT id FROM groups WHERE message_id = 1254556014544420974
 2024-06-23 | 23:57 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-24 | 0:1 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-24 | 0:1 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-24 | 0:1 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-24 | 0:1 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254556961433718819', 'ascii-art', '1031330570107629650', '0')
+2024-06-24 | 0:1 [SQL] SELECT id FROM groups WHERE message_id = 1254556961433718819
+2024-06-24 | 0:1 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-24 | 0:1 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254556961433718819
+2024-06-24 | 0:1 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-24 | 0:1 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-24 | 0:1 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254556961433718819
+2024-06-24 | 0:1 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-24 | 0:1 [SQL] DELETE FROM groups WHERE id = 1
+2024-06-24 | 0:1 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, creator_id INTEGER, confirmed INTEGER)
+2024-06-24 | 0:1 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-24 | 0:1 [SQL] SELECT id FROM groups WHERE project_name = 'ascii-art' AND creator_id = '1031330570107629650'
+2024-06-24 | 0:1 [SQL] INSERT INTO groups (message_id, project_name, creator_id, confirmed) VALUES ('1254557054375297156', 'ascii-art', '1031330570107629650', '0')
+2024-06-24 | 0:1 [SQL] SELECT id FROM groups WHERE message_id = 1254557054375297156
+2024-06-24 | 0:1 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('1', '1031330570107629650')
+2024-06-24 | 0:1 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254557054375297156
+2024-06-24 | 0:1 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-24 | 0:1 [SQL] DELETE FROM group_members WHERE group_id = 1 AND user_id = 1031330570107629650
+2024-06-24 | 0:1 [SQL] SELECT id, message_id, project_name, creator_id, confirmed FROM groups WHERE message_id = 1254557054375297156
+2024-06-24 | 0:1 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-24 | 0:1 [SQL] DELETE FROM groups WHERE id = 1

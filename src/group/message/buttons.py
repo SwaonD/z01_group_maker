@@ -21,6 +21,7 @@ async def join_group(ctx: Interaction, group: Group):
     log(f"{ctx.user} joined group {group.id}", None)
 
     author = ctx.client.get_user(group.creator_id)
+    await author.send(f"{ctx.message.author.mention} joined your group !")
 
     if author is None:
         author = await ctx.client.fetch_user(group.creator_id)
@@ -47,6 +48,7 @@ async def leave_group(ctx: Interaction, group: Group):
     group_members = get_group_members(g.id)
 
     author = ctx.client.get_user(group.creator_id)
+    await author.send(f"{ctx.message.author.mention} left your group !")
 
     if author is None:
         author = await ctx.client.fetch_user(group.creator_id)
@@ -72,7 +74,6 @@ async def leave_group(ctx: Interaction, group: Group):
 
 
 async def confirm_group(ctx: Interaction, group: Group):
-    
     group_members = get_group_members(group.id)
     if len(group_members) <= 1:
         await ctx.response.send_message(":x: You can only confirm a group with a minimum of 2 people !", ephemeral=True, delete_after=5.0)
@@ -81,6 +82,9 @@ async def confirm_group(ctx: Interaction, group: Group):
     if ctx.user.id != group.creator_id:
         await ctx.response.send_message(":x: Only the group leader can confirm his group !", ephemeral=True, delete_after=5.0)
         return
+
+    for m in group_members:
+        await ctx.client.get_user(m[0]).send(f"You group leader {ctx.client.get_user(group.creator_id)} confirmed the group for {group.project_name}")
 
     data = {}
     stat = ""
