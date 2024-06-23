@@ -64,5 +64,6 @@ def sql_delete_data(file: str, table_name: str, condition: str=""):
 	with sqlite3.connect(file) as conn:
 		cursor = conn.cursor()
 		cursor.execute(request)
+		print(request)
 		log(request, True)
 		conn.commit()

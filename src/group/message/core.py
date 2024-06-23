@@ -1,18 +1,18 @@
 from discord import Interaction, Embed, Colour, User, Member
 from src.settings.tables import GROUPS_TABLE
-from src.utils.group import get_group_id, get_group_members
+from src.utils.group import get_group_id, get_group_members, Group
 from typing import Union
 
-async def update_members_count(ctx: Interaction, project: str, author: Union[User, Member]):
-	group_members = get_group_members(ctx.message.id)
-
+async def update_members_count(ctx: Interaction, group: Group, author):
+	group_members = get_group_members(group.id)
+	print(group_members, len(group_members))
 	if len(group_members) == 0:
 		GROUPS_TABLE.delete_data(f"{GROUPS_TABLE.id} = {get_group_id(ctx.message.id)}")
 		await ctx.message.delete()
 		return
 
 	embed_desc: str = f'''
-	{author.mention} created a group for ```{project}```
+	{author.mention} created a group for ```{group.project_name}```
 	'''
 	embed: Embed = Embed(
 		description=embed_desc,
