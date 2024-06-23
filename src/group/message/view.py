@@ -13,12 +13,12 @@ class GroupMessageView(ui.View):
 
 	@ui.button(label="Join", style=ButtonStyle.primary)
 	async def join_button_callback(self, ctx: Interaction, button: Button):
-		await join_group(ctx, self.project_name, self.author)
+		await join_group(ctx)
 
 	@ui.button(label="Leave", style=ButtonStyle.secondary)
 	async def leave_button_callback(self, ctx: Interaction, button: Button):
-		await leave_group(ctx, self.project_name, self.author)
+		await leave_group(ctx)
 
 	@ui.button(label="Delete", style=ButtonStyle.danger)
 	async def delete_button_callback(self, ctx: Interaction, button: Button):
-		await delete_group(ctx, button)
+		await delete_group(ctx)

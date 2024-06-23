@@ -8,6 +8,7 @@ GROUP_CHANNEL_ID = os.getenv("Z_01_GROUP_CHANNEL_ID")
 # commands1 1253719751541264434
 # commands 1253698115425533953
 GROUP_SQL_FILE = os.getenv("Z_01_GROUP_DB")
+SQL_LOG_PATH="./log/sql.log"
 LOG_PATH="./log/logfile.log"
 
 PROJECT_NAMES = [
