@@ -1,9 +1,9 @@
-from discord import Interaction
+from src.group.message.tools import is_member, get_group_members, Group, get_group
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.group.message.tools import get_group_id, is_member, get_group_members, Group, get_group
+from src.group.message.deleteview import DeleteMessageView
 from src.group.message.core import update_embed
+from discord import Interaction, Embed, Colour
 from src.utils.log import log
-
 
 async def join_group(ctx: Interaction, group: Group):
     if is_member(group.id, ctx.user.id):
@@ -104,16 +104,17 @@ async def delete_group(ctx: Interaction, group: Group):
     if group.creator_id != ctx.user.id:
         await ctx.response.send_message(":x: Only the group creator can delete his group !", ephemeral=True, delete_after=5.0)
         return
-
-    members = get_group_members(group.id)
-
-    for m in members:
-        GROUP_MEMBERS_TABLE.delete_data(
-            f"{GROUP_MEMBERS_TABLE.id} = {group.id} AND {GROUP_MEMBERS_TABLE.user_id} = {m[0]}")
-
-    GROUPS_TABLE.delete_data(
-        f"{GROUPS_TABLE.id} = {get_group_id(ctx.message.id)}")
-    await ctx.message.delete()
-
-    log(f"{ctx.user.id} deleted group {group.id}", None)
-    await ctx.response.send_message(f"{ctx.user.mention} deleted the {group.project_name} group", ephemeral=True, delete_after=5.0)
+    
+    embed_desc = f'''
+        Are you sur you want to delete this group ?
+    '''
+    
+    embed: Embed = Embed(
+        description=embed_desc,
+        title="Group Deletion",
+        colour=Colour.from_str("#ff0000"),
+        type="rich"
+    )
+    
+    d = DeleteMessageView(group=group)
+    await ctx.response.send_message(embed=embed, view=d)
