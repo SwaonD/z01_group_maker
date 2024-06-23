@@ -9,6 +9,7 @@ class Group:
 	message_id: int
 	project_name: str
 	creator_id: int
+	confirmed: int
 
 def get_group(msg_id: int):
 	"""Fetches the whole group information using the provided message ID
@@ -21,9 +22,11 @@ def get_group(msg_id: int):
 
 	"""
 
-	rows = GROUPS_TABLE.get_data(f"{GROUPS_TABLE.message_id} = {msg_id}", GROUPS_TABLE.id,
-								 GROUPS_TABLE.message_id, GROUPS_TABLE.project_name, GROUPS_TABLE.creator_id)[0]
-	group = Group(rows[0], rows[1], rows[2], rows[3])
+	rows = GROUPS_TABLE.get_data(
+			f"{GROUPS_TABLE.message_id} = {msg_id}", GROUPS_TABLE.id,
+			GROUPS_TABLE.message_id, GROUPS_TABLE.project_name,
+			GROUPS_TABLE.creator_id, GROUPS_TABLE.confirmed)[0]
+	group = Group(rows[0], rows[1], rows[2], rows[3], rows[4])
 
 	return group
 
