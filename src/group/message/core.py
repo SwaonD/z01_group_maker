@@ -1,0 +1,30 @@
+from discord import Interaction, Embed, Colour, User, Member
+from src.settings.tables import GROUPS_TABLE
+from src.utils.group import get_group_id, get_group_members
+from typing import Union
+
+async def update_members_count(ctx: Interaction, project: str, author: Union[User, Member]):
+	group_members = get_group_members(ctx.message.id)
+
+	if len(group_members) == 0:
+		GROUPS_TABLE.delete_data(f"{GROUPS_TABLE.id} = {get_group_id(ctx.message.id)}")
+		await ctx.message.delete()
+		return
+
+	embed_desc: str = f'''
+	{author.mention} created a group for ```{project}```
+	'''
+	embed: Embed = Embed(
+		description=embed_desc,
+		title="Group Creation",
+		colour=Colour.from_str("#FFF"),
+		type="rich"
+	)
+
+	usernames: str = ""
+	for m in group_members:
+		usernames += ctx.client.get_user(m[0]).mention + "\n"
+
+	embed.add_field(name="Members", value=usernames, inline=False)
+	# Edit the message with the new embed
+	await ctx.message.edit(embed=embed)

@@ -1,9 +1,8 @@
 from discord import Interaction, Object
-from typing import Optional, Union
+from typing import Optional
 from discord.app_commands import CommandTree
-from src.group.group_core import create_group
-from src.group.group_test import test_group_sql
-from src.group.group_get_commands import list
+from src.group.commands.create_group import create_group
+from src.group.commands.list import list
 from src.settings.variables import GUILD_ID
 
 def register_commands(tree: CommandTree):
@@ -15,11 +14,6 @@ def register_commands(tree: CommandTree):
 			description="Create a group", guild=Object(id=GUILD_ID))
 	async def create_command(ctx: Interaction, project: str):
 		await create_group(ctx, project)
-
-	@tree.command(name="test_group_sql",
-			description="test_group_sql", guild=Object(id=GUILD_ID))
-	async def test_group_sql_command(ctx: Interaction, name: str):
-		await test_group_sql(ctx, name)
 
 	@tree.command(name="list",
 			description="list every groups", guild=Object(id=GUILD_ID))
