@@ -1,6 +1,7 @@
 import sqlite3
 from src.utils.log import log
 
+
 def sql_create_table(file: str, name: str, *columns: str):
 	variables = ""
 	request = ""
@@ -15,8 +16,9 @@ def sql_create_table(file: str, name: str, *columns: str):
 		log(request, True)
 		conn.commit()
 
+
 def sql_get_data(file: str,
-		table_name: str, condition: str="", *columns: str) -> list[tuple]:
+				 table_name: str, condition: str = "", *columns: str) -> list[tuple]:
 	columns_str = ""
 	request = ""
 	for i, col in enumerate(columns):
@@ -35,6 +37,7 @@ def sql_get_data(file: str,
 		rows = cursor.fetchall()
 		conn.commit()
 		return rows
+
 
 def sql_insert_data(file: str, table_name: str, data: dict[str:str]) -> int:
 	"""
@@ -57,13 +60,28 @@ def sql_insert_data(file: str, table_name: str, data: dict[str:str]) -> int:
 		conn.commit()
 		return cursor.lastrowid
 
-def sql_delete_data(file: str, table_name: str, condition: str=""):
+
+def sql_delete_data(file: str, table_name: str, condition: str = ""):
 	request = f"DELETE FROM {table_name}"
 	if condition != "":
 		request += f" WHERE {condition}"
 	with sqlite3.connect(file) as conn:
 		cursor = conn.cursor()
 		cursor.execute(request)
-		print(request)
+		log(request, True)
+		conn.commit()
+
+
+def sql_update_data(file: str, table_name: str, data: dict[str:str], condition: str):
+	d = ""
+	for i, (key, values) in enumerate(data.items()):
+		d += f"{key} = {values}"
+		if i != len(data.keys())-1:
+			d += ","
+
+	request = f"UPDATE {table_name} SET {d} WHERE {condition}"
+	with sqlite3.connect(file) as conn:
+		cursor = conn.cursor()
+		cursor.execute(request)
 		log(request, True)
 		conn.commit()

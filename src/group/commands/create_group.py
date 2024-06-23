@@ -5,13 +5,14 @@ from src.group.message.tools import get_group_id
 from src.utils.log import log
 from src.group.message.view import GroupMessageView
 
+
 async def create_group(ctx: Interaction, project: str):
 	# Checks
 	if is_project(project) is False:
 		await ctx.response.send_message(":x: This project doesn't exist !")
 		return
 
-	if  project_exists(project, ctx.user.id) is True:
+	if project_exists(project, ctx.user.id) is True:
 		await ctx.response.send_message(":x: You already created a group for this project !")
 		return
 
@@ -27,6 +28,7 @@ async def create_group(ctx: Interaction, project: str):
 	)
 
 	embed.add_field(name="Members", value=ctx.user.mention, inline=False)
+	embed.add_field(name="Status", value=":unlock: Not confirmed yet !", inline=False)
 	log(f'{ctx.user} created a group for {project}', False)
 
 	v = GroupMessageView(project, ctx.user)
