@@ -7,7 +7,7 @@ def get_group_id(msg_id: int) -> int:
 		msg_id (int): Message ID
 
 	Returns:
-		int: Returns the group ID 
+		int: Returns the group ID
 	"""
 	id = GROUPS_TABLE.get_data(f"{GROUPS_TABLE.message_id} = {msg_id}", GROUP_MEMBERS_TABLE.id)
 	return id[0][0]
@@ -17,7 +17,7 @@ def get_group_members(group_id: int):
 
 	Args:
 		group_id (int): Group id
-  
+
 	Returns:
 		list: All members for the group
 	"""
@@ -25,8 +25,8 @@ def get_group_members(group_id: int):
 	return members
 
 def is_member(group_id: int, user_id: int):
-    members = get_group_members(group_id=group_id)
-    for m in members:
-        if m[0] == user_id:
-            return True
-    return False
+	members = get_group_members(group_id=group_id)
+	for m in members:
+		if m[0] == user_id:
+			return True
+	return False

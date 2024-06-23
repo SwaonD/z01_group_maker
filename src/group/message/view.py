@@ -5,7 +5,7 @@ from typing import Union
 class GroupMessageView(ui.View):
 	def __init__(self, project_name, author: Union[User, Member], *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		self.project = project_name
+		self.project_name = project_name
 		self.author = author
 
 	async def show(self):
@@ -13,12 +13,12 @@ class GroupMessageView(ui.View):
 
 	@ui.button(label="Join", style=ButtonStyle.primary)
 	async def join_button_callback(self, ctx: Interaction, button: Button):
-		await join_group(self, ctx)
+		await join_group(ctx, self.project_name, self.author)
 
 	@ui.button(label="Leave", style=ButtonStyle.secondary)
 	async def leave_button_callback(self, ctx: Interaction, button: Button):
-		await leave_group(self, ctx)
+		await leave_group(ctx, self.project_name, self.author)
 
 	@ui.button(label="Delete", style=ButtonStyle.danger)
 	async def delete_button_callback(self, ctx: Interaction, button: Button):
-		await delete_group(self, ctx, button)
+		await delete_group(ctx, button)
