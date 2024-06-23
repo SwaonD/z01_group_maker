@@ -48,6 +48,12 @@ async def leave_group(ctx: Interaction, group: Group):
     
     if author is None:
         author = await ctx.client.fetch_user(group.creator_id)
+        
+    if len(group_members) == 0:
+        GROUPS_TABLE.delete_data(f"{GROUPS_TABLE.id} = {group.id}")
+        await ctx.response.send_message(f":cry: No one left in the group ! It was deleted", ephemeral=True)
+        await ctx.message.delete()
+        return
 
     if len(group_members) == 1:
         last_member = ctx.client.get_user(group_members[0][0])
@@ -59,7 +65,7 @@ async def leave_group(ctx: Interaction, group: Group):
         await ctx.response.send_message(f"You left {author.mention}'s group. {last_member.mention} is the new leader.", ephemeral=True)
         return
 
-    await update_embed(ctx, group, author)
+    await update_embed(ctx)
     await ctx.response.send_message(f"You left {author.mention}'s group for {group.project_name}", ephemeral=True)
 
 
