@@ -8,9 +8,9 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 			await tree.sync(guild=guild)
 		print(f"{client.user} est dans la place !")
 
-	@client.event
-	async def on_message(message: Message):
-		if message.channel.id == GROUP_CHANNEL_ID and not message.author.bot:
-			await message.author.send(
-					"Seulement les commandes sont autorisées dans ce salon.")
-			await message.delete()
+	# @client.event
+	# async def on_message(message: Message):
+	# 	if message.channel.id == GROUP_CHANNEL_ID and not message.author.bot:
+	# 		await message.author.send(
+	# 				"Seulement les commandes sont autorisées dans ce salon.")
+	# 		await message.delete()
