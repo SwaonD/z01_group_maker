@@ -1,13 +1,10 @@
-from discord import Interaction, Embed, Colour, User, Member
-
+from discord import Interaction, Embed, Colour
 from src.group.message.tools import get_group_members, get_group, Group
 
 
 async def update_embed(ctx: Interaction):
     group: Group = get_group(ctx.message.id)
-    
     author = ctx.client.get_user(group.creator_id)
-    
     group_members = get_group_members(group.id)
 
     usernames: str = ""

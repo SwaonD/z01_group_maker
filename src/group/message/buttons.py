@@ -1,9 +1,11 @@
 from src.group.message.tools import is_member, get_group_members, Group, get_group
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.group.message.deleteview import DeleteMessageView
 from src.group.message.core import update_embed
-from discord import Interaction, Embed, Colour
+from discord import Interaction, ui
 from src.utils.log import log
+from src.group.message.modal import Confirm
+
+view: ui.View
 
 async def join_group(ctx: Interaction, group: Group):
     if is_member(group.id, ctx.user.id):
@@ -19,7 +21,7 @@ async def join_group(ctx: Interaction, group: Group):
     log(f"{ctx.user} joined group {group.id}", None)
 
     author = ctx.client.get_user(group.creator_id)
-    
+
     if author is None:
         author = await ctx.client.fetch_user(group.creator_id)
 
@@ -45,10 +47,10 @@ async def leave_group(ctx: Interaction, group: Group):
     group_members = get_group_members(g.id)
 
     author = ctx.client.get_user(group.creator_id)
-    
+
     if author is None:
         author = await ctx.client.fetch_user(group.creator_id)
-        
+
     if len(group_members) == 0:
         GROUPS_TABLE.delete_data(f"{GROUPS_TABLE.id} = {group.id}")
         await ctx.response.send_message(f":cry: No one left in the group ! It was deleted", ephemeral=True, delete_after=5.0)
@@ -70,6 +72,7 @@ async def leave_group(ctx: Interaction, group: Group):
 
 
 async def confirm_group(ctx: Interaction, group: Group):
+    
     group_members = get_group_members(group.id)
     if len(group_members) <= 1:
         await ctx.response.send_message(":x: You can only confirm a group with a minimum of 2 people !", ephemeral=True, delete_after=5.0)
@@ -101,20 +104,4 @@ async def confirm_group(ctx: Interaction, group: Group):
 
 
 async def delete_group(ctx: Interaction, group: Group):
-    if group.creator_id != ctx.user.id:
-        await ctx.response.send_message(":x: Only the group creator can delete his group !", ephemeral=True, delete_after=5.0)
-        return
-    
-    embed_desc = f'''
-        Are you sur you want to delete this group ?
-    '''
-    
-    embed: Embed = Embed(
-        description=embed_desc,
-        title="Group Deletion",
-        colour=Colour.from_str("#ff0000"),
-        type="rich"
-    )
-    
-    d = DeleteMessageView(group=group)
-    await ctx.response.send_message(embed=embed, view=d)
+    await ctx.response.send_modal(Confirm(group))
