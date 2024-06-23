@@ -4,7 +4,6 @@ from src.group.message.tools import get_group, Group
 from typing import Union
 
 
-
 class GroupMessageView(ui.View):
     def __init__(self, project_name, author: Union[User, Member], *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -33,6 +32,3 @@ class GroupMessageView(ui.View):
     async def delete_button_callback(self, ctx: Interaction, button: Button):
         group: Group = get_group(ctx.message.id)
         await delete_group(ctx, group)
-
-
-
