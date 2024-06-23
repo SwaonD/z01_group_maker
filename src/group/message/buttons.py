@@ -1,96 +1,109 @@
 from discord import Interaction
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.group.message.tools import get_group_id, is_member, get_group_members, Group
+from src.group.message.tools import get_group_id, is_member, get_group_members, Group, get_group
 from src.group.message.core import update_embed
 from src.utils.log import log
 
 
 async def join_group(ctx: Interaction, group: Group):
-	if is_member(group.id, ctx.user.id):
-		await ctx.response.send_message(":x: You are already in this group !", ephemeral=True)
-		return
+    if is_member(group.id, ctx.user.id):
+        await ctx.response.send_message(":x: You are already in this group !", ephemeral=True)
+        return
 
-	if group.confirmed == 1:
-		await ctx.response.send_message(":lock: This group is locked, you cannot join it !", ephemeral=True)
-		return
+    if group.confirmed == 1:
+        await ctx.response.send_message(":lock: This group is locked, you cannot join it !", ephemeral=True)
+        return
 
-	GROUP_MEMBERS_TABLE.insert_data(group.id, ctx.user.id)
+    GROUP_MEMBERS_TABLE.insert_data(group.id, ctx.user.id)
 
-	log(f"{ctx.user} joined group {group.id}", None)
+    log(f"{ctx.user} joined group {group.id}", None)
 
-	author = ctx.client.get_user(group.creator_id)
+    author = ctx.client.get_user(group.creator_id)
 
-	await update_embed(ctx, group, author)
-	await ctx.response.send_message(f"{ctx.user.mention} joined {author.mention}'s group for {group.project_name}", ephemeral=True)
+    await update_embed(ctx)
+    await ctx.response.send_message(f"{ctx.user.mention} joined {author.mention}'s group for {group.project_name}", ephemeral=True)
 
 
 async def leave_group(ctx: Interaction, group: Group):
-	if is_member(group.id, ctx.user.id) is False:
-		await ctx.response.send_message(":x: You are not in this group !", ephemeral=True)
-		return
+    if is_member(group.id, ctx.user.id) is False:
+        await ctx.response.send_message(":x: You are not in this group !", ephemeral=True)
+        return
 
-	if group.confirmed == 1:
-		await ctx.response.send_message(":lock: This group is locked, you cannot leave it !", ephemeral=True)
-		return
+    if group.confirmed == 1:
+        await ctx.response.send_message(":lock: This group is locked, you cannot leave it !", ephemeral=True)
+        return
 
-	GROUP_MEMBERS_TABLE.delete_data(
-		f"{GROUP_MEMBERS_TABLE.group_id} = {group.id} AND {GROUP_MEMBERS_TABLE.user_id} = {ctx.user.id}")
+    GROUP_MEMBERS_TABLE.delete_data(
+        f"{GROUP_MEMBERS_TABLE.group_id} = {group.id} AND {GROUP_MEMBERS_TABLE.user_id} = {ctx.user.id}")
 
-	log(f"{ctx.user} left group {group.id}", None)
+    log(f"{ctx.user} left group {group.id}", None)
 
-	author = ctx.client.get_user(group.creator_id)
+    g: Group = get_group(ctx.message.id)
+    group_members = get_group_members(g.id)
 
-	await update_embed(ctx, group, author)
-	await ctx.response.send_message(f"{ctx.user.mention} left {author.mention}'s group for {group.project_name}", ephemeral=True)
+    author = ctx.client.get_user(group.creator_id)
+
+    if len(group_members) == 1:
+        last_member = ctx.client.get_user(group_members[0][0])
+        data = {
+            GROUPS_TABLE.creator_id: group_members[0][0]
+        }
+        GROUPS_TABLE.update_data(data, f"{GROUPS_TABLE.id} = {g.id}")
+        await update_embed(ctx)
+        await ctx.response.send_message(f"You left {author.mention}'s group. {last_member.mention} is the new leader.", ephemeral=True)
+        return
+
+    await update_embed(ctx, group, author)
+    await ctx.response.send_message(f"You left {author.mention}'s group for {group.project_name}", ephemeral=True)
 
 
 async def confirm_group(ctx: Interaction, group: Group):
-	group_members = get_group_members(group.id)
-	if len(group_members) <= 1:
-		await ctx.response.send_message(":x: You can only confirm a group with a minimum of 2 people !", ephemeral=True)
-		return
+    group_members = get_group_members(group.id)
+    if len(group_members) <= 1:
+        await ctx.response.send_message(":x: You can only confirm a group with a minimum of 2 people !", ephemeral=True)
+        return
 
-	if ctx.user.id != group.creator_id:
-		await ctx.response.send_message(":x: Only the group leader can confirm his group !", ephemeral=True)
-		return
+    if ctx.user.id != group.creator_id:
+        await ctx.response.send_message(":x: Only the group leader can confirm his group !", ephemeral=True)
+        return
 
-	data = {}
-	stat = ""
+    data = {}
+    stat = ""
 
-	if group.confirmed == 1:
-		data = {
-			GROUPS_TABLE.confirmed: 0
-		}
-		stat = "unconfirmed"
-	else:
-		data = {
-			GROUPS_TABLE.confirmed: 1
-		}
-		stat = "confirmed"
+    if group.confirmed == 1:
+        data = {
+            GROUPS_TABLE.confirmed: 0
+        }
+        stat = "unconfirmed"
+    else:
+        data = {
+            GROUPS_TABLE.confirmed: 1
+        }
+        stat = "confirmed"
 
-	GROUPS_TABLE.update_data(
-		data, f"{GROUPS_TABLE.message_id} = {group.message_id}")
+    GROUPS_TABLE.update_data(
+        data, f"{GROUPS_TABLE.message_id} = {group.message_id}")
 
-	author = ctx.client.get_user(group.creator_id)
+    author = ctx.client.get_user(group.creator_id)
 
-	await update_embed(ctx, group, author)
-	await ctx.response.send_message(f"{ctx.user.mention} {stat} the {group.project_name} project", ephemeral=True)
+    await update_embed(ctx)
+    await ctx.response.send_message(f"{ctx.user.mention} {stat} the {group.project_name} project", ephemeral=True)
 
 
 async def delete_group(ctx: Interaction, group: Group):
-	if group.creator_id != ctx.user.id:
-		await ctx.response.send_message(":x: Only the group creator can delete his group !", ephemeral=True)
-		return
+    if group.creator_id != ctx.user.id:
+        await ctx.response.send_message(":x: Only the group creator can delete his group !", ephemeral=True)
+        return
 
-	members = get_group_members(group.id)
+    members = get_group_members(group.id)
 
-	for m in members:
-		GROUP_MEMBERS_TABLE.delete_data(
-			f"{GROUP_MEMBERS_TABLE.id} = {group.id} AND {GROUP_MEMBERS_TABLE.user_id} = {m[0]}")
+    for m in members:
+        GROUP_MEMBERS_TABLE.delete_data(
+            f"{GROUP_MEMBERS_TABLE.id} = {group.id} AND {GROUP_MEMBERS_TABLE.user_id} = {m[0]}")
 
-	GROUPS_TABLE.delete_data(
-		f"{GROUPS_TABLE.id} = {get_group_id(ctx.message.id)}")
-	await ctx.message.delete()
+    GROUPS_TABLE.delete_data(
+        f"{GROUPS_TABLE.id} = {get_group_id(ctx.message.id)}")
+    await ctx.message.delete()
 
-	log(f"{ctx.user.id} deleted group {group.id}", None)
-	await ctx.response.send_message(f"{ctx.user.mention} deleted the {group.project_name} group", ephemeral=True)
+    log(f"{ctx.user.id} deleted group {group.id}", None)
+    await ctx.response.send_message(f"{ctx.user.mention} deleted the {group.project_name} group", ephemeral=True)
