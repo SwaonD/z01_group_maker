@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 GUILD_ID = 352509375266422797
-GROUP_CHANNEL_ID = os.getenv("Z_01_GROUP_CHANNEL_ID")
+GROUP_CHANNEL_ID = int(os.getenv("Z_01_GROUP_CHANNEL_ID"))
 # commands1 1253719751541264434
 # commands 1253698115425533953
 GROUP_SQL_FILE = os.getenv("Z_01_GROUP_DB")
