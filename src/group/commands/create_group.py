@@ -1,7 +1,7 @@
 from discord import Interaction, Embed, Colour
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.utils.project import is_project, project_exists
-from src.utils.group import get_group_id
+from src.group.message.tools import is_project, project_exists
+from z01_group_maker.src.group.message.tools import get_group_id
 from src.utils.log import log
 from src.group.message.view import GroupMessageView
 

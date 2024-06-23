@@ -1,7 +1,6 @@
-from discord import Interaction, Embed, Colour, User, Member
+from discord import Interaction, Embed, Colour
 from src.settings.tables import GROUPS_TABLE
-from src.utils.group import get_group_id, get_group_members, Group
-from typing import Union
+from src.group.message.tools import get_group_id, get_group_members, Group
 
 async def update_members_count(ctx: Interaction, group: Group, author):
 	group_members = get_group_members(group.id)
