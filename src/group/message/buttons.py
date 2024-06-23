@@ -19,6 +19,9 @@ async def join_group(ctx: Interaction, group: Group):
     log(f"{ctx.user} joined group {group.id}", None)
 
     author = ctx.client.get_user(group.creator_id)
+    
+    if author is None:
+        author = await ctx.client.fetch_user(group.creator_id)
 
     await update_embed(ctx)
     await ctx.response.send_message(f"{ctx.user.mention} joined {author.mention}'s group for {group.project_name}", ephemeral=True)
@@ -42,6 +45,9 @@ async def leave_group(ctx: Interaction, group: Group):
     group_members = get_group_members(g.id)
 
     author = ctx.client.get_user(group.creator_id)
+    
+    if author is None:
+        author = await ctx.client.fetch_user(group.creator_id)
 
     if len(group_members) == 1:
         last_member = ctx.client.get_user(group_members[0][0])
@@ -83,8 +89,6 @@ async def confirm_group(ctx: Interaction, group: Group):
 
     GROUPS_TABLE.update_data(
         data, f"{GROUPS_TABLE.message_id} = {group.message_id}")
-
-    author = ctx.client.get_user(group.creator_id)
 
     await update_embed(ctx)
     await ctx.response.send_message(f"{ctx.user.mention} {stat} the {group.project_name} project", ephemeral=True)

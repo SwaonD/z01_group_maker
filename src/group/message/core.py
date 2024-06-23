@@ -41,5 +41,4 @@ async def update_embed(ctx: Interaction):
 
     embed.add_field(name="Members", value=usernames, inline=False)
     embed.add_field(name="Status", value=emoji+msg, inline=False)
-    # Edit the message with the new embed
     await ctx.message.edit(embed=embed)
