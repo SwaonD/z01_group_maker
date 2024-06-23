@@ -7,11 +7,11 @@ from src.utils.log import log
 
 async def join_group(ctx: Interaction, group: Group):
     if is_member(group.id, ctx.user.id):
-        await ctx.response.send_message(":x: You are already in this group !", ephemeral=True)
+        await ctx.response.send_message(":x: You are already in this group !", ephemeral=True, delete_after=5.0)
         return
 
     if group.confirmed == 1:
-        await ctx.response.send_message(":lock: This group is locked, you cannot join it !", ephemeral=True)
+        await ctx.response.send_message(":lock: This group is locked, you cannot join it !", ephemeral=True, delete_after=5.0)
         return
 
     GROUP_MEMBERS_TABLE.insert_data(group.id, ctx.user.id)
@@ -24,16 +24,16 @@ async def join_group(ctx: Interaction, group: Group):
         author = await ctx.client.fetch_user(group.creator_id)
 
     await update_embed(ctx)
-    await ctx.response.send_message(f"{ctx.user.mention} joined {author.mention}'s group for {group.project_name}", ephemeral=True)
+    await ctx.response.send_message(f"{ctx.user.mention} joined {author.mention}'s group for {group.project_name}", ephemeral=True, delete_after=5.0)
 
 
 async def leave_group(ctx: Interaction, group: Group):
     if is_member(group.id, ctx.user.id) is False:
-        await ctx.response.send_message(":x: You are not in this group !", ephemeral=True)
+        await ctx.response.send_message(":x: You are not in this group !", ephemeral=True, delete_after=5.0)
         return
 
     if group.confirmed == 1:
-        await ctx.response.send_message(":lock: This group is locked, you cannot leave it !", ephemeral=True)
+        await ctx.response.send_message(":lock: This group is locked, you cannot leave it !", ephemeral=True, delete_after=5.0)
         return
 
     GROUP_MEMBERS_TABLE.delete_data(
@@ -51,7 +51,7 @@ async def leave_group(ctx: Interaction, group: Group):
         
     if len(group_members) == 0:
         GROUPS_TABLE.delete_data(f"{GROUPS_TABLE.id} = {group.id}")
-        await ctx.response.send_message(f":cry: No one left in the group ! It was deleted", ephemeral=True)
+        await ctx.response.send_message(f":cry: No one left in the group ! It was deleted", ephemeral=True, delete_after=5.0)
         await ctx.message.delete()
         return
 
@@ -62,21 +62,21 @@ async def leave_group(ctx: Interaction, group: Group):
         }
         GROUPS_TABLE.update_data(data, f"{GROUPS_TABLE.id} = {g.id}")
         await update_embed(ctx)
-        await ctx.response.send_message(f"You left {author.mention}'s group. {last_member.mention} is the new leader.", ephemeral=True)
+        await ctx.response.send_message(f"You left {author.mention}'s group. {last_member.mention} is the new leader.", ephemeral=True, delete_after=5.0)
         return
 
     await update_embed(ctx)
-    await ctx.response.send_message(f"You left {author.mention}'s group for {group.project_name}", ephemeral=True)
+    await ctx.response.send_message(f"You left {author.mention}'s group for {group.project_name}", ephemeral=True, delete_after=5.0)
 
 
 async def confirm_group(ctx: Interaction, group: Group):
     group_members = get_group_members(group.id)
     if len(group_members) <= 1:
-        await ctx.response.send_message(":x: You can only confirm a group with a minimum of 2 people !", ephemeral=True)
+        await ctx.response.send_message(":x: You can only confirm a group with a minimum of 2 people !", ephemeral=True, delete_after=5.0)
         return
 
     if ctx.user.id != group.creator_id:
-        await ctx.response.send_message(":x: Only the group leader can confirm his group !", ephemeral=True)
+        await ctx.response.send_message(":x: Only the group leader can confirm his group !", ephemeral=True, delete_after=5.0)
         return
 
     data = {}
@@ -97,12 +97,12 @@ async def confirm_group(ctx: Interaction, group: Group):
         data, f"{GROUPS_TABLE.message_id} = {group.message_id}")
 
     await update_embed(ctx)
-    await ctx.response.send_message(f"{ctx.user.mention} {stat} the {group.project_name} project", ephemeral=True)
+    await ctx.response.send_message(f"{ctx.user.mention} {stat} the {group.project_name} project", ephemeral=True, delete_after=5.0)
 
 
 async def delete_group(ctx: Interaction, group: Group):
     if group.creator_id != ctx.user.id:
-        await ctx.response.send_message(":x: Only the group creator can delete his group !", ephemeral=True)
+        await ctx.response.send_message(":x: Only the group creator can delete his group !", ephemeral=True, delete_after=5.0)
         return
 
     members = get_group_members(group.id)
@@ -116,4 +116,4 @@ async def delete_group(ctx: Interaction, group: Group):
     await ctx.message.delete()
 
     log(f"{ctx.user.id} deleted group {group.id}", None)
-    await ctx.response.send_message(f"{ctx.user.mention} deleted the {group.project_name} group", ephemeral=True)
+    await ctx.response.send_message(f"{ctx.user.mention} deleted the {group.project_name} group", ephemeral=True, delete_after=5.0)

@@ -9,11 +9,11 @@ from src.group.message.view import GroupMessageView
 async def create_group(ctx: Interaction, project: str):
     # Checks
     if is_project(project) is False:
-        await ctx.response.send_message(":x: This project doesn't exist !")
+        await ctx.response.send_message(":x: This project doesn't exist !", ephemeral=True, delete_after=5.0)
         return
 
     if project_exists(project, ctx.user.id) is True:
-        await ctx.response.send_message(":x: You already created a group for this project !")
+        await ctx.response.send_message(":x: You already created a group for this project !", ephemeral=True, delete_after=5.0)
         return
 
     # Create the embed
