@@ -17,10 +17,11 @@ def register_commands(tree: CommandTree):
 
 	@tree.command(name="list",
 			description="List every groups", guild=Object(id=GUILD_ID))
-	@describe(project_name="Project name")
-	async def list_command(ctx: Interaction,
-			project_name: Optional[str], user: Optional[User]):
-		await list(ctx, project_name, user)
+	@describe(project_name="Filter by project name",
+			user="Filter by user", show_confirmed_group="Show every groups")
+	async def list_command(ctx: Interaction, project_name: Optional[str],\
+			user: Optional[User], show_confirmed_group: Optional[bool]):
+		await list(ctx, project_name, user, show_confirmed_group)
 
 # async def ping(ctx:Interaction):
 # 	await ctx.response.send_message("pong")

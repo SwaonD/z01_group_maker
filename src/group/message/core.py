@@ -9,9 +9,10 @@ async def update_embed(ctx: Interaction):
 
     usernames: str = ""
     for m in group_members:
+        usernames += ctx.client.get_user(m[0]).mention
         if m[0] == group.creator_id:
-            usernames += ":crown:"
-        usernames += ctx.client.get_user(m[0]).mention + "\n"
+            usernames += " :crown:"
+        usernames += "\n"
 
     msg = ""
     color = ""

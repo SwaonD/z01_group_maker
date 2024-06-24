@@ -28,7 +28,7 @@ async def create_group(ctx: Interaction, project: str):
     )
 
     embed.add_field(
-        name="Members", value=f":crown: {ctx.user.mention}", inline=False)
+        name="Members", value=f"{ctx.user.mention} :crown:", inline=False)
     embed.add_field(
         name="Status", value=":unlock: Not confirmed yet !", inline=False)
     log(f'{ctx.user} created a group for {project}', False)
