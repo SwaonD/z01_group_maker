@@ -8,7 +8,7 @@ class Group:
 	id: int
 	message_id: int
 	project_name: str
-	creator_id: int
+	leader_id: int
 	size_limit: int
 	description: str
 	confirmed: int
@@ -26,7 +26,7 @@ def get_group(msg_id: int):
 	rows = GROUPS_TABLE.get_data(
 			f"{GROUPS_TABLE.message_id} = {msg_id}", GROUPS_TABLE.id,
 			GROUPS_TABLE.message_id, GROUPS_TABLE.project_name,
-			GROUPS_TABLE.creator_id, GROUPS_TABLE.size_limit,
+			GROUPS_TABLE.leader_id, GROUPS_TABLE.size_limit,
 			GROUPS_TABLE.description, GROUPS_TABLE.confirmed)[0]
 	group = Group(rows[0], rows[1], rows[2], rows[3], rows[4], rows[5], rows[6])
 
@@ -93,7 +93,7 @@ def project_exists(project: str, author_id: int) -> bool:
 		bool: returns True is the project was already found
 	"""
 	group_id = GROUPS_TABLE.get_data(f"{GROUPS_TABLE.project_name} = \
-			'{project}' AND {GROUPS_TABLE.creator_id} = '{author_id}'",
+			'{project}' AND {GROUPS_TABLE.leader_id} = '{author_id}'",
 			GROUPS_TABLE.id)
 	print(f"[*] Checked if project {project} already exists : {len(group_id) != 0}")
 	if len(group_id) != 0:

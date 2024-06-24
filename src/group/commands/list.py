@@ -26,7 +26,7 @@ def _get_list_data(project_name: str | None, user: User | Member | None,
 	condition = " AND ".join(conditions)
 	list_group_data = GROUPS_TABLE.get_data(
 				condition, GROUPS_TABLE.project_name,
-				GROUPS_TABLE.creator_id, GROUPS_TABLE.message_id)
+				GROUPS_TABLE.leader_id, GROUPS_TABLE.message_id)
 	return list_group_data
 
 async def list(ctx: Interaction, project_name: str | None,

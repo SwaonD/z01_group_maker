@@ -34,7 +34,7 @@ async def create_group(ctx: Interaction,
 	GROUP_MEMBERS_TABLE.insert_data(get_group_id(message.id), ctx.user.id)
 	# Add Group to GROUPDB and Author to the members database
 
-def generate_basic_group_embed(creator: User | Member, project_name: str,
+def generate_basic_group_embed(leader: User | Member, project_name: str,
 		size_limit: int, description: str) -> tuple[Embed, GroupMessageView]:
 	embed = Embed(
 		description=description,
@@ -43,9 +43,9 @@ def generate_basic_group_embed(creator: User | Member, project_name: str,
 		type="rich"
 	)
 	embed.add_field(
-		name="Members", value=f"{creator.mention} :crown:", inline=False)
+		name="Members", value=f"{leader.mention} :crown:", inline=False)
 	embed.add_field(
 		name="Status", value=":unlock: Not confirmed yet !", inline=False)
-	log(f'{creator} created a group for {project_name}', False)
-	view = GroupMessageView(project_name, creator)
+	log(f'{leader} created a group for {project_name}', False)
+	view = GroupMessageView(project_name, leader)
 	return (embed, view)

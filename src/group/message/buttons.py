@@ -22,11 +22,11 @@ async def join_group(ctx: Interaction, group: Group):
 
 	log(f"{ctx.user} joined group {group.id}", None)
 
-	author = ctx.client.get_user(group.creator_id)
+	author = ctx.client.get_user(group.leader_id)
 	await author.send(f"{ctx.user.mention} joined your group !")
 
 	if author is None:
-		author = await ctx.client.fetch_user(group.creator_id)
+		author = await ctx.client.fetch_user(group.leader_id)
 
 	await update_embed(ctx)
 	await ctx.response.send_message(
@@ -52,11 +52,11 @@ async def leave_group(ctx: Interaction, group: Group):
 	g: Group = get_group(ctx.message.id)
 	group_members = get_group_members(g.id)
 
-	author = ctx.client.get_user(group.creator_id)
+	author = ctx.client.get_user(group.leader_id)
 	await author.send(f"{ctx.user.mention} left your group !")
 
 	if author is None:
-		author = await ctx.client.fetch_user(group.creator_id)
+		author = await ctx.client.fetch_user(group.leader_id)
 
 	if len(group_members) == 0:
 		GROUPS_TABLE.delete_data(f"{GROUPS_TABLE.id} = {group.id}")
@@ -69,7 +69,7 @@ async def leave_group(ctx: Interaction, group: Group):
 	if len(group_members) == 1:
 		last_member = ctx.client.get_user(group_members[0][0])
 		data = {
-			GROUPS_TABLE.creator_id: group_members[0][0]
+			GROUPS_TABLE.leader_id: group_members[0][0]
 		}
 		GROUPS_TABLE.update_data(data, f"{GROUPS_TABLE.id} = {g.id}")
 		await update_embed(ctx)
@@ -92,7 +92,7 @@ async def confirm_group(ctx: Interaction, group: Group):
 				ephemeral=True, delete_after=5.0)
 		return
 
-	if ctx.user.id != group.creator_id:
+	if ctx.user.id != group.leader_id:
 		await ctx.response.send_message(
 				":x: Only the group leader can confirm his group !",
 				ephemeral=True, delete_after=5.0)
@@ -100,7 +100,7 @@ async def confirm_group(ctx: Interaction, group: Group):
 
 	for m in group_members:
 		await ctx.client.get_user(m[0]).send(
-				f"You group leader {ctx.client.get_user(group.creator_id)}"
+				f"You group leader {ctx.client.get_user(group.leader_id)}"
 				+ f" confirmed the group for {group.project_name}")
 
 	data = {}
