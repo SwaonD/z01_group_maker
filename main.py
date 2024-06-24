@@ -1,12 +1,12 @@
 import os
 from discord import Client, app_commands
 from src.settings.variables import *
-from src.init import getIntents
+from src.init import get_intents
 from src.events import register_events
 from src.commands import register_commands
 
 def main():
-	intents = getIntents()
+	intents = get_intents()
 	client = Client(intents=intents)
 	tree = app_commands.CommandTree(client)
 	register_commands(tree)

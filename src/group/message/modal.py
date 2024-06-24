@@ -4,7 +4,7 @@ from src.group.message.tools import Group, get_group_members, get_group_id, get_
 from src.utils.log import log
 
 
-class Confirm(ui.Modal, title='Group deletion'):
+class Confirm(ui.Modal, title='Delete the group ?'):
 	def __init__(self, group: Group, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.group = group
@@ -12,7 +12,7 @@ class Confirm(ui.Modal, title='Group deletion'):
 
 	async def on_submit(self, ctx: Interaction):
 		members = get_group_members(self.group.id)
-	
+
 		for m in members:
 			GROUP_MEMBERS_TABLE.delete_data(
 				f"{GROUP_MEMBERS_TABLE.id} = {self.group.id} AND {GROUP_MEMBERS_TABLE.user_id} = {m[0]}")

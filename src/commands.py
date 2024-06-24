@@ -12,16 +12,19 @@ def register_commands(tree: CommandTree):
 
 	@tree.command(name="create",
 			description="Create a group", guild=Object(id=GUILD_ID))
-	async def create_command(ctx: Interaction, project: str):
-		await create_group(ctx, project)
+	@describe(project="Project name", limit="Group size limit",
+			description="Description of the group message")
+	async def create_command(
+			ctx: Interaction, project: str, limit: int, description: Optional[str]):
+		await create_group(ctx, project, limit, description)
 
 	@tree.command(name="list",
 			description="List every groups", guild=Object(id=GUILD_ID))
-	@describe(project_name="Filter by project name",
-			user="Filter by user", show_confirmed_group="Show every groups")
-	async def list_command(ctx: Interaction, project_name: Optional[str],\
-			user: Optional[User], show_confirmed_group: Optional[bool]):
-		await list(ctx, project_name, user, show_confirmed_group)
+	@describe(project="Filter by project name", user="Filter by user",
+			show_all="Show every groups including confirmed ones")
+	async def list_command(ctx: Interaction, project: Optional[str],\
+			user: Optional[User], show_all: Optional[bool]):
+		await list(ctx, project, user, show_all)
 
 # async def ping(ctx:Interaction):
 # 	await ctx.response.send_message("pong")
