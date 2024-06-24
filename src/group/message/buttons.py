@@ -14,7 +14,8 @@ async def join_group(ctx: Interaction, group: Group):
 		await ctx.response.send_message(":lock: This group is locked, you cannot"
 				f" join it !", ephemeral=True, delete_after=5.0)
 		return
-	if len(get_group_members(group.id)) + 1 > group.size_limit:
+	group_len = len(get_group_members(group.id))
+	if group_len + 1 > group.size_limit:
 		await ctx.response.send_message(":x: This group is full",
 				ephemeral=True, delete_after=5.0)
 		return
@@ -23,7 +24,10 @@ async def join_group(ctx: Interaction, group: Group):
 	log(f"{ctx.user} joined group {group.id}", None)
 
 	author = ctx.client.get_user(group.leader_id)
-	await author.send(f"{ctx.user.mention} joined your group !")
+	message_to_leader = f"{ctx.user.mention} joined your group !"
+	if group_len + 1 == group.size_limit:
+		message_to_leader += " Your group is now full !"
+	await author.send(message_to_leader)
 
 	if author is None:
 		author = await ctx.client.fetch_user(group.leader_id)
