@@ -14,6 +14,7 @@ MSG_LOG_FILE_PATH = "./log/msg.log"
 SQL_LOG_FILE_PATH = "./log/sql_request.log"
 NOTIF_MSG_TIMEOUT = 5.0
 
+LIST_CMD_CONF_GROUP_MAX = 5
 PROJECT_NAMES = [
 	"ascii-art",
 	"ascii-art-fs",

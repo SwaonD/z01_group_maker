@@ -25,6 +25,6 @@ class Confirm(ui.Modal, title='Delete the group ?'):
 		await ctx.message.delete()
 
 		log(f"{ctx.user.id} deleted group {self.group.id}", MSG_LOG_FILE_PATH)
-		await ctx.response.send_message(f"{ctx.user.mention} deleted the"
+		await ctx.response.send_message(f"{ctx.user.mention} deleted the" \
 				+ f" {self.group.project_name} group",
 				ephemeral=True, delete_after=NOTIF_MSG_TIMEOUT)

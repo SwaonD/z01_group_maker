@@ -13,8 +13,8 @@ async def join_group(ctx: Interaction, group: Group):
 				ephemeral=True, delete_after=NOTIF_MSG_TIMEOUT)
 		return
 	if group.confirmed == 1:
-		await ctx.response.send_message(":lock: This group is locked, you cannot"
-				f" join it !", ephemeral=True, delete_after=NOTIF_MSG_TIMEOUT)
+		await ctx.response.send_message(":lock: This group is locked, you cannot" \
+				+ f" join it !", ephemeral=True, delete_after=NOTIF_MSG_TIMEOUT)
 		return
 	group_len = len(get_group_members_ids(group.id))
 	if group_len + 1 > group.size_limit:
@@ -36,7 +36,7 @@ async def join_group(ctx: Interaction, group: Group):
 
 	await update_embed(ctx)
 	await ctx.response.send_message(
-			f"{ctx.user.mention} joined {author.mention}'s group for"
+			f"{ctx.user.mention} joined {author.mention}'s group for" \
 			+ f" {group.project_name}", ephemeral=True,
 			delete_after=NOTIF_MSG_TIMEOUT)
 
@@ -110,7 +110,7 @@ async def confirm_group(ctx: Interaction, group: Group):
 
 	for member_id in group_members_ids:
 		await ctx.client.get_user(member_id).send(
-				f"You group leader {ctx.client.get_user(group.leader_id)}"
+				f"You group leader {ctx.client.get_user(group.leader_id)}" \
 				+ f" confirmed the group for {group.project_name}")
 
 	data = {}

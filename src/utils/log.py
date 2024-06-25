@@ -25,7 +25,7 @@ def log(msg: str, *file_paths: str):
 		except FileNotFoundError:
 			print(f"FileNotFoundError: The file '{file_path}' could not be found.")
 		except PermissionError:
-			print(f"PermissionError: Permission denied when"
+			print(f"PermissionError: Permission denied when" \
 		 			+ f" trying to access '{file_path}'.")
 		except Exception as e:
 			print(f"An error occurred: {str(e)}")

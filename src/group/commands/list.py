@@ -1,9 +1,11 @@
-from discord import Interaction, Embed, Colour, TextChannel, PartialMessage, User, Member
+from discord import Interaction, Embed, \
+		Colour, TextChannel, PartialMessage, User, Member
 from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
-from src.settings.variables import GROUP_CHANNEL_ID
+from src.settings.variables import GROUP_CHANNEL_ID, \
+		LIST_CMD_CONF_GROUP_MAX, NOTIF_MSG_TIMEOUT
 
-def _get_list_data(project_name: str | None, user: User | Member | None,
-		show_confirmed_group: bool | None) -> tuple[tuple[any]]:
+def _get_list_data(project_name: str | None,
+		user: User | Member | None, confirmed: int = 0) -> tuple[tuple[any]]:
 	conditions = []
 	user_group_ids = []
 	if user is not None:
@@ -20,33 +22,68 @@ def _get_list_data(project_name: str | None, user: User | Member | None,
 	if project_name is not None:
 		conditions.append(f"{GROUPS_TABLE.project_name} = '{project_name}'")
 
-	if show_confirmed_group is None or show_confirmed_group == False:
-		conditions.append(f"{GROUPS_TABLE.confirmed} = 0")
+	conditions.append(f"{GROUPS_TABLE.confirmed} = {confirmed}")
 
 	condition = " AND ".join(conditions)
+	if confirmed == 1:
+		condition += f" ORDER BY {GROUPS_TABLE.project_name} DESC LIMIT " \
+		+ str(LIST_CMD_CONF_GROUP_MAX)
 	list_group_data = GROUPS_TABLE.get_data(
-				condition, GROUPS_TABLE.project_name,
-				GROUPS_TABLE.leader_id, GROUPS_TABLE.message_id)
+			condition, GROUPS_TABLE.project_name, GROUPS_TABLE.message_id)
 	return list_group_data
 
-async def list(ctx: Interaction, project_name: str | None,
-		user: User | Member | None, show_confirmed_group: bool | None):
-	data = _get_list_data(project_name, user, show_confirmed_group)
-	embed = Embed(color=Colour.from_rgb(40, 230, 195))
+async def _generate_list_content(
+		ctx: Interaction, data: tuple[tuple], reverse: bool = False) -> str:
 	content = ""
-	for row in data:
-		row_user = ctx.client.get_user(row[1])
-		if row_user is None:
-			row_user = await ctx.client.fetch_user(row[1])
+	if reverse:
+		i, end = len(data)-1, -1
+	else:
+		i, end = 0, len(data)
+	while i != end:
 		group_channel: TextChannel = ctx.client.get_channel(GROUP_CHANNEL_ID)
 		if group_channel is None:
 			group_channel: TextChannel = \
 					await ctx.client.fetch_channel(GROUP_CHANNEL_ID)
-		message: PartialMessage = group_channel.get_partial_message(row[2])
-		content += f"**{row[0]}** created by {row_user.mention} {message.jump_url}\n"
-	if len(content) == 0:
-		await ctx.response.send_message("No project found.")
+		message: PartialMessage = group_channel.get_partial_message(data[i][1])
+		content += f"**{data[i][0]}** {message.jump_url}\n"
+		if reverse:
+			i -= 1
+		else:
+			i += 1
+	return content
+
+async def _create_embed(ctx: Interaction, project_name: str,
+		user: User | Member | None, confirm: int, title: str, color: Colour,
+		reverse_content: bool = False) -> Embed:
+	group_data = _get_list_data(project_name, user, confirm)
+	grp_content = await _generate_list_content(ctx, group_data, reverse_content)
+	if len(grp_content) > 0:
+		grp_embed = Embed(color=color)
+		grp_embed.description = grp_content
+		grp_embed.title = title
+		if user is not None:
+			grp_embed.set_footer(
+					text=user.display_name, icon_url=user.display_avatar.url)
+		return grp_embed
+
+async def list(ctx: Interaction, project_name: str | None,
+		user: User | Member | None, show_confirmed_group: bool | None):
+	embeds = []
+	title = "Current Groups"
+	color = Colour.from_rgb(40, 230, 195)
+	cur_grp_embed = await _create_embed(ctx, project_name, user, 0, title, color)
+	if cur_grp_embed is not None:
+		embeds.append(cur_grp_embed)
+	if show_confirmed_group is not None and show_confirmed_group is True:
+		title = "Confirmed Groups"
+		color = Colour.from_rgb(0, 255, 0)
+		cur_grp_embed = await _create_embed(
+				ctx, project_name, user, 1, title, color, True)
+		if cur_grp_embed is not None:
+			embeds.insert(0, cur_grp_embed)
+	if len(embeds) == 0:
+		await ctx.response.send_message("No project found.",
+				ephemeral=True, delete_after=NOTIF_MSG_TIMEOUT)
 	else:
-		embed.description = content
-		await ctx.response.send_message(embed=embed, ephemeral=True)
+		await ctx.response.send_message(embeds=embeds, ephemeral=True)
 
