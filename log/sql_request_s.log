@@ -1133,3 +1133,18 @@
 2024-06-25 | 11:31 [SQL] UPDATE groups SET confirmed = 1 WHERE message_id = 1255092823586246737
 2024-06-25 | 11:31 [SQL] SELECT id, message_id, project_name, leader_id, size_limit, description, confirmed FROM groups WHERE message_id = 1255092823586246737
 2024-06-25 | 11:31 [SQL] SELECT user_id FROM group_members WHERE group_id = 1
+2024-06-25 | 11:37 [SQL] CREATE TABLE IF NOT EXISTS groups (id INTEGER PRIMARY KEY, message_id INTEGER, project_name STRING, leader_id INTEGER, size_limit INTEGER, description STRING, confirmed INTEGER)
+2024-06-25 | 11:37 [SQL] CREATE TABLE IF NOT EXISTS group_members (id INTEGER PRIMARY KEY, group_id INTEGER, user_id INTEGER)
+2024-06-25 | 11:44 [SQL] SELECT id FROM groups WHERE project_name = 			'ascii-art' AND leader_id = '291563156159856641'
+2024-06-25 | 11:44 [SQL] INSERT INTO groups (message_id, project_name, leader_id, size_limit, description, confirmed) VALUES ('1255096389315067906', 'ascii-art', '291563156159856641', '2', '', '0')
+2024-06-25 | 11:44 [SQL] SELECT id FROM groups WHERE message_id = 1255096389315067906
+2024-06-25 | 11:44 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('2', '291563156159856641')
+2024-06-25 | 11:45 [SQL] SELECT id, message_id, project_name, leader_id, size_limit, description, confirmed FROM groups WHERE message_id = 1255096389315067906
+2024-06-25 | 11:45 [SQL] SELECT id, message_id, project_name, leader_id, size_limit, description, confirmed FROM groups WHERE message_id = 1255096389315067906
+2024-06-25 | 11:45 [SQL] SELECT id, message_id, project_name, leader_id, size_limit, description, confirmed FROM groups WHERE message_id = 1255096389315067906
+2024-06-25 | 11:45 [SQL] SELECT user_id FROM group_members WHERE group_id = 2
+2024-06-25 | 11:45 [SQL] SELECT user_id FROM group_members WHERE group_id = 2
+2024-06-25 | 11:45 [SQL] INSERT INTO group_members (group_id, user_id) VALUES ('2', '446709883132444675')
+2024-06-25 | 11:45 [SQL] SELECT id, message_id, project_name, leader_id, size_limit, description, confirmed FROM groups WHERE message_id = 1255096389315067906
+2024-06-25 | 11:45 [SQL] SELECT user_id FROM group_members WHERE group_id = 2
+2024-06-25 | 11:45 [SQL] SELECT id, message_id, project_name, leader_id, size_limit, description, confirmed FROM groups WHERE message_id = 1255096389315067906

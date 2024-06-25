@@ -132,4 +132,9 @@ async def confirm_group(ctx: Interaction, group: Group):
 
 
 async def delete_group(ctx: Interaction, group: Group):
+	if ctx.user.id != group.leader_id:
+		await ctx.response.send_message(
+				":x: Only the leader can delete the group !",
+				ephemeral=True, delete_after=5.0)
+		return
 	await ctx.response.send_modal(Confirm(group))
