@@ -1,6 +1,6 @@
 from discord import Interaction, Object, User
-from typing import Optional
 from discord.app_commands import CommandTree, describe
+from typing import Optional
 from src.group.commands.create_group import create_group
 from src.group.commands.list import list
 from src.settings.variables import GUILD_ID

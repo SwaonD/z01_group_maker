@@ -2,7 +2,6 @@ from src.utils.sql import sql_create_table, \
 	sql_insert_data, sql_get_data, sql_delete_data, sql_update_data
 from src.settings.variables import GROUP_SQL_FILE
 
-
 class BaseTable():
 	def __init__(self, table_name: str, db_file: str, columns: list[str]):
 		self.name = table_name
@@ -52,15 +51,15 @@ class GroupsTable(BaseTable):
 		]
 		super().__init__("groups", GROUP_SQL_FILE, columns)
 
-	def insert_data(self, message_id: int, project_name: str,
-			leader_id: int, size_limit: int, description: str) -> int:
+	def insert_data(self, message_id: int, project_name: str, leader_id: int,
+			size_limit: int, description: str,confirmed: int) -> int:
 		data = {
 			self.message_id: str(message_id),
 			self.project_name: project_name,
 			self.leader_id: str(leader_id),
 			self.size_limit: str(size_limit),
 			self.description: description,
-			self.confirmed: 0
+			self.confirmed: str(confirmed)
 		}
 		return super().insert_data(data)
 
