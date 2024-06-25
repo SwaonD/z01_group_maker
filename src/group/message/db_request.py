@@ -1,5 +1,6 @@
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
 from src.settings.variables import PROJECT_NAMES, Group
+from src.utils.log import log
 
 def get_group(msg_id: int):
 	"""Fetches the whole group information using the provided message ID
@@ -86,7 +87,7 @@ def project_exists(project: str, author_id: int) -> bool:
 	group_id = GROUPS_TABLE.get_data(f"{GROUPS_TABLE.project_name} = \
 			'{project}' AND {GROUPS_TABLE.leader_id} = '{author_id}'",
 			GROUPS_TABLE.id)
-	print(f"[*] Checked if project {project} already exists : {len(group_id) != 0}")
+	log(f"[*] Checked if project {project} already exists : {len(group_id) != 0}", False)
 	if len(group_id) != 0:
 		return True
 	return False

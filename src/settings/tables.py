@@ -1,6 +1,6 @@
 from src.utils.sql import sql_create_table, \
 	sql_insert_data, sql_get_data, sql_delete_data, sql_update_data
-from src.settings.variables import GROUP_SQL_FILE
+from src.settings.variables import GROUP_SQL_FILE, Group
 
 class BaseTable():
 	def __init__(self, table_name: str, db_file: str, columns: list[str]):
@@ -62,6 +62,14 @@ class GroupsTable(BaseTable):
 			self.confirmed: str(confirmed)
 		}
 		return super().insert_data(data)
+
+	def get_groups(self, condition: str = "") -> list[Group]:
+		data = super().get_data(condition)
+		result: list[Group] = []
+		for row in data:
+			group = Group(row[0], row[1], row[2], row[3], row[4], row[5], row[6])
+			result.append(group)
+		return result
 
 class GroupMembersTable(BaseTable):
 	def __init__(self):

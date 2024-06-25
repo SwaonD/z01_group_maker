@@ -5,10 +5,8 @@ from typing import Union
 
 
 class GroupMessageView(ui.View):
-	def __init__(self, project_name, author: Union[User, Member], *args, **kwargs):
+	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
-		self.project = project_name
-		self.author = author
 
 	async def show(self):
 		print(self)
