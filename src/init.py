@@ -1,9 +1,10 @@
 from discord import Intents, Client
-from src.group.message.embed import GroupMessageEmbed
 from src.group.message.view import GroupMessageView
-from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
-from src.settings.variables import Group, GROUP_CHANNEL_ID
+from src.settings.tables import GROUPS_TABLE
+from src.settings.variables import Group, GROUP_CHANNEL_ID, \
+		MSG_LOG_FILE_PATH, SQL_LOG_FILE_PATH, GENERAL_LOG_FILE_PATH
 from src.utils.log import log
+from pathlib import Path
 
 def get_intents():
 	# Cache
@@ -12,6 +13,16 @@ def get_intents():
 	intents.members = True
 	intents.guilds = True
 	return intents
+
+def create_log_files():
+	file_paths = [Path(MSG_LOG_FILE_PATH),
+			Path(SQL_LOG_FILE_PATH), Path(GENERAL_LOG_FILE_PATH)]
+	for path in file_paths:
+		if not path.exists():
+			path.touch()
+
+def init():
+	create_log_files()
 
 async def update_groups_from_db(client: Client):
 	groups: list[Group] = GROUPS_TABLE.get_groups()
@@ -24,5 +35,4 @@ async def update_groups_from_db(client: Client):
 			message = await group_channel.fetch_message(group.message_id)
 		view = GroupMessageView()
 		await message.edit(view=view)
-		log("update : " + group.project_name, False)
-
+		log("update : " + group.project_name, MSG_LOG_FILE_PATH)

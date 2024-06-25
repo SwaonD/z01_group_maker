@@ -3,7 +3,7 @@ from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
 from src.group.message.db_request import Group, \
 		get_group_members_ids, get_group_id
 from src.utils.log import log
-from src.settings.variables import NOTIF_MSG_TIMEOUT
+from src.settings.variables import NOTIF_MSG_TIMEOUT, MSG_LOG_FILE_PATH
 
 class Confirm(ui.Modal, title='Delete the group ?'):
 	def __init__(self, group: Group, *args, **kwargs):
@@ -24,7 +24,7 @@ class Confirm(ui.Modal, title='Delete the group ?'):
 			f"{GROUPS_TABLE.id} = {get_group_id(self.group.message_id)}")
 		await ctx.message.delete()
 
-		log(f"{ctx.user.id} deleted group {self.group.id}", None)
+		log(f"{ctx.user.id} deleted group {self.group.id}", MSG_LOG_FILE_PATH)
 		await ctx.response.send_message(f"{ctx.user.mention} deleted the"
 				+ f" {self.group.project_name} group",
 				ephemeral=True, delete_after=NOTIF_MSG_TIMEOUT)

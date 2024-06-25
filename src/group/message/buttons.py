@@ -2,7 +2,7 @@ from discord import Interaction
 from src.group.message.db_request import is_member, \
 		get_group_members_ids, Group, get_group
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.settings.variables import NOTIF_MSG_TIMEOUT
+from src.settings.variables import NOTIF_MSG_TIMEOUT, MSG_LOG_FILE_PATH
 from src.group.message.core import update_embed
 from src.utils.log import log
 from src.group.message.modal import Confirm
@@ -23,7 +23,7 @@ async def join_group(ctx: Interaction, group: Group):
 		return
 	GROUP_MEMBERS_TABLE.insert_data(group.id, ctx.user.id)
 
-	log(f"{ctx.user} joined group {group.id}", None)
+	log(f"{ctx.user} joined group {group.id}", MSG_LOG_FILE_PATH)
 
 	author = ctx.client.get_user(group.leader_id)
 	message_to_leader = f"{ctx.user.mention} joined your group !"
@@ -54,7 +54,7 @@ async def leave_group(ctx: Interaction, group: Group):
 	GROUP_MEMBERS_TABLE.delete_data(
 			f"{GROUP_MEMBERS_TABLE.group_id} = {group.id} AND"
 			+ f" {GROUP_MEMBERS_TABLE.user_id} = {ctx.user.id}")
-	log(f"{ctx.user} left group {group.id}", None)
+	log(f"{ctx.user} left group {group.id}", MSG_LOG_FILE_PATH)
 
 	g: Group = get_group(ctx.message.id)
 	group_members_ids = get_group_members_ids(g.id)

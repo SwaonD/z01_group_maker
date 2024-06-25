@@ -90,6 +90,5 @@ class GroupMembersTable(BaseTable):
 		}
 		super().insert_data(data)
 
-
 GROUPS_TABLE = GroupsTable()
 GROUP_MEMBERS_TABLE = GroupMembersTable()
