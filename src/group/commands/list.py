@@ -10,8 +10,8 @@ def _get_list_data(project_name: str | None,
 	user_group_ids = []
 	if user is not None:
 		user_group_ids_data = GROUP_MEMBERS_TABLE.get_data(
-			f"{GROUP_MEMBERS_TABLE.user_id} = {user.id}",
-			GROUP_MEMBERS_TABLE.group_id)
+				f"{GROUP_MEMBERS_TABLE.user_id} = {user.id}",
+				GROUP_MEMBERS_TABLE.group_id)
 		for row in user_group_ids_data:
 			user_group_ids.append(row[0])
 		if len(user_group_ids) > 0:
@@ -27,7 +27,7 @@ def _get_list_data(project_name: str | None,
 	condition = " AND ".join(conditions)
 	if confirmed == 1:
 		condition += f" ORDER BY {GROUPS_TABLE.project_name} DESC LIMIT " \
-		+ str(LIST_CMD_CONF_GROUP_MAX)
+				+ str(LIST_CMD_CONF_GROUP_MAX)
 	list_group_data = GROUPS_TABLE.get_data(
 			condition, GROUPS_TABLE.project_name, GROUPS_TABLE.message_id)
 	return list_group_data
