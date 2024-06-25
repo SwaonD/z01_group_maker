@@ -32,7 +32,7 @@ def _get_list_data(project_name: str | None, user: User | Member | None,
 async def list(ctx: Interaction, project_name: str | None,
 		user: User | Member | None, show_confirmed_group: bool | None):
 	data = _get_list_data(project_name, user, show_confirmed_group)
-	embed = Embed(color=Colour.from_rgb(255, 0, 0))
+	embed = Embed(color=Colour.from_rgb(40, 230, 195))
 	content = ""
 	for row in data:
 		row_user = ctx.client.get_user(row[1])
