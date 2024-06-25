@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+from dataclasses import dataclass
 
 load_dotenv()
 
@@ -22,3 +23,13 @@ PROJECT_NAMES = [
 	"ascii-art-web-stylize",
 	"groupie-tracker"
 ]
+
+@dataclass
+class Group:
+	id: int
+	message_id: int
+	project_name: str
+	leader_id: int
+	size_limit: int
+	description: str
+	confirmed: int

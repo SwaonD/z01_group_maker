@@ -1,17 +1,5 @@
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.settings.variables import PROJECT_NAMES
-from dataclasses import dataclass
-
-
-@dataclass
-class Group:
-	id: int
-	message_id: int
-	project_name: str
-	leader_id: int
-	size_limit: int
-	description: str
-	confirmed: int
+from src.settings.variables import PROJECT_NAMES, Group
 
 def get_group(msg_id: int):
 	"""Fetches the whole group information using the provided message ID
@@ -47,7 +35,7 @@ def get_group_id(msg_id: int) -> int:
 	return id[0][0]
 
 
-def get_group_members(group_id: int):
+def get_group_members_ids(group_id: int) -> list[int]:
 	"""Returns the numbers of members for the same group
 
 	Args:
@@ -56,15 +44,18 @@ def get_group_members(group_id: int):
 	Returns:
 			list: All members for the group
 	"""
-	members = GROUP_MEMBERS_TABLE.get_data(
+	members_data = GROUP_MEMBERS_TABLE.get_data(
 		f"{GROUP_MEMBERS_TABLE.group_id} = {group_id}", GROUP_MEMBERS_TABLE.user_id)
-	return members
+	members_ids = []
+	for row in members_data:
+		members_ids.append(row[0])
+	return members_ids
 
 
 def is_member(group_id: int, user_id: int):
-	members = get_group_members(group_id=group_id)
-	for m in members:
-		if m[0] == user_id:
+	members_ids = get_group_members_ids(group_id=group_id)
+	for id in members_ids:
+		if id == user_id:
 			return True
 	return False
 

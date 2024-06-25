@@ -1,7 +1,8 @@
-from src.group.message.tools import is_member, get_group_members, Group, get_group
+from discord import Interaction
+from src.group.message.db_request import is_member, \
+		get_group_members_ids, Group, get_group
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
 from src.group.message.core import update_embed
-from discord import Interaction
 from src.utils.log import log
 from src.group.message.modal import Confirm
 
@@ -14,7 +15,7 @@ async def join_group(ctx: Interaction, group: Group):
 		await ctx.response.send_message(":lock: This group is locked, you cannot"
 				f" join it !", ephemeral=True, delete_after=5.0)
 		return
-	group_len = len(get_group_members(group.id))
+	group_len = len(get_group_members_ids(group.id))
 	if group_len + 1 > group.size_limit:
 		await ctx.response.send_message(":x: This group is full",
 				ephemeral=True, delete_after=5.0)
@@ -54,7 +55,7 @@ async def leave_group(ctx: Interaction, group: Group):
 	log(f"{ctx.user} left group {group.id}", None)
 
 	g: Group = get_group(ctx.message.id)
-	group_members = get_group_members(g.id)
+	group_members_ids = get_group_members_ids(g.id)
 
 	author = ctx.client.get_user(group.leader_id)
 	await author.send(f"{ctx.user.mention} left your group !")
@@ -62,7 +63,7 @@ async def leave_group(ctx: Interaction, group: Group):
 	if author is None:
 		author = await ctx.client.fetch_user(group.leader_id)
 
-	if len(group_members) == 0:
+	if len(group_members_ids) == 0:
 		GROUPS_TABLE.delete_data(f"{GROUPS_TABLE.id} = {group.id}")
 		await ctx.response.send_message(
 				f":cry: No one left in the group ! It was deleted",
@@ -70,10 +71,10 @@ async def leave_group(ctx: Interaction, group: Group):
 		await ctx.message.delete()
 		return
 	# delete when no members left
-	if len(group_members) == 1:
-		last_member = ctx.client.get_user(group_members[0][0])
+	if len(group_members_ids) == 1:
+		last_member = ctx.client.get_user(group_members_ids[0])
 		data = {
-			GROUPS_TABLE.leader_id: group_members[0][0]
+			GROUPS_TABLE.leader_id: group_members_ids[0]
 		}
 		GROUPS_TABLE.update_data(data, f"{GROUPS_TABLE.id} = {g.id}")
 		await update_embed(ctx)
@@ -89,8 +90,8 @@ async def leave_group(ctx: Interaction, group: Group):
 
 
 async def confirm_group(ctx: Interaction, group: Group):
-	group_members = get_group_members(group.id)
-	if len(group_members) <= 1:
+	group_members_ids = get_group_members_ids(group.id)
+	if len(group_members_ids) <= 1:
 		await ctx.response.send_message(
 				":x: You can only confirm a group with a minimum of 2 people !",
 				ephemeral=True, delete_after=5.0)
@@ -102,8 +103,8 @@ async def confirm_group(ctx: Interaction, group: Group):
 				ephemeral=True, delete_after=5.0)
 		return
 
-	for m in group_members:
-		await ctx.client.get_user(m[0]).send(
+	for member_id in group_members_ids:
+		await ctx.client.get_user(member_id).send(
 				f"You group leader {ctx.client.get_user(group.leader_id)}"
 				+ f" confirmed the group for {group.project_name}")
 

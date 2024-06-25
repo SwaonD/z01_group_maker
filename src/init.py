@@ -7,3 +7,5 @@ def get_intents():
 	intents.members = True
 	intents.guilds = True
 	return intents
+
+# async def create_groups_from_db():

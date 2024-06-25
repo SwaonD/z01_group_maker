@@ -1,6 +1,6 @@
 from discord import ui, Interaction, ButtonStyle, Button, User, Member
 from src.group.message.buttons import join_group, leave_group, delete_group, confirm_group
-from src.group.message.tools import get_group, Group
+from src.group.message.db_request import get_group, Group
 from typing import Union
 
 
