@@ -1,16 +1,9 @@
-from discord import ui, Interaction, ButtonStyle, Button, User, Member
-from src.group.message.buttons import join_group, leave_group, delete_group, confirm_group
+from discord import ui, Interaction, ButtonStyle, Button
+from src.group.message.buttons import join_group, leave_group, delete_group_from_button, confirm_group
 from src.group.message.db_request import get_group, Group
-from typing import Union
 
 
 class GroupMessageView(ui.View):
-	def __init__(self, *args, **kwargs):
-		super().__init__(*args, **kwargs)
-
-	async def show(self):
-		print(self)
-
 	@ui.button(label="Join", style=ButtonStyle.primary)
 	async def join_button_callback(self, ctx: Interaction, button: Button):
 		group: Group = get_group(ctx.message.id)
@@ -29,4 +22,4 @@ class GroupMessageView(ui.View):
 	@ui.button(label="Delete", style=ButtonStyle.danger)
 	async def delete_button_callback(self, ctx: Interaction, button: Button):
 		group: Group = get_group(ctx.message.id)
-		await delete_group(ctx, group)
+		await delete_group_from_button(ctx, group)

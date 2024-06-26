@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from dataclasses import dataclass
+from src.settings.messages import TextMessages
 
 load_dotenv()
 
@@ -28,6 +29,7 @@ PROJECT_NAMES = [
 ]
 
 LOG_MAX_LINES = 300
+MSG = TextMessages("fr")
 
 @dataclass
 class Group:

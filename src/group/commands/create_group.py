@@ -1,6 +1,7 @@
 from discord import Interaction
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.settings.variables import NOTIF_MSG_TIMEOUT
+from src.settings.variables import MSG
+from src.utils.discord import send_quick_response
 from src.group.message.db_request import is_project, project_exists
 from src.group.message.db_request import get_group_id
 from src.group.message.view import GroupMessageView
@@ -27,17 +28,12 @@ async def create_group(ctx: Interaction,
 async def _is_input_valid(ctx: Interaction,
 		project_name: str, size_limit: int) -> bool:
 	if is_project(project_name) is False:
-		await ctx.response.send_message(":x: This project doesn't exist !",
-				ephemeral=True, delete_after=NOTIF_MSG_TIMEOUT)
+		await send_quick_response(ctx, MSG.PROJECTS_DOES_NOT_EXISTS)
 		return False
 	if project_exists(project_name, ctx.user.id) is True:
-		await ctx.response.send_message(
-				":x: You already created a group for this project !",
-				ephemeral=True, delete_after=NOTIF_MSG_TIMEOUT)
+		await send_quick_response(ctx, MSG.GROUP_ALREADY_EXISTS)
 		return False
 	if size_limit < 2:
-		await ctx.response.send_message(
-				":x: The size limit must be upper than 1 !"
-		)
+		await send_quick_response(ctx, MSG.HAS_NOT_MINIMUM_SIZE)
 		return False
 	return True

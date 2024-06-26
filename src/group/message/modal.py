@@ -1,11 +1,10 @@
 from discord import ui, TextStyle, Interaction
-from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.group.message.db_request import Group, \
-		get_group_members_ids, get_group_id
-from src.utils.log import log
-from src.settings.variables import NOTIF_MSG_TIMEOUT, MSG_LOG_FILE_PATH
+from src.group.message.db_request import Group, get_group_members_ids
+from src.group.message.core import delete_group
+from src.utils.discord import send_quick_response
+from src.settings.variables import MSG
 
-class Confirm(ui.Modal, title='Delete the group ?'):
+class ConfirmDeleteGroup(ui.Modal, title='Delete the group ?'):
 	def __init__(self, group: Group, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.group = group
@@ -14,17 +13,6 @@ class Confirm(ui.Modal, title='Delete the group ?'):
 
 	async def on_submit(self, ctx: Interaction):
 		members_ids = get_group_members_ids(self.group.id)
-
-		for member_id in members_ids:
-			GROUP_MEMBERS_TABLE.delete_data(
-				f"{GROUP_MEMBERS_TABLE.id} = {self.group.id} AND"
-				+ f" {GROUP_MEMBERS_TABLE.user_id} = {member_id}")
-
-		GROUPS_TABLE.delete_data(
-			f"{GROUPS_TABLE.id} = {get_group_id(self.group.message_id)}")
-		await ctx.message.delete()
-
-		log(f"{ctx.user.id} deleted group {self.group.id}", MSG_LOG_FILE_PATH)
-		await ctx.response.send_message(f"{ctx.user.mention} deleted the" \
-				+ f" {self.group.project_name} group",
-				ephemeral=True, delete_after=NOTIF_MSG_TIMEOUT)
+		await delete_group(ctx, self.group, members_ids)
+		await send_quick_response(ctx,
+			MSG.DELETE_GROUP % (self.group.project_name))

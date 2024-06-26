@@ -2,7 +2,8 @@ from discord import Interaction, Embed, \
 		Colour, TextChannel, PartialMessage, User, Member
 from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
 from src.settings.variables import GROUP_CHANNEL_ID, \
-		LIST_CMD_CONF_GROUP_MAX, NOTIF_MSG_TIMEOUT
+		LIST_CMD_CONF_GROUP_MAX, MSG
+from src.utils.discord import send_quick_response
 
 def _get_list_data(project_name: str | None,
 		user: User | Member | None, confirmed: int = 0) -> tuple[tuple[any]]:
@@ -45,7 +46,7 @@ async def _generate_list_content(
 			group_channel: TextChannel = \
 					await ctx.client.fetch_channel(GROUP_CHANNEL_ID)
 		message: PartialMessage = group_channel.get_partial_message(data[i][1])
-		content += f"**{data[i][0]}** {message.jump_url}\n"
+		content += MSG.LIST_CONTENT % (data[i][0], message.jump_url)
 		if reverse:
 			i -= 1
 		else:
@@ -69,21 +70,20 @@ async def _create_embed(ctx: Interaction, project_name: str,
 async def list(ctx: Interaction, project_name: str | None,
 		user: User | Member | None, show_confirmed_group: bool | None):
 	embeds = []
-	title = "Current Groups"
+	title = MSG.CURRENT_GROUPS_EMBED_TITLE
 	color = Colour.from_rgb(40, 230, 195)
 	cur_grp_embed = await _create_embed(ctx, project_name, user, 0, title, color)
 	if cur_grp_embed is not None:
 		embeds.append(cur_grp_embed)
 	if show_confirmed_group is not None and show_confirmed_group is True:
-		title = "Confirmed Groups"
+		title = MSG.CONFIRMED_GROUPS_EMBED_TITLE
 		color = Colour.from_rgb(0, 255, 0)
 		cur_grp_embed = await _create_embed(
 				ctx, project_name, user, 1, title, color, True)
 		if cur_grp_embed is not None:
 			embeds.insert(0, cur_grp_embed)
 	if len(embeds) == 0:
-		await ctx.response.send_message("No project found.",
-				ephemeral=True, delete_after=NOTIF_MSG_TIMEOUT)
+		await send_quick_response(MSG.PROJECT_NOT_FOUND)
 	else:
 		await ctx.response.send_message(embeds=embeds, ephemeral=True)
 
