@@ -1,7 +1,7 @@
 from discord import Intents, Client
 from src.group.message.view import GroupMessageView
-from src.settings.tables import GROUPS_TABLE
-from src.settings.variables import Group, GROUP_CHANNEL_ID, \
+from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
+from src.settings.variables import Group, GROUP_CHANNEL_ID, GROUP_SQL_FILE, \
 		MSG_LOG_FILE_PATH, SQL_LOG_FILE_PATH, GENERAL_LOG_FILE_PATH
 from src.utils.log import log
 from pathlib import Path
@@ -14,15 +14,19 @@ def get_intents():
 	intents.guilds = True
 	return intents
 
-def create_log_files():
-	file_paths = [Path(MSG_LOG_FILE_PATH),
+def create_files():
+	file_paths = [Path(GROUP_SQL_FILE), Path(MSG_LOG_FILE_PATH),
 			Path(SQL_LOG_FILE_PATH), Path(GENERAL_LOG_FILE_PATH)]
 	for path in file_paths:
+		if not path.parent.exists():
+			path.parent.mkdir(parents=True, exist_ok=True)
 		if not path.exists():
 			path.touch()
 
 def init():
-	create_log_files()
+	create_files()
+	GROUPS_TABLE.init_table()
+	GROUP_MEMBERS_TABLE.init_table()
 
 async def update_groups_from_db(client: Client):
 	groups: list[Group] = GROUPS_TABLE.get_groups()

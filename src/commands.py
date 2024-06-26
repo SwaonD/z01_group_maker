@@ -28,7 +28,7 @@ def register_commands(tree: CommandTree):
 
 	@tree.command(name="status",
 			description="Display your current groups", guild=Object(id=GUILD_ID))
-	async def me_command(ctx: Interaction):
+	async def status_command(ctx: Interaction):
 		await list(ctx, None, ctx.user, True)
 
 # async def ping(ctx:Interaction):

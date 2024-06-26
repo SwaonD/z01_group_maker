@@ -40,7 +40,7 @@ class GroupsTable(BaseTable):
 		self.size_limit = "size_limit"
 		self.description = "description"
 		self.confirmed = "confirmed"
-		columns = [
+		self.columns = [
 			f"{self.id} INTEGER PRIMARY KEY",
 			f"{self.message_id} INTEGER",
 			f"{self.project_name} STRING",
@@ -49,7 +49,9 @@ class GroupsTable(BaseTable):
 			f"{self.description} STRING",
 			f"{self.confirmed} INTEGER"
 		]
-		super().__init__("groups", GROUP_SQL_FILE, columns)
+
+	def init_table(self):
+		super().__init__("groups", GROUP_SQL_FILE, self.columns)
 
 	def insert_data(self, message_id: int, project_name: str, leader_id: int,
 			size_limit: int, description: str,confirmed: int) -> int:
@@ -76,12 +78,14 @@ class GroupMembersTable(BaseTable):
 		self.id = "id"
 		self.group_id = "group_id"
 		self.user_id = "user_id"
-		columns = [
+		self.columns = [
 			f"{self.id} INTEGER PRIMARY KEY",
 			f"{self.group_id} INTEGER",
 			f"{self.user_id} INTEGER"
 		]
-		super().__init__("group_members", GROUP_SQL_FILE, columns)
+
+	def init_table(self):
+		super().__init__("group_members", GROUP_SQL_FILE, self.columns)
 
 	def insert_data(self, group_id: int, user_id: int):
 		data = {
