@@ -67,7 +67,7 @@ async def _create_embed(ctx: Interaction, project_name: str,
 					text=user.display_name, icon_url=user.display_avatar.url)
 		return grp_embed
 
-async def list(ctx: Interaction, project_name: str | None,
+async def list_projects(ctx: Interaction, project_name: str | None,
 		user: User | Member | None, show_confirmed_group: bool | None):
 	embeds = []
 	title = MSG.CURRENT_GROUPS_EMBED_TITLE
