@@ -1,4 +1,5 @@
 from discord import Intents, Client
+from discord.errors import NotFound
 from src.group.message.view import GroupMessageView
 from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
 from src.settings.variables import Group, GROUP_CHANNEL_ID, GROUP_SQL_FILE, \
@@ -34,9 +35,20 @@ async def update_groups_from_db(client: Client):
 	if group_channel is None:
 		group_channel = client.fetch_channel(GROUP_CHANNEL_ID)
 	for group in groups:
-		message = group_channel.get_partial_message(group.message_id)
-		if message is None:
+		try:
+			# message = group_channel.get_partial_message(group.message_id)
 			message = await group_channel.fetch_message(group.message_id)
+			# partial message from cache don't know if the message still exists
+		except NotFound:
+			delete_from_db(group.id)
+			log(f"Message for group number {group.id} ({group.project_name})" \
+					+ " not found, data removed from db", MSG_LOG_FILE_PATH)
+			continue
 		view = GroupMessageView()
 		await message.edit(view=view)
 		log("update : " + group.project_name, MSG_LOG_FILE_PATH)
+
+def delete_from_db(group_id: int):
+	GROUP_MEMBERS_TABLE.delete_data(
+			f"{GROUP_MEMBERS_TABLE.group_id} = {group_id}")
+	GROUPS_TABLE.delete_data(f"{GROUPS_TABLE.id} = {group_id}")

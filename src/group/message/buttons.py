@@ -85,11 +85,12 @@ async def confirm_group(ctx: Interaction, group: Group):
 	if leader is None:
 		leader = ctx.client.fetch_user(group.leader_id)
 	for member_id in group_members_ids:
-		member = ctx.client.get_user(member_id)
-		if member is None:
-			member = ctx.client.fetch_user(member_id)
-		await member.send(MSG.CONFIRM_GROUP_TO_MEMBERS % \
-				(leader.mention, group.project_name, ctx.message.jump_url))
+		if member_id != group.leader_id:
+			member = ctx.client.get_user(member_id)
+			if member is None:
+				member = ctx.client.fetch_user(member_id)
+			await member.send(MSG.CONFIRM_GROUP_TO_MEMBERS % \
+					(leader.mention, group.project_name, ctx.message.jump_url))
 	data = {}
 	status = ""
 	if group.confirmed == 1:

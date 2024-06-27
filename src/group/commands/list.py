@@ -83,7 +83,7 @@ async def list(ctx: Interaction, project_name: str | None,
 		if cur_grp_embed is not None:
 			embeds.insert(0, cur_grp_embed)
 	if len(embeds) == 0:
-		await send_quick_response(MSG.PROJECT_NOT_FOUND)
+		await send_quick_response(ctx, MSG.PROJECT_NOT_FOUND)
 	else:
 		await ctx.response.send_message(embeds=embeds, ephemeral=True)
 
