@@ -29,7 +29,7 @@ PROJECT_NAMES = [
 ]
 
 LOG_MAX_LINES = 300
-MSG = TextMessages("fr")
+MSG = TextMessages("fr") # msg language
 
 @dataclass
 class Group:

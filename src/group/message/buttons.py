@@ -25,7 +25,7 @@ async def join_group(ctx: Interaction, group: Group):
 	message_to_leader = MSG.USER_JOIN_GROUP_TO_LEADER % \
 			(ctx.user.mention, group.project_name, ctx.message.jump_url)
 	if group_len + 1 == group.size_limit:
-		message_to_leader += MSG.GROUP_IS_FULL_TO_LEADER
+		message_to_leader += "\n" + MSG.GROUP_IS_FULL_TO_LEADER
 	await author.send(message_to_leader)
 
 	await update_embed(ctx)
@@ -97,12 +97,12 @@ async def confirm_group(ctx: Interaction, group: Group):
 		data = {
 			GROUPS_TABLE.confirmed: 0
 		}
-		status = "unlocked"
+		status = MSG.CONFIRM_GROUP_STATUS_UNLOCKED
 	else:
 		data = {
 			GROUPS_TABLE.confirmed: 1
 		}
-		status = "confirmed"
+		status = MSG.CONFIRM_GROUP_STATUS_CONFIRMED
 	GROUPS_TABLE.update_data(
 		data, f"{GROUPS_TABLE.message_id} = {group.message_id}")
 	await update_embed(ctx)
