@@ -36,19 +36,15 @@ async def update_groups_from_db(client: Client):
 		group_channel = client.fetch_channel(GROUP_CHANNEL_ID)
 	for group in groups:
 		try:
-			# message = group_channel.get_partial_message(group.message_id)
 			message = await group_channel.fetch_message(group.message_id)
 			# partial message from cache don't know if the message still exists
 		except NotFound:
-			delete_from_db(group.id)
+			GROUP_MEMBERS_TABLE.delete_data(
+					f"{GROUP_MEMBERS_TABLE.group_id} = {group.id}")
+			GROUPS_TABLE.delete_data(f"{GROUPS_TABLE.id} = {group.id}")
 			log(f"Message for group number {group.id} ({group.project_name})" \
 					+ " not found, data removed from db", MSG_LOG_FILE_PATH)
 			continue
 		view = GroupMessageView()
 		await message.edit(view=view)
 		log("update : " + group.project_name, MSG_LOG_FILE_PATH)
-
-def delete_from_db(group_id: int):
-	GROUP_MEMBERS_TABLE.delete_data(
-			f"{GROUP_MEMBERS_TABLE.group_id} = {group_id}")
-	GROUPS_TABLE.delete_data(f"{GROUPS_TABLE.id} = {group_id}")

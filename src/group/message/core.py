@@ -20,9 +20,8 @@ async def delete_group(ctx: Interaction, group: Group, members_ids: list[int]):
 				member = ctx.client.fetch_user(member_id)
 			await member.send(MSG.DELETE_GROUP_TO_MEMBERS % \
 					(ctx.user.mention, group.project_name))
-	GROUP_MEMBERS_TABLE.delete_data(
-		f"{GROUP_MEMBERS_TABLE.group_id} = {group.id}")
-	GROUPS_TABLE.delete_data(
-		f"{GROUPS_TABLE.id} = {group.id}")
+	GROUP_MEMBERS_TABLE.delete_data( \
+			f"{GROUP_MEMBERS_TABLE.group_id} = {group.id}")
+	GROUPS_TABLE.delete_data(f"{GROUPS_TABLE.id} = {group.id}")
 	await ctx.message.delete()
 	log(f"{ctx.user.id} deleted group {group.id}", MSG_LOG_FILE_PATH)
