@@ -1,8 +1,8 @@
 from discord import Intents, Guild
 from discord.errors import NotFound
 from src.group.message.view import GroupMessageView
-from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
-from src.settings.variables import Group, GROUP_CHANNEL_ID, GROUP_SQL_FILE, \
+from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE, GROUPS_CONFIG
+from src.settings.variables import Group, GROUP_CHANNEL_ID, GROUP_SQL_FILE_PATH, \
 		MSG_LOG_FILE_PATH, SQL_LOG_FILE_PATH, GENERAL_LOG_FILE_PATH
 from src.utils.log import log
 from pathlib import Path
@@ -16,7 +16,7 @@ def get_intents():
 	return intents
 
 def create_files():
-	file_paths = [Path(GROUP_SQL_FILE), Path(MSG_LOG_FILE_PATH),
+	file_paths = [Path(GROUP_SQL_FILE_PATH), Path(MSG_LOG_FILE_PATH),
 			Path(SQL_LOG_FILE_PATH), Path(GENERAL_LOG_FILE_PATH)]
 	for path in file_paths:
 		if not path.parent.exists():
@@ -26,6 +26,7 @@ def create_files():
 
 def init():
 	create_files()
+	GROUPS_CONFIG.init_table()
 	GROUPS_TABLE.init_table()
 	GROUP_MEMBERS_TABLE.init_table()
 

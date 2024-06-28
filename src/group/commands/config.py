@@ -1,4 +1,5 @@
-from discord import Interaction, Embed, TextChannel
+from discord import Interaction, TextChannel
+from src.settings.tables import GROUPS_CONFIG
 from src.settings.variables import MSG
 from src.utils.discord import send_quick_response
 
@@ -22,5 +23,6 @@ from src.utils.discord import send_quick_response
 # 	await send_quick_response(ctx, select.values[0])
 
 async def config(ctx: Interaction, group_channel: TextChannel):
-
-	await send_quick_response(ctx, "top")
+	GROUPS_CONFIG.insert_data(ctx.guild_id, group_channel.id)
+	await send_quick_response(ctx, \
+			MSG.GROUP_CHANNEL_CONFIGURED % (group_channel.mention))

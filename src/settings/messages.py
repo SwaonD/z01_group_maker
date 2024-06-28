@@ -125,6 +125,10 @@ class TextMessages():
 			"en": ":x: You are not part of this group!"
 		}
 
+		s.GROUP_CHANNEL_CONFIGURED = {
+			"en": "%s is the new default group channel."
+		}
+
 		# assign language to every dict attributes
 		for attr_name in vars(s):
 			attr_value = getattr(s, attr_name)

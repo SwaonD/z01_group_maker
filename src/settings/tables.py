@@ -1,6 +1,6 @@
 from src.utils.sql import sql_create_table, \
 	sql_insert_data, sql_get_data, sql_delete_data, sql_update_data
-from src.settings.variables import GROUP_SQL_FILE, Group
+from src.settings.variables import GROUP_SQL_FILE_PATH, Group
 
 class BaseTable():
 	def __init__(self, table_name: str, db_file: str, columns: list[str]):
@@ -51,7 +51,7 @@ class GroupsTable(BaseTable):
 		]
 
 	def init_table(self):
-		super().__init__("groups", GROUP_SQL_FILE, self.columns)
+		super().__init__("groups", GROUP_SQL_FILE_PATH, self.columns)
 
 	def insert_data(self, message_id: int, project_name: str, leader_id: int,
 			size_limit: int, description: str,confirmed: int) -> int:
@@ -85,7 +85,7 @@ class GroupMembersTable(BaseTable):
 		]
 
 	def init_table(self):
-		super().__init__("group_members", GROUP_SQL_FILE, self.columns)
+		super().__init__("group_members", GROUP_SQL_FILE_PATH, self.columns)
 
 	def insert_data(self, group_id: int, user_id: int):
 		data = {
@@ -94,5 +94,27 @@ class GroupMembersTable(BaseTable):
 		}
 		super().insert_data(data)
 
+class GuildConfigTable(BaseTable):
+	def __init__(self):
+		self.id = "id"
+		self.guild_id = "guild_id"
+		self.group_channel_id = "group_channel_id"
+		self.columns = [
+			f"{self.id} INTEGER PRIMARY KEY",
+			f"{self.guild_id} INTEGER",
+			f"{self.group_channel_id} INTEGER"
+		]
+
+	def init_table(self):
+		super().__init__("guild_config", GROUP_SQL_FILE_PATH, self.columns)
+
+	def insert_data(self, guild_id: int, group_channel_id: int):
+		data = {
+			self.guild_id: guild_id,
+			self.group_channel_id: group_channel_id
+		}
+		super().insert_data(data)
+
+GROUPS_CONFIG = GuildConfigTable()
 GROUPS_TABLE = GroupsTable()
 GROUP_MEMBERS_TABLE = GroupMembersTable()
