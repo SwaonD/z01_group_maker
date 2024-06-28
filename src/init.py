@@ -1,4 +1,4 @@
-from discord import Intents, Client
+from discord import Intents, Guild
 from discord.errors import NotFound
 from src.group.message.view import GroupMessageView
 from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
@@ -29,11 +29,11 @@ def init():
 	GROUPS_TABLE.init_table()
 	GROUP_MEMBERS_TABLE.init_table()
 
-async def update_groups_from_db(client: Client):
+async def update_groups_from_db(guild: Guild):
 	groups: list[Group] = GROUPS_TABLE.get_groups()
-	group_channel = client.get_channel(GROUP_CHANNEL_ID)
+	group_channel = guild.get_channel(GROUP_CHANNEL_ID)
 	if group_channel is None:
-		group_channel = client.fetch_channel(GROUP_CHANNEL_ID)
+		group_channel = guild.fetch_channel(GROUP_CHANNEL_ID)
 	for group in groups:
 		try:
 			message = await group_channel.fetch_message(group.message_id)

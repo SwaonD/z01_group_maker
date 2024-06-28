@@ -1,8 +1,9 @@
-from discord import Interaction, Member, Guild
+from discord import Interaction, Member, Guild, TextChannel
 from discord.app_commands import CommandTree, describe
 from typing import Optional
 from src.group.commands.create_group import create_group
 from src.group.commands.list import list_projects
+from src.group.commands.config import config
 
 # register commands for all known guilds, but only at startup !
 def register_commands(tree: CommandTree, guilds: list[Guild]):
@@ -30,6 +31,12 @@ def register_commands(tree: CommandTree, guilds: list[Guild]):
 			description="Display your current groups", guilds=guilds)
 	async def status_command(ctx: Interaction):
 		await list_projects(ctx, None, ctx.user, True)
+
+	@tree.command(name="config",
+			description="Configure the bot", guilds=guilds)
+	async def config_command(ctx: Interaction, group_channel: TextChannel):
+		await config(ctx, group_channel)
+
 
 # async def ping(ctx:Interaction):
 # 	await ctx.response.send_message("pong")
