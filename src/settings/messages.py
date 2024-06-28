@@ -1,9 +1,13 @@
 class TextMessages():
 	def __init__(s, lang):
 		# create command
+		s.GROUP_CHANNEL_NOT_CONFIGURED = {
+			"fr": "Aucun channel de group n'a été configuré, utilisez la commande /config en tant qu'administrateur pour l'ajouter.",
+			"en": "No group channel configured, pls use /config as an administrator"
+		}
 		s.PROJECTS_DOES_NOT_EXISTS = {
-			"fr": ":x: Ce project n'existe pas !",
-			"en": ":x: This project doesn't exist!"
+			"fr": ":x: Le project %s n'existe pas !",
+			"en": ":x: Project %s doesn't exist!"
 		}
 		s.GROUP_ALREADY_EXISTS = {
 			"fr": ":x: Tu as déjà crée un group pour ce projet !",
@@ -12,6 +16,10 @@ class TextMessages():
 		s.HAS_NOT_MINIMUM_SIZE = {
 			"fr": ":x: La taille limite doit être supérieure à 1 !",
 			"en": ":x: The size limit must be upper than 1!"
+		}
+		s.GROUP_CREATED = {
+			"fr": "Le groupe **%s** a été créé. %s",
+			"en": "Group **%s** created. %s"
 		}
 
 		# list command
@@ -119,6 +127,10 @@ class TextMessages():
 			"fr": "%s a supprimé le groupe **%s** !",
 			"en": "%s has deleted the group **%s**!"
 		}
+		s.DELETE_GROUP_MODAL_TITLE = {
+			"fr": "Supprimer %s ?",
+			"en": "Delete %s ?"
+		}
 
 		s.NOT_IN_GROUP = {
 			"fr": ":x: de quoi je me mèles ?",
@@ -126,7 +138,12 @@ class TextMessages():
 		}
 
 		s.GROUP_CHANNEL_CONFIGURED = {
+			"fr": "%s est le nouveau channel de groupe.",
 			"en": "%s is the new default group channel."
+		}
+		s.GROUP_CHANNEL_CONFIG_NOT_AUTHORIZED = {
+			"fr": "Seulement un administrateur peut configurer le channel de groupe",
+			"en": "Only an administrator can setup the group channel."
 		}
 
 		# assign language to every dict attributes

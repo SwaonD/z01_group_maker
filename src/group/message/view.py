@@ -1,7 +1,8 @@
 from discord import ui, Interaction, ButtonStyle, Button
-from src.group.message.buttons import join_group, leave_group, delete_group_from_button, confirm_group
-from src.group.message.db_request import get_group, Group
-
+from src.group.message.buttons import join_group, leave_group, \
+		delete_group_from_button, confirm_group
+from src.group.db_request.group import get_group
+from src.settings.variables import Group
 
 class GroupMessageView(ui.View):
 	@ui.button(label="Join", style=ButtonStyle.primary)

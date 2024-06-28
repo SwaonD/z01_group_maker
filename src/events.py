@@ -1,5 +1,4 @@
-from discord import Client, app_commands, Message
-from src.settings.variables import GROUP_CHANNEL_ID
+from discord import Client, app_commands
 from src.init import update_groups_from_db
 from src.commands import register_commands
 

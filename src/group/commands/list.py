@@ -1,8 +1,8 @@
 from discord import Interaction, Embed, \
 		Colour, TextChannel, PartialMessage, User, Member
 from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
-from src.settings.variables import GROUP_CHANNEL_ID, \
-		LIST_CMD_CONF_GROUP_MAX, MSG
+from src.settings.variables import LIST_CMD_CONF_GROUP_MAX, MSG
+from src.group.db_request.config import get_group_channel
 from src.utils.discord import send_quick_response
 
 def _get_list_data(project_name: str | None,
@@ -35,16 +35,15 @@ def _get_list_data(project_name: str | None,
 
 async def _generate_list_content(
 		ctx: Interaction, data: tuple[tuple], reverse: bool = False) -> str:
+	group_channel = await get_group_channel(ctx.guild)
+	if group_channel is None:
+		return ""
 	content = ""
 	if reverse:
 		i, end = len(data)-1, -1
 	else:
 		i, end = 0, len(data)
 	while i != end:
-		group_channel: TextChannel = ctx.client.get_channel(GROUP_CHANNEL_ID)
-		if group_channel is None:
-			group_channel: TextChannel = \
-					await ctx.client.fetch_channel(GROUP_CHANNEL_ID)
 		message: PartialMessage = group_channel.get_partial_message(data[i][1])
 		content += MSG.LIST_CONTENT % (data[i][0], message.jump_url)
 		if reverse:
@@ -55,7 +54,7 @@ async def _generate_list_content(
 
 async def _create_embed(ctx: Interaction, project_name: str,
 		user: User | Member | None, confirm: int, title: str, color: Colour,
-		reverse_content: bool = False) -> Embed:
+		reverse_content: bool = False) -> Embed | None:
 	group_data = _get_list_data(project_name, user, confirm)
 	grp_content = await _generate_list_content(ctx, group_data, reverse_content)
 	if len(grp_content) > 0:
@@ -66,6 +65,7 @@ async def _create_embed(ctx: Interaction, project_name: str,
 			grp_embed.set_footer(
 					text=user.display_name, icon_url=user.display_avatar.url)
 		return grp_embed
+	return None
 
 async def list_projects(ctx: Interaction, project_name: str | None,
 		user: User | Member | None, show_confirmed_group: bool | None):

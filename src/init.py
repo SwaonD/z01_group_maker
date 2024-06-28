@@ -2,8 +2,9 @@ from discord import Intents, Guild
 from discord.errors import NotFound
 from src.group.message.view import GroupMessageView
 from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE, GROUPS_CONFIG
-from src.settings.variables import Group, GROUP_CHANNEL_ID, GROUP_SQL_FILE_PATH, \
+from src.settings.variables import Group, GROUP_SQL_FILE_PATH, \
 		MSG_LOG_FILE_PATH, SQL_LOG_FILE_PATH, GENERAL_LOG_FILE_PATH
+from src.group.db_request.config import get_group_channel
 from src.utils.log import log
 from pathlib import Path
 
@@ -32,9 +33,11 @@ def init():
 
 async def update_groups_from_db(guild: Guild):
 	groups: list[Group] = GROUPS_TABLE.get_groups()
-	group_channel = guild.get_channel(GROUP_CHANNEL_ID)
+	group_channel = await get_group_channel(guild)
 	if group_channel is None:
-		group_channel = guild.fetch_channel(GROUP_CHANNEL_ID)
+		log("update_groups_from_db stoped: No group channel configured.",
+				MSG_LOG_FILE_PATH)
+		return
 	for group in groups:
 		try:
 			message = await group_channel.fetch_message(group.message_id)

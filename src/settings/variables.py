@@ -5,9 +5,7 @@ from src.settings.messages import TextMessages
 
 load_dotenv()
 
-GROUP_CHANNEL_ID = int(os.getenv("Z_01_GROUP_CHANNEL_ID"))
-# commands1 1253719751541264434
-# commands 1253698115425533953
+BOT_TOKEN = os.getenv("Z_01_GROUP_MAKER_DISCORD_BOT_TOKEN")
 GROUP_SQL_FILE_PATH = "./data/group_data.db"
 GENERAL_LOG_FILE_PATH = "./log/general.log"
 MSG_LOG_FILE_PATH = "./log/msg.log"

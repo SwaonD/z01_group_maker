@@ -1,12 +1,12 @@
 from discord import Interaction
-from src.group.message.db_request import is_member, \
-		get_group_members_ids, Group, get_group
+from src.group.db_request.group import is_member, \
+		get_group_members_ids, get_group
 from src.group.message.core import update_embed, delete_group
 from src.utils.discord import send_quick_response
 from src.utils.log import log
 from src.group.message.modal import ConfirmDeleteGroup
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.settings.variables import MSG_LOG_FILE_PATH, MSG
+from src.settings.variables import MSG_LOG_FILE_PATH, MSG, Group
 
 async def join_group(ctx: Interaction, group: Group):
 	if is_member(group.id, ctx.user.id):
@@ -115,4 +115,5 @@ async def delete_group_from_button(ctx: Interaction, group: Group):
 		await send_quick_response(ctx, MSG.NOT_IN_GROUP); return
 	if ctx.user.id != group.leader_id:
 		await send_quick_response(ctx, MSG.DELETE_GROUP_NOT_AUTHORIZE); return
-	await ctx.response.send_modal(ConfirmDeleteGroup(group))
+	await ctx.response.send_modal(ConfirmDeleteGroup(group,
+			MSG.DELETE_GROUP_MODAL_TITLE % (group.project_name)))

@@ -1,12 +1,12 @@
 from discord import ui, TextStyle, Interaction
-from src.group.message.db_request import Group, get_group_members_ids
+from src.group.db_request.group import get_group_members_ids
 from src.group.message.core import delete_group
 from src.utils.discord import send_quick_response
-from src.settings.variables import MSG
+from src.settings.variables import MSG, Group
 
-class ConfirmDeleteGroup(ui.Modal, title='Delete the group ?'):
-	def __init__(self, group: Group, *args, **kwargs):
-		super().__init__(*args, **kwargs)
+class ConfirmDeleteGroup(ui.Modal):
+	def __init__(self, group: Group, title: str, *args, **kwargs):
+		super().__init__(title=title, *args, **kwargs)
 		self.group = group
 		self.add_item(ui.TextInput(label="Group Name", required=False,
 				default=group.project_name, style=TextStyle.short))

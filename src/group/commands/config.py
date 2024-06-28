@@ -23,8 +23,12 @@ from src.utils.discord import send_quick_response
 # 	await send_quick_response(ctx, select.values[0])
 
 async def config(ctx: Interaction, group_channel: TextChannel):
-	data = GROUPS_CONFIG.get_data(f"{GROUPS_CONFIG.guild_id} = {ctx.guild.id}")
-	if len(data) == 0:
+	if ctx.permissions.administrator is False:
+		await send_quick_response(ctx, MSG.GROUP_CHANNEL_CONFIG_NOT_AUTHORIZED)
+		return
+	config_data = GROUPS_CONFIG.get_data(
+			f"{GROUPS_CONFIG.guild_id} = {ctx.guild.id}")
+	if len(config_data) == 0:
 		GROUPS_CONFIG.insert_data(ctx.guild_id, group_channel.id)
 	else:
 		GROUPS_CONFIG.update_data({GROUPS_CONFIG.group_channel_id: \
