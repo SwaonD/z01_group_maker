@@ -27,7 +27,7 @@ async def create_group(ctx: Interaction,
 	else:
 		message = await group_channel.send(embed=embed, view=view)
 		await send_quick_response(ctx,
-			MSG.GROUP_CREATED % (project_name, message.jump_url))
+			MSG.GROUP_CREATED % (project_name, message.jump_url), 10)
 	# Send the embed and get the message object
 	group_id = GROUPS_TABLE.insert_data(message.channel.id, message.id,
 			project_name, ctx.user.id, size_limit, description, confirmed)

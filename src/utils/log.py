@@ -1,5 +1,13 @@
 from datetime import datetime
-from src.settings.variables import LOG_MAX_LINES, GENERAL_LOG_FILE_PATH
+from src.settings.variables import LOG_MAX_LINES, \
+		GENERAL_LOG_FILE_PATH, MSG_LOG_FILE_PATH
+
+def _isPrintable(filepath: str) -> bool:
+	printable_file_paths = [MSG_LOG_FILE_PATH]
+	for printable_file_path in printable_file_paths:
+		if filepath == printable_file_path:
+			return True
+	return False
 
 def log(msg: str, *file_paths: str):
 	"""This function logs a message to the given file(s)
@@ -19,7 +27,10 @@ def log(msg: str, *file_paths: str):
 				lines = f.readlines()
 			if len(lines) >= LOG_MAX_LINES:
 				lines = lines[(len(lines)-LOG_MAX_LINES+1):]
-			lines.append(f"{str(date)} | {str(time)} {msg}\n")
+			log_text = f"{str(date)} {str(time)} | {msg}"
+			if _isPrintable(file_path):
+				print(log_text)
+			lines.append(f"{log_text}\n")
 			with open(file_path, "w") as f:
 				f.writelines(lines)
 		except FileNotFoundError:
