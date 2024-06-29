@@ -10,7 +10,7 @@ GROUP_SQL_FILE_PATH = "./data/group_data.db"
 GENERAL_LOG_FILE_PATH = "./log/general.log"
 MSG_LOG_FILE_PATH = "./log/msg.log"
 SQL_LOG_FILE_PATH = "./log/sql_request.log"
-NOTIF_MSG_TIMEOUT = 5.0
+NOTIF_MSG_TIMEOUT = 6
 
 LIST_CMD_CONF_GROUP_MAX = 5
 PROJECT_NAMES = [
@@ -38,4 +38,3 @@ class Group:
 	size_limit: int
 	description: str
 	confirmed: int
- 

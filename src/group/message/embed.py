@@ -10,19 +10,15 @@ class GroupMessageEmbed(Embed):
 			if member_id == leader_id:
 				usernames += " :crown:"
 			usernames += "\n"
-		msg = ""
-		emoji = ""
-		if confirmed == 1:
-			msg = "This group is confirmed !"
-			self.color = Colour.from_rgb(0, 255, 0)
-			emoji = ":lock: "
-		else:
-			msg = "Not confirmed yet !"
-			self.color = Colour.from_rgb(255, 255, 255)
-			emoji = ":unlock: "
 		self.description = description
-		self.title = f"{project_name}    {len(members_ids)}/{size_limit}"
+		self.title = f"{project_name}"
 		self.url = ""
 		self.type = "rich"
-		self.add_field(name="Members", value=usernames, inline=False)
-		self.add_field(name="Status", value=emoji+msg, inline=False)
+		info_field_name = f"{len(members_ids)}/{size_limit}"
+		if confirmed == 1:
+			info_field_name += " 🔒"
+			self.color = Colour.from_rgb(0, 255, 0)
+		else:
+			self.color = Colour.from_rgb(255, 255, 255)
+		self.add_field(name="Members", value=usernames, inline=True)
+		self.add_field(name=info_field_name, value="", inline=True)

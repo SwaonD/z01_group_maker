@@ -7,7 +7,6 @@ from src.group.commands.list import list_projects
 from src.group.commands.config import config
 from src.init import reload_groups
 from src.group.commands.kick import kick_project_autocompletion, kick_member
-# register commands for all known guilds, but only at startup !
 
 
 def register_commands(tree: CommandTree, guilds: list[Guild]):
@@ -47,7 +46,7 @@ def register_commands(tree: CommandTree, guilds: list[Guild]):
 			+ " if the interactions does'nt work", guilds=guilds)
 	async def reload_command(ctx: Interaction):
 		await reload_groups(ctx.guild)
-	
+
 
 # async def ping(ctx:Interaction):
 # 	await ctx.response.send_message("pong")

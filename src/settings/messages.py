@@ -1,5 +1,12 @@
 class TextMessages():
 	def __init__(s, lang):
+
+		#event on ready
+		s.CHANNEL_COMMAND_ONLY = {
+			"fr": "Seulement les commandes sont autorisées dans %s.",
+			"en": "Only commands are allowed in %s"
+		}
+
 		# create command
 		s.GROUP_CHANNEL_NOT_CONFIGURED = {
 			"fr": "Aucun channel de group n'a été configuré, utilisez la commande /config en tant qu'administrateur pour l'ajouter.",

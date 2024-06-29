@@ -59,8 +59,8 @@ class GroupsTable(BaseTable):
 			message_id: int, project_name: str, leader_id: int, \
 			size_limit: int, description: str, confirmed: int) -> int:
 		data = {
+			self.channel_id: str(channel_id),
 			self.message_id: str(message_id),
-			self.channel_id: channel_id,
 			self.project_name: project_name,
 			self.leader_id: str(leader_id),
 			self.size_limit: str(size_limit),

@@ -69,7 +69,7 @@ async def leave_group(ctx: Interaction, group: Group):
 	leader = ctx.client.get_user(group.leader_id)
 	if leader is None:
 		leader = await ctx.client.fetch_user(group.leader_id)
-	await leader.send(MSG.USER_LEFT_GROsend_quick_responseP_LEADER %
+	await leader.send(MSG.USER_LEFT_GROUP_TO_LEADER %
 						  (group.project_name, ctx.message.jump_url))
 
 	await update_embed(ctx)
@@ -96,7 +96,7 @@ async def confirm_group(ctx: Interaction, group: Group):
 			if member is None:
 				member = ctx.client.fetch_user(member_id)
 			await member.send(MSG.CONFIRM_GROUP_TO_MEMBERS %
-							  (leader.mention, group.project_name, ctx.message.jump_url))
+					(leader.mention, group.project_name, ctx.message.jump_url))
 	data = {}
 	status = ""
 	if group.confirmed == 1:
@@ -124,4 +124,4 @@ async def delete_group_from_button(ctx: Interaction, group: Group):
 		await send_quick_response(ctx, MSG.DELETE_GROUP_NOT_AUTHORIZE)
 		return
 	await ctx.response.send_modal(ConfirmDeleteGroup(group,
-													 MSG.DELETE_GROUP_MODAL_TITLE % (group.project_name)))
+					MSG.DELETE_GROUP_MODAL_TITLE % (group.project_name)))
