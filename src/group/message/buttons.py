@@ -69,8 +69,11 @@ async def leave_group(ctx: Interaction, group: Group):
 	leader = ctx.client.get_user(group.leader_id)
 	if leader is None:
 		leader = await ctx.client.fetch_user(group.leader_id)
-	await leader.send(MSG.USER_LEFT_GROUP_TO_LEADER %
-						  (group.project_name, ctx.message.jump_url))
+	await leader.send(MSG.USER_LEFT_GROUP_TO_LEADER % \
+			(ctx.user.mention, group.project_name, ctx.message.jump_url))
+	if isNewLeader:
+		await leader.send(MSG.NEW_GROUP_LEADER % \
+						(group.project_name, ctx.message.jump_url))
 
 	await update_embed(ctx)
 	await send_quick_response(ctx, MSG.USER_LEFT_GROUP % (group.project_name))

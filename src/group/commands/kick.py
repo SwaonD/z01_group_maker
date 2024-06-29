@@ -1,15 +1,17 @@
 from discord import Interaction, app_commands, Member
 from typing import List
-from src.group.db_request.group import get_all_groups_leader, get_group, is_member, get_group_leader_id
+from src.group.db_request.group import get_all_groups_leader, \
+								get_group, is_member, get_group_leader_id
 from src.settings.variables import Group
 from src.settings.tables import GROUP_MEMBERS_TABLE
 from src.utils.log import LOGGER
-from src.settings.variables import MSG_LOG_FILE_PATH, MSG, Group
+from src.settings.variables import MSG, Group
 from src.utils.discord import send_quick_response
 from src.group.message.core import update_embed
 
 
-async def kick_project_autocompletion(ctx: Interaction, current: str) -> List[app_commands.Choice[str]]:
+async def kick_project_autocompletion(ctx: Interaction, \
+								current: str) -> List[app_commands.Choice[str]]:
 	projects = [
 		app_commands.Choice(
 			name=group.project_name,
@@ -53,4 +55,5 @@ async def kick_member(ctx: Interaction, project: str, member: Member):
 	await m.send(MSG.MEMBER_KICKED_PM % (ctx.user.mention, msg.jump_url))
 
 	await update_embed(ctx, group.message_id)
-	await send_quick_response(ctx, MSG.MEMBER_KICKED_CHANNEL % (ctx.user.mention, m.mention, msg.jump_url))
+	await send_quick_response(ctx, MSG.MEMBER_KICKED_CHANNEL % \
+							(ctx.user.mention, m.mention, msg.jump_url))

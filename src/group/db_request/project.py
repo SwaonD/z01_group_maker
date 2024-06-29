@@ -7,10 +7,10 @@ def is_project(project: str) -> bool:
 	"""Verifies if a project is valid
 
 	Args:
-					project (str): project name to be checked
+		project (str): project name to be checked
 
 	Returns:
-					bool: returns True if the project is a valid one
+		bool: returns True if the project is a valid one
 	"""
 
 	for p in PROJECT_NAMES:
@@ -24,11 +24,11 @@ def project_exists(project: str, author_id: int) -> bool:
 	"""Verifies in the database if a project was already created by the user
 
 	Args:
-					project (str): project name
-					author (str): projects's author
+		project (str): project name
+		author (str): projects's author
 
 	Returns:
-					bool: returns True is the project was already found
+		bool: returns True is the project was already found
 	"""
 	group_id = GROUPS_TABLE.get_data(f"{GROUPS_TABLE.project_name} = \
 			'{project}' AND {GROUPS_TABLE.leader_id} = '{author_id}'",

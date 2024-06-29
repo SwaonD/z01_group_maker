@@ -5,12 +5,11 @@ from src.settings.variables import Group
 def get_group(msg_id: int) -> Group | None:
 	"""Fetches the whole group information using the provided message ID
 
-																																	Args:
-																																																																																																	msg_id (int): Message ID of the group
+	Args:
+		msg_id (int): Message ID of the group
 
-																																	Returns:
-																																																																	Group: Returns the group dataclass
-
+	Returns:
+		Group: Returns the group dataclass
 	"""
 	group = GROUPS_TABLE.get_groups(f"{GROUPS_TABLE.message_id} = {msg_id}")
 
@@ -24,10 +23,10 @@ def get_group_id(msg_id: int) -> int:
 	"""Goes through the tables to fetch the group id
 
 	Args:
-																																																																	msg_id (int): Message ID
+		msg_id (int): Message ID
 
 	Returns:
-																																																																	int: Returns the group ID
+		int: Returns the group ID
 	"""
 	id = GROUPS_TABLE.get_data(
 		f"{GROUPS_TABLE.message_id} = {msg_id}", GROUP_MEMBERS_TABLE.id)
@@ -39,10 +38,10 @@ def get_group_members_ids(group_id: int) -> list[int]:
 	"""Returns the numbers of members for the same group
 
 	Args:
-																																																																	group_id (int): Group id
+		group_id (int): Group id
 
 	Returns:
-																																																																	list: All members for the group
+		list: All members for the group
 	"""
 	members_data = GROUP_MEMBERS_TABLE.get_data(
 		f"{GROUP_MEMBERS_TABLE.group_id} = {group_id}", GROUP_MEMBERS_TABLE.user_id)
@@ -73,7 +72,7 @@ def get_all_groups_leader(leader_id: int) -> list[Group]:
 	groups: list[Group] = []
 	for g in fetched_groups:
 		groups.append(g)
-  
+
 	return groups
 
 
@@ -89,8 +88,8 @@ def is_member(group_id: int, user_id: int) -> bool:
 
 def is_group_leader(group_id: int, user_id: int) -> bool:
 	leader_id = get_group_leader_id(get_group_msg_id(group_id))
-	
+
 	if leader_id == user_id:
 		return True
-	
+
 	return False
