@@ -1,42 +1,48 @@
 from datetime import datetime
 from src.settings.variables import LOG_MAX_LINES, \
-		GENERAL_LOG_FILE_PATH, MSG_LOG_FILE_PATH
+		GENERAL_LOG_FILE_PATH, MSG_LOG_FILE_PATH, SQL_LOG_FILE_PATH
 
-def _isPrintable(filepath: str) -> bool:
-	printable_file_paths = [MSG_LOG_FILE_PATH]
-	for printable_file_path in printable_file_paths:
-		if filepath == printable_file_path:
-			return True
-	return False
+class LogFile():
+	def __init__(self, path: str, is_printable: bool):
+		self.path = path
+		self.is_printable = is_printable
 
-def log(msg: str, *file_paths: str):
-	"""This function logs a message to the given file(s)
+class Logger():
+	def __init__(self):
+		self.msg_log_file = LogFile(MSG_LOG_FILE_PATH, True)
+		self.sql_log_file = LogFile(SQL_LOG_FILE_PATH, False)
 
-	Args:
-			msg (str): Message to write in the file
-			*file_paths (str): Path to the file(s) where the log will be writen
-	"""
-	current_datetime = datetime.now()
-	date = current_datetime.date()
-	time = str(current_datetime.hour)+":"+str(current_datetime.minute)
-	all_file_paths = list(file_paths)
-	all_file_paths.append(GENERAL_LOG_FILE_PATH)
-	for file_path in all_file_paths:
-		try:
-			with open(file_path, "r") as f:
-				lines = f.readlines()
-			if len(lines) >= LOG_MAX_LINES:
-				lines = lines[(len(lines)-LOG_MAX_LINES+1):]
-			log_text = f"{str(date)} {str(time)} | {msg}"
-			if _isPrintable(file_path):
-				print(log_text)
-			lines.append(f"{log_text}\n")
-			with open(file_path, "w") as f:
-				f.writelines(lines)
-		except FileNotFoundError:
-			print(f"FileNotFoundError: The file '{file_path}' could not be found.")
-		except PermissionError:
-			print(f"PermissionError: Permission denied when" \
-		 			+ f" trying to access '{file_path}'.")
-		except Exception as e:
-			print(f"An error occurred: {str(e)}")
+	def log(self, text: str, *log_files: LogFile):
+		current_datetime = datetime.now()
+		date = current_datetime.date()
+		time = f"{str(current_datetime.hour)}:{str(current_datetime.minute)}"
+		all_log_files = list(log_files)
+		all_log_files.append(LogFile(GENERAL_LOG_FILE_PATH, False))
+		for log_file in all_log_files:
+			try:
+				with open(log_file.path, "r") as f:
+					lines = f.readlines()
+				if len(lines) >= LOG_MAX_LINES:
+					lines = lines[(len(lines)-LOG_MAX_LINES+1):]
+				log_text = f"{str(date)} {str(time)} | {text}"
+				if log_file.is_printable:
+					print(log_text)
+				lines.append(f"{log_text}\n")
+				with open(log_file.path, "w") as f:
+					f.writelines(lines)
+			except FileNotFoundError:
+				print(f"FileNotFoundError: The file '{log_file.path}'" \
+						+ " could not be found.")
+			except PermissionError:
+				print(f"PermissionError: Permission denied when" \
+						+ f" trying to access '{log_file.path}'.")
+			except Exception as e:
+				print(f"An error occurred: {str(e)}")
+
+	def msg(self, text: str):
+		self.log(text, self.msg_log_file)
+
+	def sql(self, text: str):
+		self.log(text, self.sql_log_file)
+
+LOGGER = Logger()

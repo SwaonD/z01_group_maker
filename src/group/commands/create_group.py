@@ -1,4 +1,4 @@
-from discord import Interaction, TextChannel
+from discord import Interaction
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
 from src.settings.variables import MSG
 from src.utils.discord import send_quick_response

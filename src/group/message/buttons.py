@@ -3,10 +3,10 @@ from src.group.db_request.group import is_member, \
 		get_group_members_ids, get_group
 from src.group.message.core import update_embed, delete_group
 from src.utils.discord import send_quick_response
-from src.utils.log import log
+from src.utils.log import LOGGER
 from src.group.message.modal import ConfirmDeleteGroup
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.settings.variables import MSG_LOG_FILE_PATH, MSG, Group
+from src.settings.variables import MSG, Group
 
 async def join_group(ctx: Interaction, group: Group):
 	if is_member(group.id, ctx.user.id):
@@ -17,7 +17,7 @@ async def join_group(ctx: Interaction, group: Group):
 	if group_len + 1 > group.size_limit:
 		await send_quick_response(ctx, MSG.GROUP_IS_FULL); return
 	GROUP_MEMBERS_TABLE.insert_data(group.id, ctx.user.id)
-	log(f"{ctx.user} joined group {group.id}", MSG_LOG_FILE_PATH)
+	LOGGER.msg(f"{ctx.user} joined group {group.id}")
 
 	author = ctx.client.get_user(group.leader_id)
 	if author is None:
@@ -40,7 +40,7 @@ async def leave_group(ctx: Interaction, group: Group):
 	GROUP_MEMBERS_TABLE.delete_data(
 			f"{GROUP_MEMBERS_TABLE.group_id} = {group.id} AND"
 			+ f" {GROUP_MEMBERS_TABLE.user_id} = {ctx.user.id}")
-	log(f"{ctx.user} left group {group.id}", MSG_LOG_FILE_PATH)
+	LOGGER.msg(f"{ctx.user} left group {group.id}")
 
 	g: Group = get_group(ctx.message.id)
 	group_members_ids = get_group_members_ids(g.id)

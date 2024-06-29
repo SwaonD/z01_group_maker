@@ -1,6 +1,6 @@
 from src.settings.tables import GROUPS_TABLE
-from src.settings.variables import PROJECT_NAMES, MSG_LOG_FILE_PATH
-from src.utils.log import log
+from src.settings.variables import PROJECT_NAMES
+from src.utils.log import LOGGER
 
 def is_project(project: str) -> bool:
 	"""Verifies if a project is valid
@@ -29,8 +29,8 @@ def project_exists(project: str, author_id: int) -> bool:
 	group_id = GROUPS_TABLE.get_data(f"{GROUPS_TABLE.project_name} = \
 			'{project}' AND {GROUPS_TABLE.leader_id} = '{author_id}'",
 			GROUPS_TABLE.id)
-	log(f"[*] Checked if project {project} already exists : {len(group_id) != 0}",
-			MSG_LOG_FILE_PATH)
+	LOGGER.msg(f"[*] Checked if project {project} already exists :" \
+			+ f" {len(group_id) != 0}")
 	if len(group_id) != 0:
 		return True
 	return False

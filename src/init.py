@@ -4,8 +4,7 @@ from src.group.message.view import GroupMessageView
 from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE, GROUPS_CONFIG
 from src.settings.variables import Group, GROUP_SQL_FILE_PATH, \
 		MSG_LOG_FILE_PATH, SQL_LOG_FILE_PATH, GENERAL_LOG_FILE_PATH
-from src.group.db_request.config import get_group_channel
-from src.utils.log import log
+from src.utils.log import LOGGER
 from pathlib import Path
 
 def get_intents():
@@ -44,10 +43,10 @@ async def update_groups_from_db(guild: Guild):
 			GROUP_MEMBERS_TABLE.delete_data(
 					f"{GROUP_MEMBERS_TABLE.group_id} = {group.id}")
 			GROUPS_TABLE.delete_data(f"{GROUPS_TABLE.id} = {group.id}")
-			log(f"Message for group number {group.id} ({group.project_name})" \
-					+ " not found, data removed from db", MSG_LOG_FILE_PATH)
+			LOGGER.msg(f"Message for group number {group.id} ({group.project_name})" \
+					+ " not found, data removed from db")
 			continue
 		view = GroupMessageView()
 		await message.edit(view=view)
-		log(f"update: {group.project_name}. channel_id={group.channel_id}" \
-				+ f" message_id={group.message_id}", MSG_LOG_FILE_PATH)
+		LOGGER.msg(f"update: {group.project_name}. channel_id={group.channel_id}" \
+				+ f" message_id={group.message_id}")

@@ -1,8 +1,7 @@
 from discord import Client, app_commands, Guild
 from src.init import update_groups_from_db
 from src.commands import register_commands
-from src.utils.log import log
-from src.settings.variables import MSG_LOG_FILE_PATH
+from src.utils.log import LOGGER
 
 def register_events(client: Client, tree: app_commands.CommandTree):
 	@client.event
@@ -11,11 +10,11 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 		for guild in client.guilds:
 			await tree.sync(guild=guild)
 			await update_groups_from_db(guild)
-		log(f"{client.user} - Ready Perfectly !", MSG_LOG_FILE_PATH)
+		LOGGER.msg(f"{client.user} - Ready Perfectly !")
 
 	@client.event
 	async def on_guild_join(guild: Guild):
-		log(f"I have joined {guild.name} ({guild.id})", MSG_LOG_FILE_PATH)
+		LOGGER.msg(f"I have joined {guild.name} ({guild.id})")
 		register_commands(tree, client.guilds)
 		await tree.sync(guild=guild)
 		await update_groups_from_db(guild)
