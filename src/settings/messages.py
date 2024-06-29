@@ -52,11 +52,11 @@ class TextMessages():
 			"fr": ":x: Ce group est complet !",
 			"en": ":x: This group is full!"
 		}
-		s.USER_JOIN_GROUP_TO_LEADER = { #1
+		s.USER_JOIN_GROUP_TO_LEADER = {  # 1
 			"fr": "%s a rejoint ton groupe **%s** ! %s",
 			"en": "%s joined your group **%s**! %s"
 		}
-		s.GROUP_IS_FULL_TO_LEADER = { #2
+		s.GROUP_IS_FULL_TO_LEADER = {  # 2
 			"fr": "Vous êtes maintenant au complet !",
 			"en": "Your group is now full!"
 		}
@@ -100,15 +100,15 @@ class TextMessages():
 			"fr": "%s a confirmé le groupe **%s** ! %s",
 			"en": "%s confirmed the group **%s**! %s"
 		}
-		s.CONFIRM_GROUP = { #1
+		s.CONFIRM_GROUP = {  # 1
 			"fr": "Tu as %s le groupe **%s**.",
 			"en": "You have %s the group **%s**."
 		}
-		s.CONFIRM_GROUP_STATUS_UNLOCKED = { #2
+		s.CONFIRM_GROUP_STATUS_UNLOCKED = {  # 2
 			"fr": "ouvert",
 			"en": "opened"
 		}
-		s.CONFIRM_GROUP_STATUS_CONFIRMED = { #2
+		s.CONFIRM_GROUP_STATUS_CONFIRMED = {  # 2
 			"fr": "confirmé",
 			"en": "confirmed"
 		}
@@ -146,9 +146,30 @@ class TextMessages():
 			"en": "Only an administrator can setup the group channel."
 		}
 
+		# Kick messages
+		s.MEMBER_KICKED_CHANNEL = {
+			"fr": "%s a exclu %s du groupe %s",
+			"en": "%s kicked %s from %s"
+		}
+
+		s.MEMBER_KICKED_PM = {
+			"fr": "%s vous a exclus du groupe %s",
+			"en": "%s kicked you from %s"
+		}
+
+		s.NOT_LEADER = {
+			"fr": ":x: Nuh uh, tu n'es pas le leader",
+			"en": ":x: Nuh uh, you ain't the leader"
+		}
+
+		s.CANT_KICK_LEADER = {
+			"fr": ":x: N'abandonne pas ton équipe comme ça !",
+			"en": ":x: Don't leave your group comrades !"
+		}
+
 		# assign language to every dict attributes
 		for attr_name in vars(s):
 			attr_value = getattr(s, attr_name)
 			if isinstance(attr_value, dict):
-				setattr(s, attr_name, attr_value.get(lang, attr_value.get("en")))
-
+				setattr(s, attr_name, attr_value.get(
+					lang, attr_value.get("en")))

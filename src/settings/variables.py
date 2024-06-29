@@ -38,3 +38,4 @@ class Group:
 	size_limit: int
 	description: str
 	confirmed: int
+ 

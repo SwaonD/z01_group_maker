@@ -4,13 +4,22 @@ from src.settings.variables import Group, MSG
 from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
 from src.group.message.embed import GroupMessageEmbed
 from src.utils.log import LOGGER
+from typing import Optional
 
-async def update_embed(ctx: Interaction):
-	g: Group = get_group(ctx.message.id)
-	group_members_ids = get_group_members_ids(g.id)
-	embed = GroupMessageEmbed(ctx.client, g.project_name, g.leader_id,
-			group_members_ids, g.size_limit, g.description, g.confirmed)
-	await ctx.message.edit(embed=embed)
+
+async def update_embed(ctx: Interaction, message_id: int = 0):
+    if ctx.message is None:
+        g: Group = get_group(message_id)
+        message = ctx.channel.get_partial_message(message_id)
+    else:
+        g: Group = get_group(ctx.message.id)
+        message = ctx.message
+
+    group_members_ids = get_group_members_ids(g.id)
+    embed = GroupMessageEmbed(ctx.client, g.project_name, g.leader_id,
+                              group_members_ids, g.size_limit, g.description, g.confirmed)
+    await message.edit(embed=embed)
+
 
 async def delete_group(ctx: Interaction, group: Group, members_ids: list[int]):
 	for member_id in members_ids:
