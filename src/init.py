@@ -30,7 +30,7 @@ def init():
 	GROUPS_TABLE.init_table()
 	GROUP_MEMBERS_TABLE.init_table()
 
-async def update_groups_from_db(guild: Guild):
+async def reload_groups(guild: Guild):
 	groups: list[Group] = GROUPS_TABLE.get_groups()
 	for group in groups:
 		try:

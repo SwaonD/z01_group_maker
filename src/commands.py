@@ -4,6 +4,7 @@ from typing import Optional
 from src.group.commands.create_group import create_group
 from src.group.commands.list import list_projects
 from src.group.commands.config import config
+from src.init import reload_groups
 
 # register commands for all known guilds, but only at startup !
 def register_commands(tree: CommandTree, guilds: list[Guild]):
@@ -37,6 +38,11 @@ def register_commands(tree: CommandTree, guilds: list[Guild]):
 	async def config_command(ctx: Interaction, group_channel: TextChannel):
 		await config(ctx, group_channel)
 
+	# temp command, to fast fix any failing group message
+	@tree.command(name="reload_groups", description="Reload the groups messages" \
+			+ " if the interactions does'nt work", guilds=guilds)
+	async def reload_command(ctx: Interaction):
+		await reload_groups(ctx.guild)
 
 # async def ping(ctx:Interaction):
 # 	await ctx.response.send_message("pong")
