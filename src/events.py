@@ -27,6 +27,6 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 			return
 		group_channel = await get_group_channel(message.guild)
 		if group_channel is not None and message.channel.id == group_channel.id:
-			await message.author.send(
-					MSG.CHANNEL_COMMAND_ONLY % (message.channel.jump_url))
+			await message.author.send(MSG.CHANNEL_COMMAND_ONLY % \
+					(message.channel.jump_url), suppress_embeds=True)
 			await message.delete()
