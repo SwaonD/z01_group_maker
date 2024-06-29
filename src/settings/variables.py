@@ -31,6 +31,7 @@ MSG = TextMessages("fr") # msg language
 @dataclass
 class Group:
 	id: int
+	channel_id: int
 	message_id: int
 	project_name: str
 	leader_id: int

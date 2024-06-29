@@ -34,6 +34,7 @@ class BaseTable():
 class GroupsTable(BaseTable):
 	def __init__(self):
 		self.id = "id"
+		self.channel_id = "channel_id"
 		self.message_id = "message_id"
 		self.project_name = "project_name"
 		self.leader_id = "leader_id"
@@ -42,6 +43,7 @@ class GroupsTable(BaseTable):
 		self.confirmed = "confirmed"
 		self.columns = [
 			f"{self.id} INTEGER PRIMARY KEY",
+			f"{self.channel_id} INTEGER",
 			f"{self.message_id} INTEGER",
 			f"{self.project_name} STRING",
 			f"{self.leader_id} INTEGER",
@@ -53,10 +55,12 @@ class GroupsTable(BaseTable):
 	def init_table(self):
 		super().__init__("groups", GROUP_SQL_FILE_PATH, self.columns)
 
-	def insert_data(self, message_id: int, project_name: str, leader_id: int,
-			size_limit: int, description: str,confirmed: int) -> int:
+	def insert_data(self, channel_id: int, \
+			message_id: int, project_name: str, leader_id: int, \
+			size_limit: int, description: str, confirmed: int) -> int:
 		data = {
 			self.message_id: str(message_id),
+			self.channel_id: channel_id,
 			self.project_name: project_name,
 			self.leader_id: str(leader_id),
 			self.size_limit: str(size_limit),
@@ -69,7 +73,8 @@ class GroupsTable(BaseTable):
 		data = super().get_data(condition)
 		result: list[Group] = []
 		for row in data:
-			group = Group(row[0], row[1], row[2], row[3], row[4], row[5], row[6])
+			group = Group(row[0], row[1], row[2], \
+					row[3], row[4], row[5], row[6], row[7])
 			result.append(group)
 		return result
 

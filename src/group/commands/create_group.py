@@ -29,7 +29,7 @@ async def create_group(ctx: Interaction,
 		await send_quick_response(ctx,
 			MSG.GROUP_CREATED % (project_name, message.jump_url))
 	# Send the embed and get the message object
-	group_id = GROUPS_TABLE.insert_data(message.id,
+	group_id = GROUPS_TABLE.insert_data(message.channel.id, message.id,
 			project_name, ctx.user.id, size_limit, description, confirmed)
 	GROUP_MEMBERS_TABLE.insert_data(group_id, ctx.user.id)
 	# Add Group to GROUPDB and Author to the members database

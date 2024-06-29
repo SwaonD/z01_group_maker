@@ -33,14 +33,12 @@ def init():
 
 async def update_groups_from_db(guild: Guild):
 	groups: list[Group] = GROUPS_TABLE.get_groups()
-	group_channel = await get_group_channel(guild)
-	if group_channel is None:
-		log("update_groups_from_db stoped: No group channel configured.",
-				MSG_LOG_FILE_PATH)
-		return
 	for group in groups:
 		try:
-			message = await group_channel.fetch_message(group.message_id)
+			channel = guild.get_channel(group.channel_id)
+			if channel is None:
+				channel = await guild.fetch_channel(group.channel_id)
+			message = await channel.fetch_message(group.message_id)
 			# partial message from cache don't know if the message still exists
 		except NotFound:
 			GROUP_MEMBERS_TABLE.delete_data(
@@ -51,4 +49,5 @@ async def update_groups_from_db(guild: Guild):
 			continue
 		view = GroupMessageView()
 		await message.edit(view=view)
-		log("update : " + group.project_name, MSG_LOG_FILE_PATH)
+		log(f"update: {group.project_name}. channel_id={group.channel_id}" \
+				+ f" message_id={group.message_id}", MSG_LOG_FILE_PATH)

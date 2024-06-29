@@ -1,8 +1,6 @@
-from discord import Interaction, Embed, \
-		Colour, TextChannel, PartialMessage, User, Member
+from discord import Interaction, Embed, Colour, User, Member
 from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
 from src.settings.variables import LIST_CMD_CONF_GROUP_MAX, MSG
-from src.group.db_request.config import get_group_channel
 from src.utils.discord import send_quick_response
 
 def _get_list_data(project_name: str | None,
@@ -30,22 +28,23 @@ def _get_list_data(project_name: str | None,
 		condition += f" ORDER BY {GROUPS_TABLE.project_name} DESC LIMIT " \
 				+ str(LIST_CMD_CONF_GROUP_MAX)
 	list_group_data = GROUPS_TABLE.get_data(
-			condition, GROUPS_TABLE.project_name, GROUPS_TABLE.message_id)
+			condition, GROUPS_TABLE.channel_id, \
+			GROUPS_TABLE.message_id, GROUPS_TABLE.project_name)
 	return list_group_data
 
 async def _generate_list_content(
 		ctx: Interaction, data: tuple[tuple], reverse: bool = False) -> str:
-	group_channel = await get_group_channel(ctx.guild)
-	if group_channel is None:
-		return ""
 	content = ""
 	if reverse:
 		i, end = len(data)-1, -1
 	else:
 		i, end = 0, len(data)
 	while i != end:
-		message: PartialMessage = group_channel.get_partial_message(data[i][1])
-		content += MSG.LIST_CONTENT % (data[i][0], message.jump_url)
+		channel = ctx.guild.get_channel(data[i][0])
+		if channel is None:
+			channel = ctx.guild.fetch_channel(data[i][0])
+		message = channel.get_partial_message(data[i][1])
+		content += MSG.LIST_CONTENT % (data[i][2], message.jump_url)
 		if reverse:
 			i -= 1
 		else:
