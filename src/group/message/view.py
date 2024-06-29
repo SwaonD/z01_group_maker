@@ -5,6 +5,9 @@ from src.group.db_request.group import get_group
 from src.settings.variables import Group
 
 class GroupMessageView(ui.View):
+	def __init__(self):
+		super().__init__(timeout=None)
+
 	@ui.button(label="Join", style=ButtonStyle.primary)
 	async def join_button_callback(self, ctx: Interaction, button: Button):
 		group: Group = get_group(ctx.message.id)
