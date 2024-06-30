@@ -41,12 +41,5 @@ def register_commands(tree: CommandTree, guilds: list[Guild]):
 	async def kick_command(ctx: Interaction, project: str, member: Member):
 		await kick_member(ctx, project=project, member=member)
 
-	# temp command, to fast fix any failing group message
-	@tree.command(name="reload_groups", description="Reload the groups messages" \
-			+ " if the interactions does'nt work", guilds=guilds)
-	async def reload_command(ctx: Interaction):
-		await reload_groups(ctx.guild)
-
-
 # async def ping(ctx:Interaction):
 # 	await ctx.response.send_message("pong")
