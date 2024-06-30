@@ -5,8 +5,7 @@ from src.group.db_request.group import get_group
 from src.settings.variables import Group
 
 class GroupMessageView(ui.View):
-	def __init__(self, group_id: int):
-		self.group_id = group_id
+	def __init__(self):
 		super().__init__(timeout=None)
 
 	@ui.button(label="Join", style=ButtonStyle.primary, custom_id="join_button")
