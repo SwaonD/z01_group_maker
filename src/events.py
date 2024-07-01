@@ -12,7 +12,7 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 		for guild in client.guilds:
 			await tree.sync(guild=guild)
 			await reload_groups(guild)
-		LOGGER.msg(f"{client.user} - Ready Perfectly !")
+		LOGGER.msg(f"{client.user} -- Ready Perfectly !")
 
 	@client.event
 	async def on_guild_join(guild: Guild):
