@@ -16,7 +16,7 @@ async def update_embed(ctx: Interaction, message_id: int = None):
 
 	group_members_ids = get_group_members_ids(g.id)
 	embed = GroupMessageEmbed(ctx.client, g.project_name, g.leader_id,
-							  group_members_ids, g.size_limit, g.description, g.confirmed)
+					group_members_ids, g.size_limit, g.description, g.confirmed)
 	await message.edit(embed=embed)
 
 
