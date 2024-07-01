@@ -6,10 +6,11 @@ from src.settings.messages import TextMessages
 load_dotenv()
 
 BOT_TOKEN = os.getenv("Z_01_GROUP_MAKER_DISCORD_BOT_TOKEN")
-GROUP_SQL_FILE_PATH = "./data/group_data.db"
-GENERAL_LOG_FILE_PATH = "./log/general.log"
-MSG_LOG_FILE_PATH = "./log/msg.log"
-SQL_LOG_FILE_PATH = "./log/sql_request.log"
+ROOT_DIR = f"{os.path.dirname(os.path.abspath(__file__))}/../.."
+GROUP_SQL_FILE_PATH = f"{ROOT_DIR}/data/group_data.db"
+GENERAL_LOG_FILE_PATH = f"{ROOT_DIR}/log/general.log"
+MSG_LOG_FILE_PATH = f"{ROOT_DIR}/log/msg.log"
+SQL_LOG_FILE_PATH = f"{ROOT_DIR}/log/sql_request.log"
 NOTIF_MSG_TIMEOUT = 6
 
 LIST_CMD_CONF_GROUP_MAX = 5
