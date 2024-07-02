@@ -1,5 +1,4 @@
 from discord import Interaction, Member, Guild, TextChannel, app_commands
-import discord
 from discord.app_commands import CommandTree, describe
 from typing import Optional
 from src.group.commands.create_group import create_group

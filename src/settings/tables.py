@@ -1,6 +1,6 @@
 from src.utils.sql import sql_create_table, \
 	sql_insert_data, sql_get_data, sql_delete_data, sql_update_data
-from src.settings.variables import Variables as V, Group
+from src.settings.variables import Group, GROUP_SQL_FILE_PATH
 
 class BaseTable():
 	def __init__(self, table_name: str, db_file: str, columns: list[str]):
@@ -53,7 +53,7 @@ class GroupsTable(BaseTable):
 		]
 
 	def init_table(self):
-		super().__init__("groups", V.GROUP_SQL_FILE_PATH, self.columns)
+		super().__init__("groups", GROUP_SQL_FILE_PATH, self.columns)
 
 	def insert_data(self, channel_id: int, \
 			message_id: int, project_name: str, leader_id: int, \
@@ -90,7 +90,7 @@ class GroupMembersTable(BaseTable):
 		]
 
 	def init_table(self):
-		super().__init__("group_members", V.GROUP_SQL_FILE_PATH, self.columns)
+		super().__init__("group_members", GROUP_SQL_FILE_PATH, self.columns)
 
 	def insert_data(self, group_id: int, user_id: int):
 		data = {
@@ -111,7 +111,7 @@ class GuildConfigTable(BaseTable):
 		]
 
 	def init_table(self):
-		super().__init__("guild_config", V.GROUP_SQL_FILE_PATH, self.columns)
+		super().__init__("guild_config", GROUP_SQL_FILE_PATH, self.columns)
 
 	def insert_data(self, guild_id: int, group_channel_id: int):
 		data = {

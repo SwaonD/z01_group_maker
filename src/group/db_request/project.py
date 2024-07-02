@@ -12,7 +12,7 @@ def is_project(project: str) -> bool:
 	Returns:
 		bool: returns True if the project is a valid one
 	"""
-	for p in V.PROJECT_NAMES:
+	for p in V.project_names:
 		if p == project:
 			return True
 
