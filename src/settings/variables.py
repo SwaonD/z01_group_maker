@@ -25,7 +25,7 @@ LOG_MAX_LINES = 300
 MSG = TextMessages("fr") # msg language
 
 class Variables:
-	project_names = []
+	project_names: list[str] = []
 
 @dataclass
 class Group:

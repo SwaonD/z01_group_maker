@@ -1,11 +1,13 @@
-from discord import Interaction
+from discord import Interaction, app_commands
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.settings.variables import MSG
+from src.settings.variables import MSG, Variables as V
 from src.utils.discord import send_quick_response
 from src.group.db_request.project import is_project, project_exists
 from src.group.db_request.config import get_group_channel
 from src.group.message.view import GroupMessageView
 from src.group.message.embed import GroupMessageEmbed
+from fuzzywuzzy import fuzz
+from typing import List
 
 async def create_group(ctx: Interaction,
 		project_name: str, size_limit: int, description: str | None):
@@ -47,3 +49,16 @@ async def _is_input_valid(ctx: Interaction,
 		await send_quick_response(ctx, MSG.HAS_NOT_MINIMUM_SIZE)
 		return False
 	return True
+
+async def project_names_autocompletion(
+		ctx: Interaction, current: str) -> List[app_commands.Choice[str]]:
+	if not current.strip():
+		return []
+	filtered_projects = [name for name in V.project_names \
+			if current.lower() in name.lower()]
+	filtered_projects.sort(key=lambda name: \
+			fuzz.partial_ratio(current.lower(), name.lower()), reverse=True)
+	filtered_projects = filtered_projects[:10]
+	choices = [app_commands.Choice(name=project_name, value=project_name) \
+			for project_name in filtered_projects]
+	return choices
