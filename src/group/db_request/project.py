@@ -1,5 +1,5 @@
 from src.settings.tables import GROUPS_TABLE
-from src.settings.variables import PROJECT_NAMES
+from src.settings.variables import Variables as V
 from src.utils.log import LOGGER
 
 
@@ -12,8 +12,7 @@ def is_project(project: str) -> bool:
 	Returns:
 		bool: returns True if the project is a valid one
 	"""
-
-	for p in PROJECT_NAMES:
+	for p in V.PROJECT_NAMES:
 		if p == project:
 			return True
 

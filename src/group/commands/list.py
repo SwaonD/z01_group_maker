@@ -1,6 +1,6 @@
 from discord import Interaction, Embed, Colour, User, Member
 from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
-from src.settings.variables import LIST_CMD_CONF_GROUP_MAX, MSG
+from src.settings.variables import Variables as V, MSG
 from src.utils.discord import send_quick_response
 
 def _get_list_data(project_name: str | None,
@@ -26,7 +26,7 @@ def _get_list_data(project_name: str | None,
 	condition = " AND ".join(conditions)
 	if confirmed == 1:
 		condition += f" ORDER BY {GROUPS_TABLE.project_name} DESC LIMIT " \
-				+ str(LIST_CMD_CONF_GROUP_MAX)
+				+ str(V.LIST_CMD_CONF_GROUP_MAX)
 	list_group_data = GROUPS_TABLE.get_data(
 			condition, GROUPS_TABLE.channel_id, \
 			GROUPS_TABLE.message_id, GROUPS_TABLE.project_name)

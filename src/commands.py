@@ -1,11 +1,10 @@
-from discord import Interaction, Member, Guild, TextChannel, app_commands, utils
+from discord import Interaction, Member, Guild, TextChannel, app_commands
 import discord
 from discord.app_commands import CommandTree, describe
 from typing import Optional
 from src.group.commands.create_group import create_group
 from src.group.commands.list import list_projects
 from src.group.commands.config import config
-from src.init import reload_groups
 from src.group.commands.kick import kick_project_autocompletion, kick_member
 
 
@@ -36,7 +35,8 @@ def register_commands(tree: CommandTree, guilds: list[Guild]):
 	async def config_command(ctx: Interaction, group_channel: TextChannel):
 		await config(ctx, group_channel)
 
-	@tree.command(name="kick", description="Kick someone from the specified group", guilds=guilds)
+	@tree.command(name="kick", \
+			description="Kick someone from the specified group", guilds=guilds)
 	@app_commands.autocomplete(project=kick_project_autocompletion)
 	async def kick_command(ctx: Interaction, project: str, member: Member):
 		await kick_member(ctx, project=project, member=member)
