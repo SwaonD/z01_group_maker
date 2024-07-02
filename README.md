@@ -30,3 +30,13 @@ https://discord.com/oauth2/authorize?client_id=1253304421983588422
 `/config channel:#my_text_channel`
 3. **Create your first group using the project names on Zone01's website**<br>
 `/create project:ascii-art`
+
+## Commands
+- /create<br>
+	*Create a group. See the [valid group names](./data/project_names.txt).*
+- /list<br>
+	*List every groups.*
+- /kick<br>
+	*Kick a member of your group.*
+- /config<br>
+	*Admin command, it configure the channel where the group message will be sent.*
