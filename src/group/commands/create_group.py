@@ -54,7 +54,7 @@ async def _is_input_valid(ctx: Interaction,
 async def project_names_autocompletion(
 		ctx: Interaction, current: str) -> List[app_commands.Choice[str]]:
 	if not current.strip():
-		return []
+		return [app_commands.Choice(name=project_name, value=project_name) for project_name in V.project_names]
 	filtered_projects = [name for name in V.project_names \
 			if current.lower() in name.lower()]
 	filtered_projects.sort(key=lambda name: \
