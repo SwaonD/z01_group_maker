@@ -5,7 +5,7 @@ from src.utils.log import LOGGER
 from src.group.db_request.config import get_group_channel
 from src.settings.variables import MSG, Variables as V
 from src.welcome import send_welcome_message
-
+from src.admin_commands import admin_commands
 
 def register_events(client: Client, tree: app_commands.CommandTree):
 	@client.event
@@ -32,6 +32,9 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 	@client.event
 	async def on_message(message: Message):
 		if message.author.bot or message.type != MessageType.default:
+			return
+		if admin_commands(message):
+			await message.delete()
 			return
 		group_channel = await get_group_channel(message.guild)
 		if group_channel is not None and message.channel.id == group_channel.id:
