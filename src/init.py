@@ -35,7 +35,8 @@ def init():
 	GROUP_MEMBERS_TABLE.init_table()
 
 async def reload_groups(guild: Guild):
-	groups: list[Group] = GROUPS_TABLE.get_groups()
+	groups: list[Group] = GROUPS_TABLE.get_groups(
+			f"{GROUPS_TABLE.guild_id} = {guild.id}")
 	for group in groups:
 		try:
 			channel = guild.get_channel(group.channel_id)

@@ -34,6 +34,7 @@ class BaseTable():
 class GroupsTable(BaseTable):
 	def __init__(self):
 		self.id = "id"
+		self.guild_id = "guild_id"
 		self.channel_id = "channel_id"
 		self.message_id = "message_id"
 		self.project_name = "project_name"
@@ -43,6 +44,7 @@ class GroupsTable(BaseTable):
 		self.confirmed = "confirmed"
 		self.columns = [
 			f"{self.id} INTEGER PRIMARY KEY",
+			f"{self.guild_id} INTEGER",
 			f"{self.channel_id} INTEGER",
 			f"{self.message_id} INTEGER",
 			f"{self.project_name} STRING",
@@ -55,10 +57,11 @@ class GroupsTable(BaseTable):
 	def init_table(self):
 		super().__init__("groups", GROUP_SQL_FILE_PATH, self.columns)
 
-	def insert_data(self, channel_id: int, \
+	def insert_data(self, guild_id, channel_id: int, \
 			message_id: int, project_name: str, leader_id: int, \
 			size_limit: int, description: str, confirmed: int) -> int:
 		data = {
+			self.guild_id: str(guild_id),
 			self.channel_id: str(channel_id),
 			self.message_id: str(message_id),
 			self.project_name: project_name,

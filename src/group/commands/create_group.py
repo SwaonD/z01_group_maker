@@ -11,11 +11,11 @@ from typing import List
 
 async def create_group(ctx: Interaction,
 		project_name: str, size_limit: int, description: str | None):
-	if not await _is_input_valid(ctx, project_name, size_limit):
-		return
 	group_channel = await get_group_channel(ctx.guild)
 	if group_channel is None:
 		await send_quick_response(ctx, MSG.GROUP_CHANNEL_NOT_CONFIGURED)
+		return
+	if not await _is_input_valid(ctx, project_name, size_limit):
 		return
 	if description is None:
 		description = ""
@@ -31,8 +31,9 @@ async def create_group(ctx: Interaction,
 		await send_quick_response(ctx,
 			MSG.GROUP_CREATED % (project_name, message.jump_url), 10)
 	# Send the embed and get the message object
-	group_id = GROUPS_TABLE.insert_data(message.channel.id, message.id,
-			project_name, ctx.user.id, size_limit, description, confirmed)
+	group_id = GROUPS_TABLE.insert_data(ctx.guild.id, \
+			message.channel.id, message.id, project_name, \
+			ctx.user.id, size_limit, description, confirmed)
 	GROUP_MEMBERS_TABLE.insert_data(group_id, ctx.user.id)
 	# Add Group to GROUPDB and Author to the members database
 
