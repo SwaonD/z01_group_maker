@@ -15,6 +15,7 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 			await tree.sync(guild=guild)
 			await reload_groups(guild)
 			V.registered_guilds.add(guild.id)
+			LOGGER.msg(f"register commands for {guild.name} ({guild.id})")
 		LOGGER.msg(f"{client.user} -- Ready Perfectly !")
 
 	@client.event
@@ -22,8 +23,9 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 		LOGGER.msg(f"I have joined {guild.name} ({guild.id})")
 		if guild.id not in V.registered_guilds:
 			register_commands(tree, guild)
-			await tree.sync(guild=guild)
 			V.registered_guilds.add(guild.id)
+			LOGGER.msg(f"register commands for {guild.name} ({guild.id})")
+		await tree.sync(guild=guild)
 		await reload_groups(guild)
 		await send_welcome_message(guild)
 
