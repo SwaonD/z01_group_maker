@@ -56,7 +56,7 @@ async def project_names_autocompletion(
 	if not current.strip():
 		return [app_commands.Choice(name=project_name, value=project_name) for project_name in V.project_names]
 	filtered_projects = [name for name in V.project_names \
-			if current.lower() in name.lower()]
+			if current.lower() in name.lower()][:25]
 	filtered_projects.sort(key=lambda name: \
 			fuzz.partial_ratio(current.lower(), name.lower()), reverse=True)
 	filtered_projects = filtered_projects[:10]
