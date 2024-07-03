@@ -174,6 +174,37 @@ class TextMessages():
 			"en": ":x: Don't leave your group comrades !"
 		}
 
+		# Welcome message
+		s.WELCOME_TITLE = {
+			"en": "Hello Zere !"
+		}
+		s.WELCOME_DESCRIPTION = {
+			"en": """
+		This bot helps creating groups to work together !
+		:bangbang: **Before using this bot don't forget to set up a channel ID with the /config <channel_id> command !**
+		:page_facing_up: Here is a list of the commands available:
+		"""
+		}
+		s.WELCOME_CREATE_CMD = {
+			"en": "Create a group, takes as arguments the project name, a size and an optional description"
+		}
+
+		s.WELCOME_LIST_CMD = {
+			"en": "Lists every group available, arguments are optional, they are used to filter by user or project name"
+		}
+
+		s.WELCOME_STATUS_CMD = {
+			"en": "Displays the current groups you are in or the groups you created"
+		}
+
+		s.WELCOME_CONFIG_CMD = {
+			"en": "Takes as argument the channel you want the bot to send messages on"
+		}
+
+		s.WELCOME_KICK_CMD = {
+			"en": "Kicks someone from a group whose leader is you, takes as argument a project name and a user to kick"
+		}
+
 		# assign language to every dict attributes
 		for attr_name in vars(s):
 			attr_value = getattr(s, attr_name)

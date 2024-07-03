@@ -2,9 +2,9 @@ from discord import Client, app_commands, Guild, Message
 from src.init import reload_groups
 from src.commands import register_commands
 from src.utils.log import LOGGER
-from src.group.message.welcome_embed import WelcomeMessageEmbed
 from src.group.db_request.config import get_group_channel
 from src.settings.variables import MSG
+from src.welcome import send_welcome_message
 
 
 def register_events(client: Client, tree: app_commands.CommandTree):
@@ -22,7 +22,7 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 		register_commands(tree, client.guilds)
 		await tree.sync(guild=guild)
 		await reload_groups(guild)
-		await guild.channels[0].send(embed=WelcomeMessageEmbed())
+		await send_welcome_message(guild)
 
 	@client.event
 	async def on_message(message: Message):
