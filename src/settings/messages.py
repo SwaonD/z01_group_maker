@@ -176,14 +176,14 @@ class TextMessages():
 
 		# Welcome message
 		s.WELCOME_TITLE = {
-			"en": "Hello Zere !"
+			"en": "Hello There !"
 		}
 		s.WELCOME_DESCRIPTION = {
 			"en": """
-		This bot helps creating groups to work together !
-		:bangbang: **Before using this bot don't forget to set up a channel ID with the /config <channel_id> command !**
-		:page_facing_up: Here is a list of the commands available:
-		"""
+				This bot helps creating groups to work together !
+				:bangbang: **Before using this bot don't forget to set up a channel ID with the /config <channel_id> command !**
+				:page_facing_up: Here is a list of the commands available:
+				"""
 		}
 		s.WELCOME_CREATE_CMD = {
 			"en": "Create a group, takes as arguments the project name, a size and an optional description"

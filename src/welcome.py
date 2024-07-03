@@ -12,6 +12,7 @@ class WelcomeMessageEmbed(Embed):
 		self.add_field(name="/status", value=MSG.WELCOME_STATUS_CMD, inline=False)
 		self.add_field(name="/config", value=MSG.WELCOME_CONFIG_CMD, inline=False)
 		self.add_field(name="/kick", value=MSG.WELCOME_KICK_CMD, inline=False)
+		self.set_image(url="https://i.imgur.com/5aQla2a.gif")
 
 async def send_welcome_message(guild: Guild):
 	for channel in guild.channels:

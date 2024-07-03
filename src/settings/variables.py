@@ -26,6 +26,7 @@ MSG = TextMessages("fr") # msg language
 
 class Variables:
 	project_names: list[str] = []
+	registered_guilds = set()
 
 @dataclass
 class Group:

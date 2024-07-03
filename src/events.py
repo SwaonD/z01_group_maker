@@ -3,7 +3,7 @@ from src.init import reload_groups
 from src.commands import register_commands
 from src.utils.log import LOGGER
 from src.group.db_request.config import get_group_channel
-from src.settings.variables import MSG
+from src.settings.variables import MSG, Variables as V
 from src.welcome import send_welcome_message
 
 
@@ -14,13 +14,16 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 		for guild in client.guilds:
 			await tree.sync(guild=guild)
 			await reload_groups(guild)
+			V.registered_guilds.add(guild.id)
 		LOGGER.msg(f"{client.user} -- Ready Perfectly !")
 
 	@client.event
 	async def on_guild_join(guild: Guild):
 		LOGGER.msg(f"I have joined {guild.name} ({guild.id})")
-		register_commands(tree, client.guilds)
-		await tree.sync(guild=guild)
+		if guild.id not in V.registered_guilds:
+			register_commands(tree, client.guilds)
+			await tree.sync(guild=guild)
+			V.registered_guilds.add(guild.id)
 		await reload_groups(guild)
 		await send_welcome_message(guild)
 
