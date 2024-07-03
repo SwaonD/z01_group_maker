@@ -8,11 +8,11 @@ class WelcomeMessageEmbed(Embed):
 		self.description = MSG.WELCOME_DESCRIPTION
 		self.type = "rich"
 		self.add_field(name="/create", value=MSG.WELCOME_CREATE_CMD, inline=False)
-		self.add_field(name="/list", value=MSG.WELCOME_DESCRIPTION, inline=False)
+		self.add_field(name="/list", value=MSG.WELCOME_LIST_CMD, inline=False)
 		self.add_field(name="/status", value=MSG.WELCOME_STATUS_CMD, inline=False)
 		self.add_field(name="/config", value=MSG.WELCOME_CONFIG_CMD, inline=False)
 		self.add_field(name="/kick", value=MSG.WELCOME_KICK_CMD, inline=False)
-		self.set_image(url="https://i.imgur.com/5aQla2a.gif")
+		self.set_image(url="https://i.imgur.com/D8VWzWV.gif")
 
 async def send_welcome_message(guild: Guild):
 	for channel in guild.channels:
