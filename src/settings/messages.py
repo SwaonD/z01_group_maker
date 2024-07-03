@@ -1,7 +1,7 @@
 class TextMessages():
 	def __init__(s, lang):
 
-		#event on ready
+		# event on ready
 		s.CHANNEL_COMMAND_ONLY = {
 			"fr": "Seulement les commandes sont autorisées dans %s.",
 			"en": "Only commands are allowed in %s"
@@ -180,29 +180,39 @@ class TextMessages():
 		}
 		s.WELCOME_DESCRIPTION = {
 			"en": """
-		This bot helps creating groups to work together !
-		:bangbang: **Before using this bot don't forget to set up a channel ID with the /config <channel_id> command !**
-		:page_facing_up: Here is a list of the commands available:
-		"""
+					This bot helps creating groups to work together !
+					:bangbang: **Before using this bot don't forget to set up a channel with the /config <channel> command !**
+					:page_facing_up: Here is a list of the commands available:
+				""",
+			"fr": """
+					Ce bot vous aide à créer des groupes pour travailler ensemble !
+					:bangbang: **Avant d'utiliser le bot, n'oubliez pas de configurer le channel avec la commande /config <salon>
+					:page_facing_up: Voici une liste des commandes disponibles:
+   				"""
 		}
 		s.WELCOME_CREATE_CMD = {
-			"en": "Create a group, takes as arguments the project name, a size and an optional description"
+			"en": "Create a group, takes as arguments the project name, a size and an optional description",
+			"fr": "Créer un groupe, prends en argument le nom du project, une taille et une description optionnelle"
 		}
 
 		s.WELCOME_LIST_CMD = {
-			"en": "Lists every group available, arguments are optional, they are used to filter by user or project name"
+			"en": "Lists every group available, arguments are optional, they are used to filter by user or project name",
+			"fr": "Donne une liste de chaque groupe disponible, tout les arguments sont optionnels, il est possible de filtrer les projets par utiliser ou nom de projet"
 		}
 
 		s.WELCOME_STATUS_CMD = {
-			"en": "Displays the current groups you are in or the groups you created"
+			"en": "Displays the current groups you are in or the groups you created",
+			"fr": "Affiche les groupes dans lesquels vous êtes ou les groupes crées"
 		}
 
 		s.WELCOME_CONFIG_CMD = {
-			"en": "Takes as argument the channel you want the bot to send messages on"
+			"en": "Takes as argument the channel you want the bot to send messages on",
+			"fr": "Configure le channel à utiliser, prends en argument un salon"
 		}
 
 		s.WELCOME_KICK_CMD = {
-			"en": "Kicks someone from a group whose leader is you, takes as argument a project name and a user to kick"
+			"en": "Kicks someone from a group whose leader is you, takes as argument a project name and a user to kick",
+			"fr": "Exclure quelqu'un d'un group dont vous êtes chef, prends en argument le nom du projet and un utilisateur à kick"
 		}
 
 		# assign language to every dict attributes
@@ -210,4 +220,4 @@ class TextMessages():
 			attr_value = getattr(s, attr_name)
 			if isinstance(attr_value, dict):
 				setattr(s, attr_name, attr_value.get(
-					lang, attr_value.get("en")))
+						lang, attr_value.get("en")))
