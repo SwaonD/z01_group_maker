@@ -9,14 +9,16 @@ from src.init import reload_groups
 async def print_help_message(message: Message):
 	help_embed = Embed()
 	help_embed.add_field(name="!group-sql-request | !gsr", \
-			value="make a request to the group db")
+			value="make a request to the group db", inline=False)
 	help_embed.add_field(name="!reload-groups", \
-			value="reload every groups of the guild")
+			value="reload every groups of the guild", inline=False)
 	help_embed.add_field(name="!help", \
-			value="print this help message")
-	await message.channel.send(embed=help_embed)
+			value="print this help message", inline=False)
+	await message.channel.send(embed=help_embed, reference=message)
 
 async def group_sql_request(message: Message, request: str):
+	if len(request) == 0:
+		return
 	with sqlite3.connect(GROUP_SQL_FILE_PATH) as conn:
 		cursor = conn.cursor()
 		LOGGER.sql(f"from admin command: {request}")
@@ -62,6 +64,7 @@ async def admin_commands(message: Message) -> bool:
 		return False
 	parts = content.split(" ", 1)
 	command = parts[0] if parts else ""
+	parts[1] = parts[1].strip()
 	arg = parts[1] if len(parts) > 1 else ""
 	if command == "!help":
 		await print_help_message(message)

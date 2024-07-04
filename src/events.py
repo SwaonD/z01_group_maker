@@ -2,6 +2,7 @@ from discord import Client, app_commands, Guild, Message, MessageType, errors
 from src.init import reload_groups
 from src.commands import register_commands
 from src.utils.log import LOGGER
+from src.utils.discord import send_private_message
 from src.group.db_request.config import get_group_channel_id
 from src.settings.variables import MSG, Variables as V
 from src.welcome import send_welcome_message
@@ -39,10 +40,6 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 			group_channel_id = get_group_channel_id(message.guild)
 			if group_channel_id is not None \
 					and message.channel.id == group_channel_id:
-				try:
-					await message.author.send(MSG.CHANNEL_COMMAND_ONLY % \
-							(message.channel.jump_url), suppress_embeds=True)
-				except errors.Forbidden:
-					LOGGER.msg(f"Could not send message to" \
-							+ f"{message.author.name} on {message.guild.name}")
+				await send_private_message(message.author, MSG.CHANNEL_COMMAND_ONLY % \
+							(message.channel.jump_url))
 				await message.delete()
