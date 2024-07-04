@@ -10,6 +10,8 @@ def get_group_channel_id(guild: Guild) -> int | None:
 
 async def get_group_channel(guild: Guild) -> TextChannel | None:
 	group_channel_id = get_group_channel_id(guild)
+	if group_channel_id is None:
+		return None
 	group_channel: TextChannel = guild.get_channel(group_channel_id)
 	if group_channel is None:
 		group_channel: TextChannel = \

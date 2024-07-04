@@ -1,6 +1,9 @@
 import sqlite3
 from src.utils.log import LOGGER
 
+def sql_escape(s: str):
+	return s.replace("'", "''")
+
 def sql_create_table(file: str, name: str, *columns: str):
 	variables = ""
 	request = ""
@@ -16,7 +19,7 @@ def sql_create_table(file: str, name: str, *columns: str):
 		conn.commit()
 
 def sql_get_data(file: str,
-				 table_name: str, condition: str = "", *columns: str) -> list[tuple]:
+		table_name: str, condition: str = "", *columns: str) -> list[tuple]:
 	columns_str = ""
 	request = ""
 	for i, col in enumerate(columns):
@@ -41,8 +44,8 @@ def sql_insert_data(file: str, table_name: str, data: dict[str:str]) -> int:
 	returns INTEGER PRIMARY KEY if it exists
 	"""
 	keys_str = ", ".join(data.keys())
-	values = [str(value).replace("'", "''") for value in data.values()]
-	values_str = ", ".join(f"'{value}'" for value in values)
+	values_str = [f"'{sql_escape(value)}'" for value in data.values()]
+	values_str = ", ".join(values_str)
 	request = f"INSERT INTO {table_name} ({keys_str}) VALUES ({values_str})"
 	with sqlite3.connect(file) as conn:
 		cursor = conn.cursor()

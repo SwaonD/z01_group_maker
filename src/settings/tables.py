@@ -8,7 +8,7 @@ class BaseTable():
 		self.file = db_file
 		sql_create_table(self.file, self.name, *columns)
 
-	def insert_data(self, data: dict) -> int:
+	def insert_data(self, data: dict[str:str]) -> int:
 		return sql_insert_data(self.file, self.name, data)
 
 	def get_data(self, condition: str = "", *columns: str) -> list[tuple]:
@@ -97,8 +97,8 @@ class GroupMembersTable(BaseTable):
 
 	def insert_data(self, group_id: int, user_id: int):
 		data = {
-			self.group_id: group_id,
-			self.user_id: user_id
+			self.group_id: str(group_id),
+			self.user_id: str(user_id)
 		}
 		super().insert_data(data)
 
@@ -118,8 +118,8 @@ class GuildConfigTable(BaseTable):
 
 	def insert_data(self, guild_id: int, group_channel_id: int):
 		data = {
-			self.guild_id: guild_id,
-			self.group_channel_id: group_channel_id
+			self.guild_id: str(guild_id),
+			self.group_channel_id: str(group_channel_id)
 		}
 		super().insert_data(data)
 

@@ -2,6 +2,7 @@ from discord import Interaction, Embed, Colour, User, Member
 from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
 from src.settings.variables import MSG, LIST_CMD_CONF_GROUP_MAX
 from src.utils.discord import send_quick_response
+from src.utils.sql import sql_escape
 
 def _get_list_data(project_name: str | None,
 		user: User | Member | None, confirmed: int = 0) -> tuple[tuple[any]]:
@@ -19,7 +20,8 @@ def _get_list_data(project_name: str | None,
 					f"{GROUPS_TABLE.id} IN {str(tuple(user_group_ids_str))}")
 
 	if project_name is not None:
-		conditions.append(f"{GROUPS_TABLE.project_name} = '{project_name}'")
+		conditions.append(
+			f"{GROUPS_TABLE.project_name} = '{sql_escape(project_name)}'")
 
 	conditions.append(f"{GROUPS_TABLE.confirmed} = {confirmed}")
 
