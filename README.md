@@ -10,7 +10,7 @@ This bot was made to help our colleagues have a better opportunity to find group
 1. **Create your application and get your discord bot token**<br>
 https://discord.com/developers/applications
 
-2. **Add your token in a .env file at the root of the directory**<br>
+2. **Add the following line with your token to a file called .env at the root of the directory**<br>
 ```sh
 Z_01_GROUP_MAKER_DISCORD_BOT_TOKEN="<DISCORD_BOT_TOKEN>"
 ```
@@ -23,7 +23,7 @@ python3 -m pip install -r requirements.txt
 python3 main.py
 ```
 ### Dev Tools
-- You can add to your .env file a variable which store the discord ids of the devs to get access of advanced commands.
+- You can also add to your .env file a variable which store the discord ids of the devs to get access of advanced commands.
 Here is the format:
 ```sh
 Z_01_GROUP_MAKER_DEVS_IDS=xxxxxxxxxxxxxxx,xxxxxxxxxxxxxxx,xxxxxxxxxxxxxxx
