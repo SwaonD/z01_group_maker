@@ -13,4 +13,4 @@ async def send_private_message(member: Member, \
 		await member.send(msg, suppress_embeds=True)
 	except errors.Forbidden:
 		LOGGER.msg(f"Could not send message to" \
-			+ f"{member.name} on {member.guild.name}")
+			+ f"{member.name}")
