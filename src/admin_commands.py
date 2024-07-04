@@ -64,8 +64,7 @@ async def admin_commands(message: Message) -> bool:
 		return False
 	parts = content.split(" ", 1)
 	command = parts[0] if parts else ""
-	parts[1] = parts[1].strip()
-	arg = parts[1] if len(parts) > 1 else ""
+	arg = parts[1].strip() if len(parts) > 1 else ""
 	if command == "!help":
 		await print_help_message(message)
 		return True
