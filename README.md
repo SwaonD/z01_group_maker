@@ -22,6 +22,13 @@ python3 -m pip install -r requirements.txt
 ```sh
 python3 main.py
 ```
+### Dev Tools
+- You can add to your .env file a variable which store the discord ids of the devs to get access of advanced commands.
+Here is the format:
+```sh
+Z_01_GROUP_MAKER_DEVS_IDS=xxxxxxxxxxxxxxx,xxxxxxxxxxxxxxx,xxxxxxxxxxxxxxx
+```
+To see which commands are available, send `!help`.
 
 ## Quick Start
 1. **Install the bot on your server**<br>
@@ -36,6 +43,8 @@ https://discord.com/oauth2/authorize?client_id=1253304421983588422
 	*Create a group. See the [valid group names](./data/project_names.txt).*
 - /list<br>
 	*List every groups.*
+- /status<br>
+	*A shortcut of /list but for the current user*
 - /kick<br>
 	*Kick a member of your group.*
 - /config<br>
