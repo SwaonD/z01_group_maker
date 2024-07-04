@@ -2,3 +2,5 @@ discord.py
 sqlalchemy
 python-dotenv
 fuzzywuzzy
+levenshtein
+tabulate

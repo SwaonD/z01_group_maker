@@ -33,8 +33,7 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 	async def on_message(message: Message):
 		if message.author.bot or message.type != MessageType.default:
 			return
-		if admin_commands(message):
-			await message.delete()
+		if await admin_commands(message):
 			return
 		group_channel = await get_group_channel(message.guild)
 		if group_channel is not None and message.channel.id == group_channel.id:
