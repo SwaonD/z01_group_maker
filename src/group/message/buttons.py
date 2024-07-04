@@ -2,7 +2,7 @@ from discord import Interaction
 from src.group.db_request.group import is_member, \
 	get_group_members_ids, get_group
 from src.group.message.core import update_embed, delete_group
-from src.utils.discord import send_quick_response
+from src.utils.discord import send_quick_response, send_private_message
 from src.utils.log import LOGGER
 from src.group.message.modal import ConfirmDeleteGroup
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
@@ -30,7 +30,7 @@ async def join_group(ctx: Interaction, group: Group):
 		(ctx.user.mention, group.project_name, ctx.message.jump_url)
 	if group_len + 1 == group.size_limit:
 		message_to_leader += "\n" + MSG.GROUP_IS_FULL_TO_LEADER
-	await author.send(message_to_leader)
+	await send_private_message(author, message_to_leader)
 
 	await update_embed(ctx)
 	await send_quick_response(ctx, MSG.USER_JOIN_GROUP % (group.project_name))
@@ -69,10 +69,10 @@ async def leave_group(ctx: Interaction, group: Group):
 	leader = ctx.client.get_user(group.leader_id)
 	if leader is None:
 		leader = await ctx.client.fetch_user(group.leader_id)
-	await leader.send(MSG.USER_LEFT_GROUP_TO_LEADER % \
+	await send_private_message(leader, MSG.USER_LEFT_GROUP_TO_LEADER % \
 			(ctx.user.mention, group.project_name, ctx.message.jump_url))
 	if isNewLeader:
-		await leader.send(MSG.NEW_GROUP_LEADER % \
+		await send_private_message(leader, MSG.NEW_GROUP_LEADER % \
 						(group.project_name, ctx.message.jump_url))
 
 	await update_embed(ctx)
@@ -98,8 +98,9 @@ async def confirm_group(ctx: Interaction, group: Group):
 			member = ctx.client.get_user(member_id)
 			if member is None:
 				member = ctx.client.fetch_user(member_id)
-			await member.send(MSG.CONFIRM_GROUP_TO_MEMBERS %
+			await send_private_message(member, MSG.CONFIRM_GROUP_TO_MEMBERS %
 					(leader.mention, group.project_name, ctx.message.jump_url))
+   
 	data = {}
 	status = ""
 	if group.confirmed == 1:
