@@ -1,7 +1,7 @@
 import sqlite3
 from tabulate import tabulate
 from io import BytesIO
-from discord import Message, User, Member, File
+from discord import Message, User, Member, File, Guild
 from src.utils.log import LOGGER
 from src.settings.variables import GROUP_SQL_FILE_PATH
 from src.init import reload_groups
@@ -28,6 +28,15 @@ async def group_sql_request(message: Message, request: str):
 		await message.channel.send("request sent with success", \
 				reference=message, mention_author=False)
 
+async def force_reload_groups(message: Message):
+	if message.guild is not None:
+		await reload_groups(message.guild)
+		await message.channel.send("Groups reloaded with success", \
+				reference=message, mention_author=False)
+	else:
+		await message.channel.send("Reload groups failed, no guild found", \
+				reference=message, mention_author=False)
+
 def is_admin(author: User | Member):
 	devs_ids = [291563156159856641, 1031330570107629650]
 	if author.id in devs_ids:
@@ -47,9 +56,7 @@ async def admin_commands(message: Message) -> bool:
 	if command == "!group-sql-request":
 		await group_sql_request(message, arg)
 		return True
-	# if command == "!reload-groups":
-	# 	await reload_groups(message.guild)
-	# 	await message.channel.send("Groups reloaded with success", \
-	# 			reference=message, mention_author=False)
-	# 	return True
+	if command == "!reload-groups":
+		await force_reload_groups(message)
+		return True
 	return False
