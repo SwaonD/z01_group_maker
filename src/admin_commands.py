@@ -1,9 +1,10 @@
 import sqlite3
+import os
 from tabulate import tabulate
 from io import BytesIO
 from discord import Message, User, Member, File, Embed
 from src.utils.log import LOGGER
-from src.settings.variables import GROUP_SQL_FILE_PATH
+from src.settings.variables import GROUP_SQL_FILE_PATH, DEVS_IDS_STR
 from src.init import reload_groups
 
 async def print_help_message(message: Message):
@@ -14,7 +15,8 @@ async def print_help_message(message: Message):
 			value="reload every groups of the guild", inline=False)
 	help_embed.add_field(name="!help", \
 			value="print this help message", inline=False)
-	await message.channel.send(embed=help_embed, reference=message)
+	await message.channel.send(
+			embed=help_embed, reference=message, mention_author=False)
 
 async def group_sql_request(message: Message, request: str):
 	if len(request) == 0:
@@ -50,7 +52,10 @@ async def force_reload_groups(message: Message):
 				reference=message, mention_author=False)
 
 def is_admin(author: User | Member):
-	devs_ids = [291563156159856641, 1031330570107629650]
+	if DEVS_IDS_STR is not None:
+		devs_ids = [int(x) for x in DEVS_IDS_STR.split(',')]
+	else:
+		devs_ids = []
 	if author.id in devs_ids:
 		return True
 	return False

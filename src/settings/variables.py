@@ -23,6 +23,8 @@ GROUP_MAX_SIZE = 20
 
 NOTIF_MSG_TIMEOUT = 6
 LOG_MAX_LINES = 300
+DEVS_IDS_STR = os.getenv("Z_01_GROUP_MAKER_DEVS_IDS")
+# format: Z_01_GROUP_MAKER_DEVS_IDS=xxxxxxxxxxxxx,xxxxxxxxxxxxx,xxxxxxxxxxxxx
 
 MSG = TextMessages("fr") # msg language
 
