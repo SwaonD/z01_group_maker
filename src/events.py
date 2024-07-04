@@ -35,12 +35,14 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 			return
 		if await admin_commands(message):
 			return
-		group_channel_id = get_group_channel_id(message.guild)
-		if group_channel_id is not None and message.channel.id == group_channel_id:
-			try:
-				await message.author.send(MSG.CHANNEL_COMMAND_ONLY % \
-						(message.channel.jump_url), suppress_embeds=True)
-			except errors.Forbidden:
-				LOGGER.msg(f"Could not send message to {message.author.name}" \
-						+ f" on {message.guild.name}")
-			await message.delete()
+		if message.guild is not None:
+			group_channel_id = get_group_channel_id(message.guild)
+			if group_channel_id is not None \
+					and message.channel.id == group_channel_id:
+				try:
+					await message.author.send(MSG.CHANNEL_COMMAND_ONLY % \
+							(message.channel.jump_url), suppress_embeds=True)
+				except errors.Forbidden:
+					LOGGER.msg(f"Could not send message to" \
+							+ f"{message.author.name} on {message.guild.name}")
+				await message.delete()
