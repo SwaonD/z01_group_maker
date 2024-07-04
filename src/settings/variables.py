@@ -31,6 +31,7 @@ class Variables:
 @dataclass
 class Group:
 	id: int
+	guild_id: int
 	channel_id: int
 	message_id: int
 	project_name: str
