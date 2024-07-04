@@ -1,6 +1,7 @@
 from discord import Interaction, app_commands
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.settings.variables import MSG, Variables as V
+from src.settings.variables import MSG, \
+		Variables as V, GROUP_MIN_SIZE, GROUP_MAX_SIZE
 from src.utils.discord import send_quick_response
 from src.group.db_request.project import is_project, project_exists
 from src.group.db_request.config import get_group_channel
@@ -46,8 +47,12 @@ async def _is_input_valid(ctx: Interaction,
 	if project_exists(project_name, ctx.user.id) is True:
 		await send_quick_response(ctx, MSG.GROUP_ALREADY_EXISTS)
 		return False
-	if size_limit < 2:
-		await send_quick_response(ctx, MSG.HAS_NOT_MINIMUM_SIZE)
+	if size_limit < GROUP_MIN_SIZE:
+		await send_quick_response(ctx, MSG.GROUP_HAS_NOT_MINIMUM_SIZE)
+		return False
+	if size_limit > GROUP_MAX_SIZE:
+		await send_quick_response(ctx, \
+				MSG.GROUP_HAS_MAXIMUM_SIZE % (GROUP_MAX_SIZE))
 		return False
 	return True
 

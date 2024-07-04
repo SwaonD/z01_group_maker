@@ -20,9 +20,13 @@ class TextMessages():
 			"fr": ":x: Tu as déjà crée un group pour ce projet !",
 			"en": ":x: You already created a group for this project!"
 		}
-		s.HAS_NOT_MINIMUM_SIZE = {
-			"fr": ":x: La taille limite doit être supérieure à 1 !",
-			"en": ":x: The size limit must be upper than 1!"
+		s.GROUP_HAS_NOT_MINIMUM_SIZE = {
+			"fr": ":x: La taille limite du groupe doit être supérieure à 1 !",
+			"en": ":x: The size limit of the group must be upper than 1!"
+		}
+		s.GROUP_HAS_MAXIMUM_SIZE = {
+			"fr": ":x: La taille limite du groupe est de %s !",
+			"en": ":x: The size limit of the group is %s !"
 		}
 		s.GROUP_CREATED = {
 			"fr": "Le groupe **%s** a été créé. %s",

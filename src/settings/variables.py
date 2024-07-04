@@ -16,10 +16,12 @@ GENERAL_LOG_FILE_PATH = f"{LOG_DIR}/general.log"
 MSG_LOG_FILE_PATH = f"{LOG_DIR}/msg.log"
 SQL_LOG_FILE_PATH = f"{LOG_DIR}/sql_request.log"
 
+
+LIST_CMD_CONF_GROUP_MAX = 5 # max confirmated groups printed by the list cmd
+GROUP_MIN_SIZE = 2
+GROUP_MAX_SIZE = 20
+
 NOTIF_MSG_TIMEOUT = 6
-
-LIST_CMD_CONF_GROUP_MAX = 5
-
 LOG_MAX_LINES = 300
 
 MSG = TextMessages("fr") # msg language

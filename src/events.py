@@ -8,6 +8,20 @@ from src.settings.variables import MSG, Variables as V
 from src.welcome import send_welcome_message
 from src.admin_commands import admin_commands
 
+
+async def handle_message_in_group_channel(message: Message):
+	if message.guild is None:
+		return
+	group_channel_id = get_group_channel_id(message.guild)
+	if group_channel_id is not None and message.channel.id == group_channel_id:
+		try:
+			if not message.author.bot:
+				await send_private_message(message.author, \
+						MSG.CHANNEL_COMMAND_ONLY % (message.channel.jump_url))
+			await message.delete()
+		except errors.Forbidden:
+			LOGGER.msg(f"Could not delete message {message.jump_url}.")
+
 def register_events(client: Client, tree: app_commands.CommandTree):
 	@client.event
 	async def on_ready():
@@ -32,14 +46,8 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 
 	@client.event
 	async def on_message(message: Message):
-		if message.author.bot or message.type != MessageType.default:
+		if message.author == client.user:
 			return
 		if await admin_commands(message):
 			return
-		if message.guild is not None:
-			group_channel_id = get_group_channel_id(message.guild)
-			if group_channel_id is not None \
-					and message.channel.id == group_channel_id:
-				await send_private_message(message.author, MSG.CHANNEL_COMMAND_ONLY % \
-							(message.channel.jump_url))
-				await message.delete()
+		await handle_message_in_group_channel(message)
