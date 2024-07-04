@@ -1,4 +1,4 @@
-from discord import Client, app_commands, Guild, Message, MessageType
+from discord import Client, app_commands, Guild, Message, MessageType, errors
 from src.init import reload_groups
 from src.commands import register_commands
 from src.utils.log import LOGGER
@@ -35,6 +35,10 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 			return
 		group_channel = await get_group_channel(message.guild)
 		if group_channel is not None and message.channel.id == group_channel.id:
-			await message.author.send(MSG.CHANNEL_COMMAND_ONLY % \
-					(message.channel.jump_url), suppress_embeds=True)
+			try:
+				await message.author.send(MSG.CHANNEL_COMMAND_ONLY % \
+						(message.channel.jump_url), suppress_embeds=True)
+			except errors.Forbidden:
+				LOGGER.msg(f"Could not send message to {message.author.name}" \
+						+ f" on {message.guild.name}")
 			await message.delete()
