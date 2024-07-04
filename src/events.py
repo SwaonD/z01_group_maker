@@ -2,7 +2,7 @@ from discord import Client, app_commands, Guild, Message, MessageType, errors
 from src.init import reload_groups
 from src.commands import register_commands
 from src.utils.log import LOGGER
-from src.group.db_request.config import get_group_channel
+from src.group.db_request.config import get_group_channel_id
 from src.settings.variables import MSG, Variables as V
 from src.welcome import send_welcome_message
 from src.admin_commands import admin_commands
@@ -35,8 +35,8 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 			return
 		if await admin_commands(message):
 			return
-		group_channel = await get_group_channel(message.guild)
-		if group_channel is not None and message.channel.id == group_channel.id:
+		group_channel_id = get_group_channel_id(message.guild)
+		if group_channel_id is not None and message.channel.id == group_channel_id:
 			try:
 				await message.author.send(MSG.CHANNEL_COMMAND_ONLY % \
 						(message.channel.jump_url), suppress_embeds=True)
