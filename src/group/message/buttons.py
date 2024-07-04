@@ -93,14 +93,8 @@ async def confirm_group(ctx: Interaction, group: Group):
 	leader = ctx.client.get_user(group.leader_id)
 	if leader is None:
 		leader = ctx.client.fetch_user(group.leader_id)
-	for member_id in group_members_ids:
-		if member_id != group.leader_id:
-			member = ctx.client.get_user(member_id)
-			if member is None:
-				member = ctx.client.fetch_user(member_id)
-			await send_private_message(member, MSG.CONFIRM_GROUP_TO_MEMBERS %
-					(leader.mention, group.project_name, ctx.message.jump_url))
-   
+
+
 	data = {}
 	status = ""
 	if group.confirmed == 1:
@@ -115,6 +109,16 @@ async def confirm_group(ctx: Interaction, group: Group):
 		status = MSG.CONFIRM_GROUP_STATUS_CONFIRMED
 	GROUPS_TABLE.update_data(
 		data, f"{GROUPS_TABLE.message_id} = {group.message_id}")
+
+	for member_id in group_members_ids:
+		if member_id != group.leader_id:
+			member = ctx.client.get_user(member_id)
+			if member is None and data[GROUPS_TABLE.confirmed] == 1:
+				member = ctx.client.fetch_user(member_id)
+			await send_private_message(member, MSG.CONFIRM_GROUP_TO_MEMBERS %
+					(leader.mention, group.project_name, ctx.message.jump_url))
+ 
+ 
 	await update_embed(ctx)
 	await send_quick_response(ctx, MSG.CONFIRM_GROUP %
 							  (status, group.project_name))
