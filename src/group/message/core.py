@@ -13,11 +13,13 @@ async def update_embed(ctx: Interaction, message_id: int = None):
 	else:
 		g: Group = get_group(ctx.message.id)
 		message = ctx.message
-
-	group_members_ids = get_group_members_ids(g.id)
-	embed = GroupMessageEmbed(ctx.client, g.project_name, g.leader_id,
+	if g is not None:
+		group_members_ids = get_group_members_ids(g.id)
+		embed = GroupMessageEmbed(ctx.client, g.project_name, g.leader_id,
 					group_members_ids, g.size_limit, g.description, g.confirmed)
-	await message.edit(embed=embed)
+		await message.edit(embed=embed)
+	else:
+		LOGGER.msg("Failed to update embed, Group not found.")
 
 
 async def delete_group(ctx: Interaction, group: Group, members_ids: list[int]):

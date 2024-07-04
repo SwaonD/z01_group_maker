@@ -1,7 +1,7 @@
 from discord import Interaction, app_commands
 from src.settings.tables import GROUP_MEMBERS_TABLE, GROUPS_TABLE
-from src.settings.variables import MSG, \
-		Variables as V, GROUP_MIN_SIZE, GROUP_MAX_SIZE
+from src.settings.variables import MSG, Variables as V, \
+		GROUP_MIN_SIZE, GROUP_MAX_SIZE, GROUP_DESCRIPTION_MAX_SIZE
 from src.utils.discord import send_quick_response
 from src.group.db_request.project import is_project, project_exists
 from src.group.db_request.config import get_group_channel
@@ -16,7 +16,7 @@ async def create_group(ctx: Interaction,
 	if group_channel is None:
 		await send_quick_response(ctx, MSG.GROUP_CHANNEL_NOT_CONFIGURED)
 		return
-	if not await _is_input_valid(ctx, project_name, size_limit):
+	if not await _is_input_valid(ctx, project_name, size_limit, description):
 		return
 	if description is None:
 		description = ""
@@ -39,7 +39,7 @@ async def create_group(ctx: Interaction,
 	# Add Group to GROUPDB and Author to the members database
 
 async def _is_input_valid(ctx: Interaction,
-		project_name: str, size_limit: int) -> bool:
+		project_name: str, size_limit: int, description: str | None) -> bool:
 	if is_project(project_name) is False:
 		await send_quick_response(ctx,
 				MSG.PROJECTS_DOES_NOT_EXISTS % (project_name))
@@ -48,11 +48,15 @@ async def _is_input_valid(ctx: Interaction,
 		await send_quick_response(ctx, MSG.GROUP_ALREADY_EXISTS)
 		return False
 	if size_limit < GROUP_MIN_SIZE:
-		await send_quick_response(ctx, MSG.GROUP_HAS_NOT_MINIMUM_SIZE)
+		await send_quick_response(ctx, MSG.GROUP_HAS_NOT_MIN_SIZE)
 		return False
 	if size_limit > GROUP_MAX_SIZE:
 		await send_quick_response(ctx, \
-				MSG.GROUP_HAS_MAXIMUM_SIZE % (GROUP_MAX_SIZE))
+				MSG.GROUP_OVER_MAX_SIZE % (GROUP_MAX_SIZE))
+		return False
+	if len(description) > GROUP_DESCRIPTION_MAX_SIZE or len(description) > 4096:
+		await send_quick_response(ctx, MSG.GROUP_DESCRIPTION_OVER_MAX_CHARS % \
+				(GROUP_DESCRIPTION_MAX_SIZE))
 		return False
 	return True
 

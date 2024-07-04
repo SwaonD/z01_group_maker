@@ -23,6 +23,7 @@ SQL_LOG_FILE_PATH = f"{LOG_DIR}/sql_request.log"
 LIST_CMD_CONF_GROUP_MAX = 5 # max confirmated groups printed by the list cmd
 GROUP_MIN_SIZE = 2
 GROUP_MAX_SIZE = 20
+GROUP_DESCRIPTION_MAX_SIZE = 400 # max chars, currently limited by discord to 4096
 
 # GENERAL CONFIGS
 NOTIF_MSG_TIMEOUT = 6
