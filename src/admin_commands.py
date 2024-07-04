@@ -6,6 +6,14 @@ from src.utils.log import LOGGER
 from src.settings.variables import GROUP_SQL_FILE_PATH
 from src.init import reload_groups
 
+async def print_help_message(message: Message):
+	help_message = """
+	!help							- print this help message
+	!group-sql-request | !sql		- make a request to the group db
+	!reload-groups					- reload every groups of the guild
+	"""
+	await message.channel.send(help_message)
+
 async def group_sql_request(message: Message, request: str):
 	with sqlite3.connect(GROUP_SQL_FILE_PATH) as conn:
 		cursor = conn.cursor()
@@ -53,7 +61,10 @@ async def admin_commands(message: Message) -> bool:
 	parts = content.split(" ", 1)
 	command = parts[0] if parts else ""
 	arg = parts[1] if len(parts) > 1 else ""
-	if command == "!group-sql-request":
+	if command == "!help":
+		await print_help_message(message)
+		return True
+	if command == "!group-sql-request" or command == "!sql":
 		await group_sql_request(message, arg)
 		return True
 	if command == "!reload-groups":
