@@ -8,7 +8,7 @@ from src.init import reload_groups
 
 async def print_help_message(message: Message):
 	help_embed = Embed()
-	help_embed.add_field(name="!group-sql-request | !sql", \
+	help_embed.add_field(name="!group-sql-request | !gsr", \
 			value="make a request to the group db")
 	help_embed.add_field(name="!reload-groups", \
 			value="reload every groups of the guild")
@@ -66,7 +66,7 @@ async def admin_commands(message: Message) -> bool:
 	if command == "!help":
 		await print_help_message(message)
 		return True
-	if command == "!group-sql-request" or command == "!sql":
+	if command == "!group-sql-request" or command == "!gsr":
 		await group_sql_request(message, arg)
 		return True
 	if command == "!reload-groups":
