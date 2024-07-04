@@ -1,18 +1,20 @@
 import sqlite3
 from tabulate import tabulate
 from io import BytesIO
-from discord import Message, User, Member, File, Guild
+from discord import Message, User, Member, File, Embed
 from src.utils.log import LOGGER
 from src.settings.variables import GROUP_SQL_FILE_PATH
 from src.init import reload_groups
 
 async def print_help_message(message: Message):
-	help_message = """
-	!help							- print this help message
-	!group-sql-request | !sql		- make a request to the group db
-	!reload-groups					- reload every groups of the guild
-	"""
-	await message.channel.send(help_message)
+	help_embed = Embed()
+	help_embed.add_field(name="!group-sql-request | !sql", \
+			value="make a request to the group db")
+	help_embed.add_field(name="!reload-groups", \
+			value="reload every groups of the guild")
+	help_embed.add_field(name="!help", \
+			value="print this help message")
+	await message.channel.send(embed=help_embed)
 
 async def group_sql_request(message: Message, request: str):
 	with sqlite3.connect(GROUP_SQL_FILE_PATH) as conn:
