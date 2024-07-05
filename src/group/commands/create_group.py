@@ -54,7 +54,8 @@ async def _is_input_valid(ctx: Interaction,
 		await send_quick_response(ctx, \
 				MSG.GROUP_OVER_MAX_SIZE % (GROUP_MAX_SIZE))
 		return False
-	if len(description) > GROUP_DESCRIPTION_MAX_SIZE or len(description) > 4096:
+	if description is not None and (len(description) > 4096 or \
+			len(description) > GROUP_DESCRIPTION_MAX_SIZE):
 		await send_quick_response(ctx, MSG.GROUP_DESCRIPTION_OVER_MAX_CHARS % \
 				(GROUP_DESCRIPTION_MAX_SIZE))
 		return False
