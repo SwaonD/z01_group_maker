@@ -1,4 +1,4 @@
-from discord import Client, app_commands, Guild, Message, MessageType, errors
+from discord import Client, app_commands, Guild, Message, errors
 from src.init import reload_groups
 from src.commands import register_commands
 from src.utils.log import LOGGER

@@ -1,6 +1,5 @@
 from discord import Interaction, Member
-from src.group.db_request.group import is_member, \
-	get_group_members_ids, get_group
+from src.group.db_request.group import is_member, get_group_members_ids
 from src.group.message.core import update_embed, delete_group
 from src.utils.discord import send_quick_response, send_private_message
 from src.utils.log import LOGGER
