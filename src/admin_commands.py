@@ -1,19 +1,26 @@
 import sqlite3
-import os
 from tabulate import tabulate
 from io import BytesIO
-from discord import Message, User, Member, File, Embed
+from discord import Message, User, Member, File, Embed, Client
 from src.utils.log import LOGGER
 from src.settings.variables import GROUP_SQL_FILE_PATH, DEVS_IDS_STR
 from src.init import reload_groups
 
+ADMIN_CMD_SQL_REQUEST = "sql-request"
+ADMIN_CMD_SQL_REQUEST_ALT = "sql"
+ADMIN_CMD_RELOAD_GROUPS = "reload-groups"
+ADMIN_CMD_HELP = "help"
+
 async def print_help_message(message: Message):
 	help_embed = Embed()
-	help_embed.add_field(name="!group-sql-request | !gsr", \
+	help_embed.add_field(
+			name=ADMIN_CMD_SQL_REQUEST + "  |  " + ADMIN_CMD_SQL_REQUEST_ALT,
 			value="make a request to the group db", inline=False)
-	help_embed.add_field(name="!reload-groups", \
+	help_embed.add_field(
+			name=ADMIN_CMD_RELOAD_GROUPS,
 			value="reload every groups of the guild", inline=False)
-	help_embed.add_field(name="!help", \
+	help_embed.add_field(
+			name=ADMIN_CMD_HELP,
 			value="print this help message", inline=False)
 	await message.channel.send(
 			embed=help_embed, reference=message, mention_author=False)
@@ -60,23 +67,25 @@ def is_admin(author: User | Member):
 		return True
 	return False
 
-async def admin_commands(message: Message) -> bool:
+async def admin_commands(client: Client, message: Message) -> bool:
 	"""
 	return whether the message is an admin command
 	"""
-	content = message.content.strip()
-	if not content or not is_admin(message.author):
+	if not message.content or not is_admin(message.author):
 		return False
-	parts = content.split(" ", 1)
-	command = parts[0] if parts else ""
-	arg = parts[1].strip() if len(parts) > 1 else ""
-	if command == "!help":
+	parts = message.content.split(None, 2)
+	mention = parts[0] if parts else ""
+	if mention != client.user.mention:
+		return False
+	cmd = parts[1] if len(parts) > 1 else ""
+	arg = parts[2] if len(parts) > 2 else ""
+	if cmd == ADMIN_CMD_HELP:
 		await print_help_message(message)
 		return True
-	if command == "!group-sql-request" or command == "!gsr":
+	if cmd == ADMIN_CMD_SQL_REQUEST or cmd == ADMIN_CMD_SQL_REQUEST_ALT:
 		await group_sql_request(message, arg)
 		return True
-	if command == "!reload-groups":
+	if cmd == ADMIN_CMD_RELOAD_GROUPS:
 		await force_reload_groups(message)
 		return True
 	return False

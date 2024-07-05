@@ -48,6 +48,6 @@ def register_events(client: Client, tree: app_commands.CommandTree):
 	async def on_message(message: Message):
 		if message.author == client.user:
 			return
-		if await admin_commands(message):
+		if await admin_commands(client, message):
 			return
 		await handle_message_in_group_channel(message)

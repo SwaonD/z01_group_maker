@@ -28,7 +28,8 @@ Here is the format:
 ```sh
 Z_01_GROUP_MAKER_DEVS_IDS=xxxxxxxxxxxxxxx,xxxxxxxxxxxxxxx,xxxxxxxxxxxxxxx
 ```
-To see which commands are available, send `!help`.
+To see which commands are available:<br>
+`@MyBot help`.
 
 ## Quick Start
 1. **Install the bot on your server**<br>
