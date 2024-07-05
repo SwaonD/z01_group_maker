@@ -72,8 +72,8 @@ class TextMessages():
 			"en": "%s joined your group **%s**! %s"
 		}
 		s.GROUP_IS_FULL_TO_LEADER = {  # 2
-			"fr": "Vous êtes maintenant au complet !",
-			"en": "Your group is now full!"
+			"fr": "Vous êtes maintenant au complet ! Tu peux maintenant confirmer le groupe pour notifier les autres membres.",
+			"en": "Your group is now full! You can now confirm it to notify the other members."
 		}
 		s.USER_JOIN_GROUP = {
 			"fr": "Tu as rejoins **%s**",
@@ -148,8 +148,12 @@ class TextMessages():
 		}
 
 		s.NOT_IN_GROUP = {
-			"fr": ":x: de quoi je me mèles ?",
+			"fr": ":x: De quoi je me mèles ?",
 			"en": ":x: You are not part of this group!"
+		}
+		s.GROUP_NOT_FOUND = {
+			"fr": ":x: Aucun groupe trouvé !",
+			"en": ":x: Group not found!"
 		}
 
 		s.GROUP_CHANNEL_CONFIGURED = {
@@ -163,13 +167,13 @@ class TextMessages():
 
 		# Kick messages
 		s.MEMBER_KICKED_CHANNEL = {
-			"fr": "%s a exclu %s du groupe %s",
-			"en": "%s kicked %s from %s"
+			"fr": "%s a bien été exclu du groupe **%s**",
+			"en": "%s has been kicked from **%s**"
 		}
 
 		s.MEMBER_KICKED_PM = {
-			"fr": "%s vous a exclus du groupe %s",
-			"en": "%s kicked you from %s"
+			"fr": "%s vous a exclu du groupe **%s**",
+			"en": "%s kicked you from **%s**"
 		}
 
 		s.NOT_LEADER = {
