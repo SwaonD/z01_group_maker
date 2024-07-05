@@ -11,19 +11,23 @@ class GroupMessageView(ui.View):
 	@ui.button(label="Join", style=ButtonStyle.primary, custom_id="join_button")
 	async def join_button_callback(self, ctx: Interaction, button: Button):
 		group: Group = get_group(ctx.message.id)
-		await join_group(ctx, group)
+		if group:
+			await join_group(ctx, group)
 
 	@ui.button(label="Leave", style=ButtonStyle.secondary, custom_id="leave_button")
 	async def leave_button_callback(self, ctx: Interaction, button: Button):
 		group: Group = get_group(ctx.message.id)
-		await leave_group(ctx, group)
+		if group:
+			await leave_group(ctx, group)
 
 	@ui.button(label="Confirm", style=ButtonStyle.success, custom_id="confirm_button")
 	async def lock_button_callback(self, ctx: Interaction, button: Button):
 		group: Group = get_group(ctx.message.id)
-		await confirm_group(ctx, group)
+		if group:
+			await confirm_group(ctx, group)
 
 	@ui.button(label="Delete", style=ButtonStyle.danger, custom_id="delete_button")
 	async def delete_button_callback(self, ctx: Interaction, button: Button):
 		group: Group = get_group(ctx.message.id)
-		await delete_group_from_button(ctx, group)
+		if group:
+			await delete_group_from_button(ctx, group)

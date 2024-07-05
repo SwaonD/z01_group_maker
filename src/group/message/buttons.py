@@ -1,4 +1,4 @@
-from discord import Interaction
+from discord import Interaction, Member
 from src.group.db_request.group import is_member, \
 	get_group_members_ids, get_group
 from src.group.message.core import update_embed, delete_group
@@ -36,6 +36,21 @@ async def join_group(ctx: Interaction, group: Group):
 	await send_quick_response(ctx, MSG.USER_JOIN_GROUP % (group.project_name))
 
 
+async def _update_group_leader_on_leave(ctx: Interaction,
+		group: Group, group_members_ids: list[int]) -> Member | None:
+	if len(group_members_ids) == 0:
+		return None
+	if ctx.user.id == group.leader_id:
+		data = {
+			GROUPS_TABLE.leader_id: group_members_ids[0]
+		}
+		GROUPS_TABLE.update_data(data, f"{GROUPS_TABLE.id} = {group.id}")
+		group.leader_id = group_members_ids[0]
+	leader = ctx.guild.get_member(group.leader_id)
+	if leader is None:
+		leader = await ctx.guild.fetch_member(group.leader_id)
+	return leader
+
 async def leave_group(ctx: Interaction, group: Group):
 	if is_member(group.id, ctx.user.id) is False:
 		await send_quick_response(ctx, MSG.NOT_IN_GROUP)
@@ -47,34 +62,19 @@ async def leave_group(ctx: Interaction, group: Group):
 			f"{GROUP_MEMBERS_TABLE.group_id} = {group.id} AND"
 			+ f" {GROUP_MEMBERS_TABLE.user_id} = {ctx.user.id}")
 	LOGGER.msg(f"{ctx.user} left group {group.id}")
-
-	g: Group = get_group(ctx.message.id)
-	group_members_ids = get_group_members_ids(g.id)
-	# delete when no members left
+	group_members_ids = get_group_members_ids(group.id)
 	if len(group_members_ids) == 0:
 		await delete_group(ctx, group, group_members_ids)
 		await send_quick_response(ctx, MSG.DELETE_EMPTY_GROUP)
+		# delete when no members left
 		return
-
-	# update leader if there is only one person left.
-	isNewLeader = False
-	if ctx.user.id == group.leader_id:
-		data = {
-			GROUPS_TABLE.leader_id: group_members_ids[0]
-		}
-		GROUPS_TABLE.update_data(data, f"{GROUPS_TABLE.id} = {g.id}")
-		group.leader_id = group_members_ids[0]
-		isNewLeader = True
-
-	leader = ctx.client.get_user(group.leader_id)
-	if leader is None:
-		leader = await ctx.client.fetch_user(group.leader_id)
+	leader = await _update_group_leader_on_leave(ctx, group, group_members_ids)
+	# send messages
 	await send_private_message(leader, MSG.USER_LEFT_GROUP_TO_LEADER % \
 			(ctx.user.mention, group.project_name, ctx.message.jump_url))
-	if isNewLeader:
+	if leader.id != ctx.user.id:
 		await send_private_message(leader, MSG.NEW_GROUP_LEADER % \
-						(group.project_name, ctx.message.jump_url))
-
+				(group.project_name, ctx.message.jump_url))
 	await update_embed(ctx)
 	await send_quick_response(ctx, MSG.USER_LEFT_GROUP % (group.project_name))
 
@@ -117,8 +117,8 @@ async def confirm_group(ctx: Interaction, group: Group):
 				member = ctx.client.fetch_user(member_id)
 			await send_private_message(member, MSG.CONFIRM_GROUP_TO_MEMBERS %
 					(leader.mention, group.project_name, ctx.message.jump_url))
- 
- 
+
+
 	await update_embed(ctx)
 	await send_quick_response(ctx, MSG.CONFIRM_GROUP %
 							  (status, group.project_name))
