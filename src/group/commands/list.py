@@ -94,4 +94,3 @@ async def list_projects(ctx: Interaction, project_name: str | None,
 		await send_quick_response(ctx, MSG.PROJECT_NOT_FOUND)
 	else:
 		await ctx.response.send_message(embeds=embeds, ephemeral=True)
-

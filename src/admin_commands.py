@@ -11,7 +11,7 @@ ADMIN_CMD_SQL_REQUEST_ALT = "sql"
 ADMIN_CMD_RELOAD_GROUPS = "reload-groups"
 ADMIN_CMD_HELP = "help"
 
-async def print_help_message(message: Message):
+async def _print_help_message(message: Message):
 	help_embed = Embed()
 	help_embed.add_field(
 			name=ADMIN_CMD_SQL_REQUEST + "  |  " + ADMIN_CMD_SQL_REQUEST_ALT,
@@ -25,7 +25,7 @@ async def print_help_message(message: Message):
 	await message.channel.send(
 			embed=help_embed, reference=message, mention_author=False)
 
-async def group_sql_request(message: Message, request: str):
+async def _group_sql_request(message: Message, request: str):
 	if len(request) == 0:
 		return
 	with sqlite3.connect(GROUP_SQL_FILE_PATH) as conn:
@@ -49,7 +49,7 @@ async def group_sql_request(message: Message, request: str):
 		await message.channel.send("request sent with success", \
 				reference=message, mention_author=False)
 
-async def force_reload_groups(message: Message):
+async def _force_reload_groups(message: Message):
 	if message.guild is not None:
 		await reload_groups(message.guild)
 		await message.channel.send("Groups reloaded with success", \
@@ -58,7 +58,7 @@ async def force_reload_groups(message: Message):
 		await message.channel.send("Reload groups failed, no guild found", \
 				reference=message, mention_author=False)
 
-def is_admin(author: User | Member):
+def _is_admin(author: User | Member):
 	if DEVS_IDS_STR is not None:
 		devs_ids = [int(x) for x in DEVS_IDS_STR.split(',')]
 	else:
@@ -71,7 +71,7 @@ async def admin_commands(client: Client, message: Message) -> bool:
 	"""
 	return whether the message is an admin command
 	"""
-	if not message.content or not is_admin(message.author):
+	if not message.content or not _is_admin(message.author):
 		return False
 	parts = message.content.split(None, 2)
 	mention = parts[0] if parts else ""
@@ -80,12 +80,12 @@ async def admin_commands(client: Client, message: Message) -> bool:
 	cmd = parts[1] if len(parts) > 1 else ""
 	arg = parts[2] if len(parts) > 2 else ""
 	if cmd == ADMIN_CMD_HELP:
-		await print_help_message(message)
+		await _print_help_message(message)
 		return True
 	if cmd == ADMIN_CMD_SQL_REQUEST or cmd == ADMIN_CMD_SQL_REQUEST_ALT:
-		await group_sql_request(message, arg)
+		await _group_sql_request(message, arg)
 		return True
 	if cmd == ADMIN_CMD_RELOAD_GROUPS:
-		await force_reload_groups(message)
+		await _force_reload_groups(message)
 		return True
 	return False
