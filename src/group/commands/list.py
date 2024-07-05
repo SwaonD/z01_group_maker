@@ -3,11 +3,14 @@ from src.settings.tables import GROUPS_TABLE, GROUP_MEMBERS_TABLE
 from src.settings.variables import MSG, LIST_CMD_CONF_GROUP_MAX
 from src.utils.discord import send_quick_response
 from src.utils.sql import sql_escape
+from src.group.db_request.group import get_group_members_ids
 
 def _get_list_data(project_name: str | None,
 		user: User | Member | None, confirmed: int = 0) -> tuple[tuple[any]]:
 	conditions = []
 	user_group_ids = []
+	# build condition
+	# by user
 	if user is not None:
 		user_group_ids_data = GROUP_MEMBERS_TABLE.get_data(
 				f"{GROUP_MEMBERS_TABLE.user_id} = {user.id}",
@@ -18,20 +21,21 @@ def _get_list_data(project_name: str | None,
 			user_group_ids_str = f"({', '.join(map(str, user_group_ids))})"
 			conditions.append(
 					f"{GROUPS_TABLE.id} IN {str(tuple(user_group_ids_str))}")
-
+	# by project name
 	if project_name is not None:
 		conditions.append(
 			f"{GROUPS_TABLE.project_name} = '{sql_escape(project_name)}'")
-
+	# is confirmed
 	conditions.append(f"{GROUPS_TABLE.confirmed} = {confirmed}")
-
 	condition = " AND ".join(conditions)
 	if confirmed == 1:
 		condition += f" ORDER BY {GROUPS_TABLE.project_name} DESC LIMIT " \
 				+ str(LIST_CMD_CONF_GROUP_MAX)
+	# request data
 	list_group_data = GROUPS_TABLE.get_data(
-			condition, GROUPS_TABLE.channel_id, \
-			GROUPS_TABLE.message_id, GROUPS_TABLE.project_name)
+			condition, GROUPS_TABLE.id,
+			GROUPS_TABLE.channel_id, GROUPS_TABLE.message_id,
+			GROUPS_TABLE.project_name, GROUPS_TABLE.size_limit)
 	return list_group_data
 
 async def _generate_list_content(
@@ -42,11 +46,14 @@ async def _generate_list_content(
 	else:
 		i, end = 0, len(data)
 	while i != end:
-		channel = ctx.guild.get_channel(data[i][0])
+		channel = ctx.guild.get_channel(data[i][1])
 		if channel is None:
-			channel = ctx.guild.fetch_channel(data[i][0])
-		message = channel.get_partial_message(data[i][1])
-		content += MSG.LIST_CONTENT % (data[i][2], message.jump_url)
+			channel = ctx.guild.fetch_channel(data[i][1])
+		message = channel.get_partial_message(data[i][2])
+		project_name = data[i][3]
+		nb_members = f"{len(get_group_members_ids(data[i][0]))}/{data[i][4]}"
+		content += MSG.LIST_CONTENT % \
+				(project_name, nb_members, message.jump_url)
 		if reverse:
 			i -= 1
 		else:

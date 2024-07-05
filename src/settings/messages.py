@@ -51,7 +51,7 @@ class TextMessages():
 			"en": "No project found."
 		}
 		s.LIST_CONTENT = {
-			"en": "**%s** %s\n"
+			"en": "**%s** %s %s\n"
 		}
 
 		# join group button
