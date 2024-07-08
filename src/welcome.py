@@ -1,4 +1,4 @@
-from discord import Embed, Colour, Client, Guild, TextChannel
+from discord import Embed, Guild, TextChannel
 from src.settings.variables import MSG
 
 class WelcomeMessageEmbed(Embed):

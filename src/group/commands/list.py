@@ -5,12 +5,8 @@ from src.utils.discord import send_quick_response
 from src.utils.sql import sql_escape
 from src.group.db_request.group import get_group_members_ids
 
-def _get_list_data(project_name: str | None,
-		user: User | Member | None, confirmed: int = 0) -> tuple[tuple[any]]:
-	conditions = []
+def _get_condition_by_user(user: User | Member | None) -> str | None:
 	user_group_ids = []
-	# build condition
-	# by user
 	if user is not None:
 		user_group_ids_data = GROUP_MEMBERS_TABLE.get_data(
 				f"{GROUP_MEMBERS_TABLE.user_id} = {user.id}",
@@ -19,8 +15,16 @@ def _get_list_data(project_name: str | None,
 			user_group_ids.append(row[0])
 		if len(user_group_ids) > 0:
 			user_group_ids_str = f"({', '.join(map(str, user_group_ids))})"
-			conditions.append(
-					f"{GROUPS_TABLE.id} IN {str(tuple(user_group_ids_str))}")
+			return f"{GROUPS_TABLE.id} IN {str(tuple(user_group_ids_str))}"
+	return None
+
+def _get_list_data(project_name: str | None,
+		user: User | Member | None, confirmed: int = 0) -> tuple[tuple[any]]:
+	conditions = []
+	# build condition
+	# by user
+	if (user_condition := _get_condition_by_user(user)) is not None:
+		conditions.append(user_condition)
 	# by project name
 	if project_name is not None:
 		conditions.append(
