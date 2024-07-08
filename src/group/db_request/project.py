@@ -3,7 +3,7 @@ from src.settings.variables import Variables as V
 from src.utils.log import LOGGER
 
 
-def is_project(project: str) -> bool:
+def is_project(project_name: str) -> bool:
 	"""Verifies if a project is valid
 
 	Args:
@@ -13,7 +13,7 @@ def is_project(project: str) -> bool:
 		bool: returns True if the project is a valid one
 	"""
 	for p in V.project_names:
-		if p == project:
+		if p == project_name:
 			return True
 
 	return False

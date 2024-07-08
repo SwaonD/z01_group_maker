@@ -13,8 +13,8 @@ class TextMessages():
 			"en": "No group channel configured, pls use /config as an administrator"
 		}
 		s.PROJECTS_DOES_NOT_EXISTS = {
-			"fr": ":x: Le project %s n'existe pas !",
-			"en": ":x: Project %s doesn't exist!"
+			"fr": ":x: Ce project n'existe pas !",
+			"en": ":x: This project doesn't exist!"
 		}
 		s.GROUP_ALREADY_EXISTS = {
 			"fr": ":x: Tu as déjà crée un group pour ce projet !",

@@ -41,8 +41,7 @@ async def create_group(ctx: Interaction,
 async def _is_input_valid(ctx: Interaction,
 		project_name: str, size_limit: int, description: str | None) -> bool:
 	if is_project(project_name) is False:
-		await send_quick_response(ctx,
-				MSG.PROJECTS_DOES_NOT_EXISTS % (project_name))
+		await send_quick_response(ctx, MSG.PROJECTS_DOES_NOT_EXISTS)
 		return False
 	if project_exists(project_name, ctx.user.id) is True:
 		await send_quick_response(ctx, MSG.GROUP_ALREADY_EXISTS)
