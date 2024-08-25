@@ -5,10 +5,12 @@ from discord import Message, User, Member, File, Embed, Client
 from src.utils.log import LOGGER
 from src.settings.variables import GROUP_SQL_FILE_PATH, DEVS_IDS_STR
 from src.init import reload_groups
+from src.welcome import send_welcome_message
 
 ADMIN_CMD_SQL_REQUEST = "sql-request"
 ADMIN_CMD_SQL_REQUEST_ALT = "sql"
 ADMIN_CMD_RELOAD_GROUPS = "reload-groups"
+ADMIN_CMD_SEND_WELCOME_MSG = "send-welcome-msg"
 ADMIN_CMD_HELP = "help"
 
 async def _print_help_message(message: Message):
@@ -19,6 +21,9 @@ async def _print_help_message(message: Message):
 	help_embed.add_field(
 			name=ADMIN_CMD_RELOAD_GROUPS,
 			value="reload every groups of the guild", inline=False)
+	help_embed.add_field(
+			name=ADMIN_CMD_SEND_WELCOME_MSG,
+			value="send welcome message in the current channel", inline=False)
 	help_embed.add_field(
 			name=ADMIN_CMD_HELP,
 			value="print this help message", inline=False)
@@ -87,5 +92,8 @@ async def admin_commands(client: Client, message: Message) -> bool:
 		return True
 	if cmd == ADMIN_CMD_RELOAD_GROUPS:
 		await _force_reload_groups(message)
+		return True
+	if cmd == ADMIN_CMD_SEND_WELCOME_MSG:
+		await send_welcome_message(message.guild, message.channel)
 		return True
 	return False

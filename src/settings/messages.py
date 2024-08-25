@@ -193,38 +193,40 @@ class TextMessages():
 		s.WELCOME_DESCRIPTION = {
 			"en": """
 					This bot helps creating groups to work together !
-					:bangbang: **Before using this bot don't forget to set up a channel with the /config <channel> command !**
-					:page_facing_up: Here is a list of the commands available:
+					For a given project, it is possible to create a group with the /create command. This way, everyone will be able to join your group if they are interested.
+
+					Here is a list of the commands available:
 				""",
 			"fr": """
 					Ce bot vous aide à créer des groupes pour travailler ensemble !
-					:bangbang: **Avant d'utiliser le bot, n'oubliez pas de configurer le channel avec la commande /config <salon>
-					:page_facing_up: Voici une liste des commandes disponibles:
-   				"""
+					Pour un projet donné, il est possible de créer un groupe via la commande /create. Ainsi tout le monde pourra rejoindre votre groupe s'il est intéressé.
+
+					Voici une liste des commandes disponibles:
+				"""
 		}
 		s.WELCOME_CREATE_CMD = {
-			"en": "Create a group, takes as arguments the project name, a size and an optional description",
-			"fr": "Créer un groupe, prends en argument le nom du project, une taille et une description optionnelle"
+			"en": "Create a group for a given project.",
+			"fr": "Créer un groupe pour un projet donné."
 		}
 
 		s.WELCOME_LIST_CMD = {
-			"en": "Lists every group available, arguments are optional, they are used to filter by user or project name",
-			"fr": "Donne une liste de chaque groupe disponible, tout les arguments sont optionnels, il est possible de filtrer les projets par utiliser ou nom de projet"
+			"en": "Lists every group available. You can filter by user or project name.",
+			"fr": "Donne une liste de chaque groupe disponible. Il est possible de filtrer les projets par utilisateur ou nom de projet."
 		}
 
 		s.WELCOME_STATUS_CMD = {
-			"en": "Displays the current groups you are in or the groups you created",
-			"fr": "Affiche les groupes dans lesquels vous êtes ou les groupes crées"
+			"en": "Displays all the current groups you are in.",
+			"fr": "Affiche tout les groupes dans lesquels vous êtes."
 		}
 
 		s.WELCOME_CONFIG_CMD = {
-			"en": "Takes as argument the channel you want the bot to send messages on",
-			"fr": "Configure le channel à utiliser, prends en argument un salon"
+			"en": "Configure the group channel to use.",
+			"fr": "Configure le channel à utiliser."
 		}
 
 		s.WELCOME_KICK_CMD = {
-			"en": "Kicks someone from a group whose leader is you, takes as argument a project name and a user to kick",
-			"fr": "Exclure quelqu'un d'un group dont vous êtes chef, prends en argument le nom du projet and un utilisateur à kick"
+			"en": "Kicks someone from a group whose leader is you.",
+			"fr": "Exclure quelqu'un d'un groupe dont vous êtes le chef."
 		}
 
 		# assign language to every dict attributes

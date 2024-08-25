@@ -14,10 +14,18 @@ class WelcomeMessageEmbed(Embed):
 		self.add_field(name="/kick", value=MSG.WELCOME_KICK_CMD, inline=False)
 		self.set_image(url="https://i.imgur.com/D8VWzWV.gif")
 
-async def send_welcome_message(guild: Guild):
-	for channel in guild.channels:
-		if isinstance(channel, TextChannel):
-			bot_permissions = channel.permissions_for(guild.me)
-			if bot_permissions.send_messages:
-				await channel.send(embed=WelcomeMessageEmbed())
-				return
+async def _send_msg_on_permission(guild: Guild, channel: TextChannel) -> bool:
+	bot_permissions = channel.permissions_for(guild.me)
+	if bot_permissions.send_messages:
+		await channel.send(embed=WelcomeMessageEmbed())
+		return True
+	return False
+
+async def send_welcome_message(guild: Guild, channel: TextChannel = None):
+	if channel is not None:
+		await _send_msg_on_permission(guild, channel)
+	else:
+		for guild_channel in guild.channels:
+			if isinstance(guild_channel, TextChannel):
+				if await _send_msg_on_permission(guild, guild_channel):
+					return
