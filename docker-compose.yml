@@ -1,0 +1,12 @@
+services:
+  discord-group-maker:
+    build: .
+    container_name: discord-group-maker
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - .:/app:Z
+      - group_data:/app/data # persistent database volume
+
+volumes:
+  group_data:

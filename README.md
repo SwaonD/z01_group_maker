@@ -14,14 +14,11 @@ https://discord.com/developers/applications
 ```sh
 Z_01_GROUP_MAKER_DISCORD_BOT_TOKEN="<DISCORD_BOT_TOKEN>"
 ```
-3. **Install the required python packages**<br>
+4. **Launch the container**<br>
 ```sh
-python3 -m pip install -r requirements.txt
+docker compose up -d
 ```
-4. **Launch the bot**<br>
-```sh
-python3 main.py
-```
+
 ### Dev Tools
 - You can also add to your .env file a variable which store the discord ids of the devs to get access of advanced commands.
 Here is the format:
